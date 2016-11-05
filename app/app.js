@@ -19,14 +19,20 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import useScroll from 'react-router-scroll';
+import FontFaceObserver from 'fontfaceobserver';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
+
+
+
+import styles from 'containers/App/styles.css';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
+import './app.css';
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router

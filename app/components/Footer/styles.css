@@ -1,0 +1,60 @@
+.footer { /* stylelint-disable */
+  width: 100%;
+  background: #3D3D3D;
+  color: #FFF;
+  text-align: center;
+  padding: 2rem;
+}
+
+.leftSide {
+  width: 100%;
+  min-height: 10rem;
+  padding: 2rem 0;
+  border-right: 0.1rem solid #FFF;
+}
+
+.rightSide {
+  width: 100%;
+  min-height: 10rem;
+  padding: 3.5rem 0;
+}
+
+.logo {
+  width: 10rem;
+  height: auto;
+}
+
+.desc {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.icon {
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.icon a {
+  color: #e5d224;
+}
+
+.icon a:hover,
+.icon a:focus {
+  color: #fada2c;
+}
+
+.icon a:nth-child(2) {
+  margin-left: 3rem;
+}
+
+.copyrightNotice {
+  margin-top: 2rem;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.rightSide h1 {
+  color: #e5d224;
+  font-weight: 700;
+}

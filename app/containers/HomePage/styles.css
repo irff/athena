@@ -1,0 +1,143 @@
+.hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.contentContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-image: linear-gradient(302deg, rgba(234, 199, 8, 0.77), rgba(221, 191, 27, 0.81) 52%, rgba(255, 220, 32, 0.95));
+  opacity: 0.5;
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.heroContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  text-align: center;
+}
+
+.centralize {
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo {
+  width: 30rem;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.tagline {
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 1.25;
+  color: #FFFFFF;
+}
+
+.blackButton {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFF;
+  background: linear-gradient(257deg, #40403c, #292929);
+  padding: 1.25rem 5rem;
+  border-radius: 3rem;
+  margin-top: 2rem;
+}
+
+.blackButton:hover,
+.blackButton:focus,
+.blackButton:active {
+  background: #333333;
+}
+
+.content {
+  margin-top: 100vh;
+}
+
+.secondPanel {
+  width: 100%;
+  padding: 10rem 0;
+  text-align: center;
+  background: linear-gradient(234deg, #40403c, #090908);
+  color: #FFFFFF;
+}
+
+.secondPanel h1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 2.5rem;
+}
+
+.thirdPanel {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.thirdPanel h3 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #4a4a4a;
+  margin-bottom: 2rem;
+}
+
+.thirdPanel img {
+  height: 3.5rem;
+  width: auto;
+  margin: 2rem auto;
+}

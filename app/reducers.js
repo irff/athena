@@ -8,6 +8,9 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
+import NavbarReducer from 'containers/Navbar/reducer';
+import FilterBarReducer from 'containers/FilterBar/reducer';
+
 /*
  * routeReducer
  *
@@ -43,6 +46,8 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
+    navbar: NavbarReducer,
+    filterBar: FilterBarReducer,
     ...asyncReducers,
   });
 }

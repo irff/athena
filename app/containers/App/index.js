@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import styles from './styles.css';
 
@@ -23,7 +24,14 @@ export default class App extends React.Component { // eslint-disable-line react/
 
   render() {
     return (
-      <div className={styles.container}>
+      <div>
+        <Helmet
+          titleTemplate="%s - Quint"
+          defaultTitle="Quint.id - Quality Internship for you "
+          meta={[
+            { name: 'description', content: 'Gurumobil.com - Platform jual beli mobil bekas Indonesia' },
+          ]}
+        />
         {React.Children.toArray(this.props.children)}
       </div>
     );

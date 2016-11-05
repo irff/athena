@@ -1,0 +1,28 @@
+.leftlink,
+.rightlink {
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0.25rem 1rem;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.leftlink:hover,
+.leftlink:focus,
+.rightlink:hover,
+.rightlink:focus {
+  margin: -1rem 0;
+  padding: 1.25rem 1rem;
+  color: #3D3D3D;
+  background: #E5D224;
+  outline: none;
+  box-shadow: none;
+}
+
+.leftlink {
+  float: left;
+}
+
+.rightlink {
+  float: right;
+}
