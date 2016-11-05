@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 import styles from './styles.css';
+import globalStyles from 'containers/App/styles.css';
 
 import SpaciousMp from './Spacious.mp4';
 import SpaciousWebm from './Spacious.webm';
@@ -108,7 +109,37 @@ export default class HomePage extends React.Component { // eslint-disable-line r
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
+              <div className={styles.fourthPanel}>
+                <div className={styles.testimonyContentContainer}>
+                  <button className={styles.prevnextButton}><span className={globalStyles.iconleftarrow}></span></button>
+                  <button className={styles.prevnextButton}><span className={globalStyles.iconrightarrow}></span></button>
+                  <div className="row expanded">
+                    <div className="small-12 columns text-center">
+                      <h3>Testimoni</h3>
+                    </div>
+                    <div className="small-12 columns text-center">
+                      <p className={styles.testimonyText}>An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.</p>
+                    </div>
+                    <div className="small-12 medium-4 columns">
+                      <img className={styles.testimonyPicture} src={TokopediaImg} alt="xendit.com" />
+                    </div>
+                    <div className="small-12 medium-8 columns">
+                      <h4 className={styles.testimonyName}>Gabe Newell Bellevue</h4>
+                      <h5 className={styles.testimonyPosition}>CEO of Valve Software Ltd.</h5>
+                    </div>
+                    <div className="small-12 columns">
+                      <div className={styles.testimonyDivider} />
+                    </div>
+                    <div className="small-12 columns text-center">
+                      <div className={styles.circleSelected} />
+                      <div className={styles.circle} />
+                      <div className={styles.circle} />
+                      <div className={styles.circle} />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

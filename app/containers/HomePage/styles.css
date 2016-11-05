@@ -18,6 +18,15 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+}
+
+.testimonyContentContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
 }
 
 .heroBackground {
@@ -140,4 +149,68 @@
   height: 3.5rem;
   width: auto;
   margin: 2rem auto;
+}
+
+.fourthPanel {
+  background: linear-gradient(253deg, #e0d022, #fada2c);
+  color: #232321;
+  padding: 2rem 0;
+}
+
+.fourthPanel h3 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 3rem 0 5rem;
+}
+
+.testimonyText {
+  font-style: italic;
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0 0 4rem;
+}
+
+.testimonyPicture {
+  width: 8rem;
+  height: 8rem;
+  float: right;
+  border-radius: 5rem;
+  background: #333;
+  object-fit: cover;
+}
+
+.testimonyName,
+.testimonyPosition {
+  margin-left: 2rem;
+}
+
+.testimonyName {
+  margin-top: 1.75rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.testimonyDivider {
+  width: 15%;
+  height: 0.1rem;
+  background: #232321;
+  margin: 2rem auto;
+}
+
+.circleSelected,
+.circle {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 1.5rem;
+  margin: 0 1rem;
+}
+
+.circleSelected {
+  background: #65570e;
+}
+
+.circle {
+  background: #ccb018;
 }

@@ -130,11 +130,19 @@ body {
   }
 }
 
+.iconuparrow,
+.icondownarrow,
 .iconfacebook,
-.iconline {   
+.iconleftarrow,
+.iconline,
+.iconrightarrow {  
   font-family: "Flaticon";
   font-style: normal;
 }
 
-.iconfacebook:before { content: "\f100"; }
-.iconline:before { content: "\f101"; }
+.iconuparrow:before { content: "\f100"; }
+.icondownarrow:before { content: "\f101"; }
+.iconfacebook:before { content: "\f102"; }
+.iconleftarrow:before { content: "\f103"; }
+.iconline:before { content: "\f104"; }
+.iconrightarrow:before { content: "\f105"; }
