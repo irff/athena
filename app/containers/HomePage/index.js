@@ -35,12 +35,55 @@ import DmsumImg from './dmsum.jpg';
 import XenditImg from './xendit.jpg';
 
 export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      testimony: 0,
+    };
+  }
 
   goLogin() {
     console.log("plob");
   }
 
+  next(currentPage) {
+    const nextPage = currentPage >= 3 ? 0 : currentPage + 1;
+    this.setState({'testimony':nextPage});
+  }
+
+  prev(currentPage) {
+    const prevPage = currentPage == 0 ? 3 : currentPage - 1;
+    this.setState({'testimony':prevPage});
+  }
+
+  setPage(targetPage) {
+    this.setState({'testimony':targetPage});
+  }
+
   render() {
+    const testimonyList = [
+      {
+        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
+        'testimonyName':'Gabe Newell Bellevue',
+        'testimonyPosition':'CEO of Valve Software Ltd.'
+      },
+      {
+        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
+        'testimonyName':'Son Goku',
+        'testimonyPosition':'CEO of Pleb Software Ltd.'
+      },
+      {
+        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
+        'testimonyName':'Vallfard Samatarian',
+        'testimonyPosition':'CEO of Pl0b Software Ltd.'
+      },
+      {
+        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
+        'testimonyName':'Ernest Blofeld',
+        'testimonyPosition':'CEO of Plab Software Ltd.'
+      },
+    ];
     return (
       <div>
         <div className="row expanded">
@@ -112,30 +155,30 @@ export default class HomePage extends React.Component { // eslint-disable-line r
               </div>
               <div className={styles.fourthPanel}>
                 <div className={styles.testimonyContentContainer}>
-                  <button className={styles.prevnextButton}><span className={globalStyles.iconleftarrow}></span></button>
-                  <button className={styles.prevnextButton}><span className={globalStyles.iconrightarrow}></span></button>
+                  <button className={styles.prevButton} onClick={() => this.prev(this.state.testimony)} ><span className={globalStyles.iconleftarrow}></span></button>
+                  <button className={styles.nextButton} onClick={() => this.next(this.state.testimony)} ><span className={globalStyles.iconrightarrow}></span></button>
                   <div className="row expanded">
                     <div className="small-12 columns text-center">
                       <h3>Testimoni</h3>
                     </div>
                     <div className="small-12 columns text-center">
-                      <p className={styles.testimonyText}>An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.</p>
+                      <p className={styles.testimonyText}>{testimonyList[this.state.testimony].testimonyText}</p>
                     </div>
                     <div className="small-12 medium-4 columns">
                       <img className={styles.testimonyPicture} src={TokopediaImg} alt="xendit.com" />
                     </div>
                     <div className="small-12 medium-8 columns">
-                      <h4 className={styles.testimonyName}>Gabe Newell Bellevue</h4>
-                      <h5 className={styles.testimonyPosition}>CEO of Valve Software Ltd.</h5>
+                      <h4 className={styles.testimonyName}>{testimonyList[this.state.testimony].testimonyName}</h4>
+                      <h5 className={styles.testimonyPosition}>{testimonyList[this.state.testimony].testimonyPosition}</h5>
                     </div>
                     <div className="small-12 columns">
                       <div className={styles.testimonyDivider} />
                     </div>
                     <div className="small-12 columns text-center">
-                      <div className={styles.circleSelected} />
-                      <div className={styles.circle} />
-                      <div className={styles.circle} />
-                      <div className={styles.circle} />
+                      <button className={styles.circle} disabled={this.state.testimony == 0} onClick={() => this.setPage(0)} />
+                      <button className={styles.circle} disabled={this.state.testimony == 1} onClick={() => this.setPage(1)}  />
+                      <button className={styles.circle} disabled={this.state.testimony == 2} onClick={() => this.setPage(2)}  />
+                      <button className={styles.circle} disabled={this.state.testimony == 3} onClick={() => this.setPage(3)}  />
                     </div>
                   </div>
                 </div>

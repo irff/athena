@@ -25,7 +25,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
   position: relative;
 }
 
@@ -207,10 +207,25 @@
   margin: 0 1rem;
 }
 
-.circleSelected {
+.circle {
+  background: #ccb018;
+}
+
+.circle:disabled {
   background: #65570e;
 }
 
-.circle {
-  background: #ccb018;
+.nextButton,
+.prevButton {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+}
+
+.nextButton {
+  right: -2rem;
+}
+
+.prevButton {
+  left: -2rem;
 }
