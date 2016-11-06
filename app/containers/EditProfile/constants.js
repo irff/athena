@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/EditProfile/DEFAULT_ACTION';
+export const SUBMIT = 'app/EditProfile/SUBMIT';

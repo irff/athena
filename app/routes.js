@@ -122,15 +122,13 @@ export default function createRoutes(store) {
           name: 'edit-profil',
           getComponent(nextState, cb) {
             const importModules = Promise.all([
-              System.import('containers/EditProfile/reducer'),
               System.import('containers/EditProfile/sagas'),
               System.import('containers/EditProfile'),
             ]);
 
             const renderRoute = loadModule(cb);
 
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('edit-profile', reducer.default);
+            importModules.then(([sagas, component]) => {
               injectSagas(sagas.default);
               renderRoute(component);
             });
