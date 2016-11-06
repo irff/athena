@@ -117,6 +117,27 @@ export default function createRoutes(store) {
             importModules.catch(errorLoading);
           },
         },
+        {
+          path: '/mahasiswa/edit-profil',
+          name: 'edit-profil',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/EditProfile/reducer'),
+              System.import('containers/EditProfile/sagas'),
+              System.import('containers/EditProfile'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('edit-profile', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        },
       ]
     },{
       path: '/perusahaan',

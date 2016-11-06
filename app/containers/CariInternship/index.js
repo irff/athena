@@ -15,9 +15,13 @@ import styles from './styles.css';
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 
-import SectionTitle from 'components/SectionTitle';
 import Select from 'components/Select';
+import SectionTitle from 'components/SectionTitle';
 import FilterBar from 'containers/FilterBar';
+import InternshipPostCard from 'containers/InternshipPostCard';
+
+import TokopediaImg from 'containers/HomePage/tokopedia.png';
+import IndivaraImg from 'containers/HomePage/indivara.jpg';
 
 export class CariInternship extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -32,24 +36,16 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
         <Navbar />
         <div className={styles.cariInternship}>
           <div className="row">
-            <div className="small-6 columns">
+            <div className="small-12 columns">
               <SectionTitle><FormattedMessage {...messages.header} /></SectionTitle>
             </div>
-            <div className="small-6 columns">
-              <div className="float-right">
-                <Select className={styles.sortBySelect}>
-                  <option>Urutkan Berdasarkan</option>
-                  <option>U</option>
-                  <option>UA</option>
-                </Select>
-              </div>
-            </div>
-            <div className="small-12 columns">
-              <FilterBar />
-            </div>
+            <InternshipPostCard />
+            <InternshipPostCard />
+            <InternshipPostCard />
+            <InternshipPostCard />
           </div>
         </div>
-        <Footer />
+        <Footer hasMargin={true} />
       </div>
     );
   }

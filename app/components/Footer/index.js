@@ -13,9 +13,10 @@ import styles from './styles.css';
 import globalStyles from 'containers/App/styles.css';
 import Logo from 'components/Logo';
 
-function Footer() {
+function Footer(props) {
+  let footerClass = props.hasMargin ? styles.footerMargin : styles.footer;
   return (
-    <div className={styles.footer}>
+    <div className={footerClass}>
       <div className="row">
         <div className="small-12 medium-4 columns">
           <div className={styles.leftSide}>
@@ -44,6 +45,10 @@ function Footer() {
       </div>
     </div>
   );
+}
+
+Footer.propTypes = {
+  hasMargin: React.PropTypes.bool,
 }
 
 export default Footer;

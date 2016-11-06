@@ -9,8 +9,10 @@
 
 .leftlink:hover,
 .leftlink:focus,
+.leftlink:disabled,
 .rightlink:hover,
-.rightlink:focus {
+.rightlink:focus,
+.rightlink:disabled {
   margin: -1rem 0;
   padding: 1.25rem 1rem;
   color: #3D3D3D;

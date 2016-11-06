@@ -21,11 +21,17 @@
   position: relative;
 }
 
+.testimonyContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  min-height: 10rem;
+}
+
 .testimonyContentContainer {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
   position: relative;
 }
 
@@ -170,13 +176,26 @@
   margin: 0 0 4rem;
 }
 
+.testimonyPerson {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .testimonyPicture {
   width: 8rem;
   height: 8rem;
-  float: right;
   border-radius: 5rem;
   background: #333;
   object-fit: cover;
+  display: inline-block;
+  float: left;
+}
+
+.testimonyCred {
+  display: inline-block;
+  float: left;
 }
 
 .testimonyName,
@@ -192,7 +211,7 @@
 }
 
 .testimonyDivider {
-  width: 15%;
+  width: 10%;
   height: 0.1rem;
   background: #232321;
   margin: 2rem auto;

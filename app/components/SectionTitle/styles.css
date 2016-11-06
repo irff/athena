@@ -1,6 +1,8 @@
 .sectionTitle { /* stylelint-disable */
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.15rem;
-  color: #3D3D3D;
+  margin: 0;
+  margin-bottom: 3rem;
+  color: #4a4a4a;
 }

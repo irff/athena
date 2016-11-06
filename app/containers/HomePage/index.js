@@ -10,6 +10,8 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
@@ -34,17 +36,39 @@ import IndivaraImg from './indivara.jpg';
 import DmsumImg from './dmsum.jpg';
 import XenditImg from './xendit.jpg';
 
-export default class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    push: React.PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
     
     this.state = {
       testimony: 0,
+      testimonyList: [
+        {
+          'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
+          'testimonyName':'Gabe Newell Bellevue',
+          'testimonyPosition':'CEO of Valve Software Ltd.'
+        },
+        {
+          'testimonyText':'olala',
+          'testimonyName':'Son Goku',
+          'testimonyPosition':'CEO of Pleb Software Ltd.'
+        },
+        {
+          'testimonyText':'elolo',
+          'testimonyName':'Vallfard Samatarian',
+          'testimonyPosition':'CEO of Pl0b Software Ltd.'
+        },
+        {
+          'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
+          'testimonyName':'Ernest Blofeld',
+          'testimonyPosition':'CEO of Plab Software Ltd.'
+        },
+      ],
     };
-  }
-
-  goLogin() {
-    console.log("plob");
   }
 
   next(currentPage) {
@@ -62,28 +86,6 @@ export default class HomePage extends React.Component { // eslint-disable-line r
   }
 
   render() {
-    const testimonyList = [
-      {
-        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
-        'testimonyName':'Gabe Newell Bellevue',
-        'testimonyPosition':'CEO of Valve Software Ltd.'
-      },
-      {
-        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
-        'testimonyName':'Son Goku',
-        'testimonyPosition':'CEO of Pleb Software Ltd.'
-      },
-      {
-        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
-        'testimonyName':'Vallfard Samatarian',
-        'testimonyPosition':'CEO of Pl0b Software Ltd.'
-      },
-      {
-        'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
-        'testimonyName':'Ernest Blofeld',
-        'testimonyPosition':'CEO of Plab Software Ltd.'
-      },
-    ];
     return (
       <div>
         <div className="row expanded">
@@ -102,7 +104,7 @@ export default class HomePage extends React.Component { // eslint-disable-line r
         	          <div className={styles.centralize}>
                       <Logo className={styles.logo} />
         	            <h1 className={styles.tagline}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</h1>
-                      <Button className={styles.blackButton} handleRoute={this.goLogin} >coba sekarang</Button>
+                      <Button className={styles.blackButton} handleRoute={() => this.props.push('/mahasiswa/login')} >coba sekarang</Button>
         	          </div>
         		    	</div>
         		    </div>
@@ -155,21 +157,23 @@ export default class HomePage extends React.Component { // eslint-disable-line r
               </div>
               <div className={styles.fourthPanel}>
                 <div className={styles.testimonyContentContainer}>
-                  <button className={styles.prevButton} onClick={() => this.prev(this.state.testimony)} ><span className={globalStyles.iconleftarrow}></span></button>
-                  <button className={styles.nextButton} onClick={() => this.next(this.state.testimony)} ><span className={globalStyles.iconrightarrow}></span></button>
                   <div className="row expanded">
                     <div className="small-12 columns text-center">
                       <h3>Testimoni</h3>
                     </div>
                     <div className="small-12 columns text-center">
-                      <p className={styles.testimonyText}>{testimonyList[this.state.testimony].testimonyText}</p>
+                      <p className={styles.testimonyText}>{this.state.testimonyList[this.state.testimony].testimonyText}</p>
                     </div>
-                    <div className="small-12 medium-4 columns">
-                      <img className={styles.testimonyPicture} src={TokopediaImg} alt="xendit.com" />
-                    </div>
-                    <div className="small-12 medium-8 columns">
-                      <h4 className={styles.testimonyName}>{testimonyList[this.state.testimony].testimonyName}</h4>
-                      <h5 className={styles.testimonyPosition}>{testimonyList[this.state.testimony].testimonyPosition}</h5>
+                    <div className="small-12 columns text-center">
+                      <div className={styles.testimonyContainer}>
+                        <div className={styles.testimonyPerson}>
+                          <img className={styles.testimonyPicture} src={TokopediaImg} alt="xendit.com" />
+                          <div className={styles.testimonyCred}>
+                            <h4 className={styles.testimonyName}>{this.state.testimonyList[this.state.testimony].testimonyName}</h4>
+                            <h5 className={styles.testimonyPosition}>{this.state.testimonyList[this.state.testimony].testimonyPosition}</h5>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div className="small-12 columns">
                       <div className={styles.testimonyDivider} />
@@ -191,3 +195,11 @@ export default class HomePage extends React.Component { // eslint-disable-line r
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    push: (url) => dispatch(push(url)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(HomePage);

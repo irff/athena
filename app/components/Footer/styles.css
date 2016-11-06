@@ -1,9 +1,14 @@
-.footer { /* stylelint-disable */
+.footer,
+.footerMargin { /* stylelint-disable */
   width: 100%;
   background: #3D3D3D;
   color: #FFF;
   text-align: center;
   padding: 2rem;
+}
+
+.footerMargin {
+  margin-top: 3rem;
 }
 
 .leftSide {

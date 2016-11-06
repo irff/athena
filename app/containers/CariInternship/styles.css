@@ -1,7 +1,16 @@
 .cariInternship { /* stylelint-disable */
-  margin-top: 5rem;
+  padding-top: 5rem;
+  min-height: calc(100vh - 3.5rem);
 }
 
 .sortBySelect {
   margin-top: 0.5rem;
+}
+
+.sectionTitle { /* stylelint-disable */
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #4a4a4a;
+  margin-bottom: 2rem;
 }
