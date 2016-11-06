@@ -8,7 +8,7 @@
 
 .snipet {
   width: 100%;
-  padding: 1.5rem;
+  padding: 1.25rem 1.25rem 0.5rem;
 }
 
 .postLogo {
@@ -29,20 +29,20 @@
 }
 
 .postContent h3 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1;
   margin: 0;
 }
 
 .postContent h4 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
   line-height: 1;
   margin: 0 0 1rem;
 }
 
 .postContent h5 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1;
   margin: 0;
   margin-right: 1rem;
@@ -58,6 +58,7 @@
   position: absolute;
   top: 0;
   right: 0;
+  font-size: 0.8rem;
 }
 
 .postContent p {
@@ -66,6 +67,7 @@
 
 .detailButton,
 .applyButton {
+  font-size: 0.8rem;
   width: 100%;
   text-align: center;
   padding: 1rem;
@@ -106,22 +108,24 @@
 .header .postContent p {
   margin: 0.5rem 0 0;
   line-height: 1;
+  font-size: 0.8rem;
 }
 
 .postContact p {
   margin: 0 0 0.5rem;
   line-height: 1;
+  font-size: 0.8rem;
 }
 
 .postContact h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0;
   line-height: 1;
 }
 
 .postContact h4 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin: 0 0 0.5rem;
   line-height: 1;
 }
@@ -129,7 +133,7 @@
 .postContact h5 {
   margin: 0;
   line-height: 1;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .postDetail {
@@ -153,16 +157,16 @@
 }
 
 .postDetail h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
 .postDetail h2 {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .postDetail h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
   margin-top: 1.5rem;
 }
@@ -172,10 +176,12 @@
   white-space: pre-line;
   line-height: 1.25;
   width: 80%;
+  font-size: 0.8rem;
 }
 
 .postDetail h6 {
   position: absolute;
   top: 0;
   right: 0;
+  font-size: 0.8rem;
 }

@@ -77,12 +77,12 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
             <div className="small-12 columns" />
             <div className="small-12 medium-5 columns">
               <h2>Jurusan*</h2>
-              <input type="text" placeholder="Ketik jurusanmu disini" value={data.get('major')} onChange={(evt) => this.changeInput(evt, 'major')} />
+              <input type="text" placeholder="Ketik jurusanmu di sini" value={data.get('major')} onChange={(evt) => this.changeInput(evt, 'major')} />
             </div>
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
-                <h2>nama belakang*</h2>
-                <input type="text" placeholder="Ketik universitasmu disini" value={data.get('university')} onChange={(evt) => this.changeInput(evt, 'university')} />
+                <h2>Universitas*</h2>
+                <input type="text" placeholder="Ketik universitasmu di sini" value={data.get('university')} onChange={(evt) => this.changeInput(evt, 'university')} />
               </div>
             </div>
             <div className="small-12 columns">
@@ -105,7 +105,7 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
               <div className={styles.marginContent}>
                 <h2>URL LinkedIn</h2>
                 <input type="text" placeholder="Ketik url disini" value={data.get('linkedIn')} onChange={(evt) => this.changeInput(evt, 'linkedIn')} />
-                <h2>URL Resume</h2>
+                <h2>URL Resume*</h2>
                 <input type="text" placeholder="Ketik url disini" value={data.get('resume')} onChange={(evt) => this.changeInput(evt, 'resume')} />
               </div>
             </div>

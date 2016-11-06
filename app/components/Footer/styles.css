@@ -30,12 +30,12 @@
 }
 
 .desc {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   margin-top: 1rem;
 }
 
 .icon {
-  font-size: 3rem;
+  font-size: 2rem;
   margin: 0;
   line-height: 1;
 }
@@ -57,9 +57,15 @@
   margin-top: 2rem;
   margin-bottom: 0;
   line-height: 1;
+  font-size: 0.8rem;
 }
 
 .rightSide h1 {
   color: #e5d224;
   font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.rightSide h3 {
+  font-size: 1.5rem;
 }

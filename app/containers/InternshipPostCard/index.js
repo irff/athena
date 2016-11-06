@@ -19,6 +19,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
       data: Map({
         detailed: false,
         item: {
+          id: 'wololo',
           role: 'Software Engineer Intern',
           company: 'Bukalapak',
           companyDescription: 'Bukalapak adalah company terkeren sedunia. Dengan intern di Bukalapak, kamu bisa dapat gaji yang besar, makan gratis, fasilitas gratis, dan kehidupan yang amat sangat layak. Ada gym-nya pula. Yuk, intern di Bukalapak!',
@@ -33,6 +34,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
           responsibility: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac mi ut neque pharetra aliquam. Etiam maximus tempus mi et rutrum:\n- plebplob\n- beepboop',
           experience: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac mi ut neque pharetra aliquam. Etiam maximus tempus mi et rutrum:\n- plebplob\n- beepboop',
           cp: {
+            id: 'wulala',
             name: 'Illuvatar Samatarian',
             role: 'Chief of Pleb',
             phone: '+62 123 456 7890',

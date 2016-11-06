@@ -1,6 +1,6 @@
 .editProfile { /* stylelint-disable */
   padding-top: 5rem;
-  min-height: calc(100vh - 3.5rem);
+  min-height: calc(100vh - 3rem);
   color: #4a4a4a;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .editProfile h2 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   letter-spacing: 0.25rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -21,7 +21,7 @@
 .editProfile input {
   width: 100%;
   border-bottom: 0.1rem solid #d8d8d8;
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: 0.5rem 0;
   outline: none;
 }
