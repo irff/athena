@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the cariInternship state domain
  */
-const selectCariInternshipDomain = () => state => state.get('cari-internship');
+const selectCariInternshipDomain = () => state => state.get('cari-internship').cariInternship;
 
 /**
  * Other specific selectors

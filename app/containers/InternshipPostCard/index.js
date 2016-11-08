@@ -7,11 +7,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styles from './styles.css';
-import { Map } from 'immutable';
+import { fromJS, Map } from 'immutable';
+
+import { displayApply } from 'containers/ApplyInternship/actions';
 
 import TokopediaImg from 'containers/HomePage/tokopedia.png';
 
 export class InternshipPostCard extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    displayApply: React.PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
 
@@ -46,6 +52,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
     };
 
     this.toggleDetailed = this.toggleDetailed.bind(this);
+    this.applyIntern = this.applyIntern.bind(this);
   }
 
   toggleDetailed() {
@@ -54,6 +61,11 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
     }));
     console.log(this.state.data.get('detailed'));
   }
+
+  applyIntern() {
+    console.log('bleh');
+    this.props.displayApply(fromJS(this.state.data));
+  }  
 
   render() {
     const data = this.state.data;
@@ -95,7 +107,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
               <button className={styles.detailButton} onClick={this.toggleDetailed} >Lihat Detail Internship</button>
             </div>
             <div className="small-6 columns">
-              <button className={styles.applyButton}>Daftar Internship</button>
+              <button className={styles.applyButton} onClick={this.applyIntern}>Daftar Internship</button>
             </div>
           </div>
         </div>
@@ -161,7 +173,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
               <button className={styles.detailButton} onClick={this.toggleDetailed} >Tutup</button>
             </div>
             <div className="small-6 columns">
-              <button className={styles.applyButton}>Daftar Internship</button>
+              <button className={styles.applyButton} onClick={this.applyIntern}>Daftar Internship</button>
             </div>
           </div>
         </div>
@@ -181,6 +193,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
 
 function mapDispatchToProps(dispatch) {
   return {
+    displayApply: (payload) => dispatch(displayApply(payload)),
     dispatch,
   };
 }

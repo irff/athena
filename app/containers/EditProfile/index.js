@@ -6,35 +6,43 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Map } from 'immutable';
+import { fromJS } from 'immutable';
 import Helmet from 'react-helmet';
 import styles from './styles.css';
 import { submit } from './actions';
+import { createStructuredSelector } from 'reselect';
 
 import SectionTitle from 'components/SectionTitle';
 
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 
+import { selectGlobal } from 'containers/App/selectors';
+
 export class EditProfile extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     submit: React.PropTypes.func,
+    global: React.PropTypes.object,
   };
 
   constructor(props) {
     super(props);
 
+    const userData = this.props.global.get('userData');
+
     this.state = {
-      data: Map({
-        firstName: '',
-        lastName: '',
-        major: '',
-        university: '',
-        achievement: '',
-        project: '',
-        job: '',
-        linkedIn: '',
-        resume: ''
+      data: fromJS({
+        firstName: userData.get('firstName'),
+        lastName: userData.get('lastName'),
+        highlight:  userData.get('highlight'),
+        major:  userData.get('major'),
+        university:  userData.get('university'),
+        achievement:  userData.get('achievement'),
+        project:  userData.get('project'),
+        job:  userData.get('job'),
+        linkedIn:  userData.get('linkedIn'),
+        resume:  userData.get('resume'),
+        valid:  userData.get('valid'),
       }),
     };
 
@@ -73,6 +81,10 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
                 <h2>nama belakang*</h2>
                 <input type="text" placeholder="Ketik nama belakang" value={data.get('lastName')} onChange={(evt) => this.changeInput(evt, 'lastName')} />
               </div>
+            </div>
+            <div className="small-12 medium-10 columns">
+              <h2>highlight*</h2>
+              <input type="text" placeholder="Ketik nama depan" value={data.get('highlight')} onChange={(evt) => this.changeInput(evt, 'highlight')} />
             </div>
             <div className="small-12 columns" />
             <div className="small-12 medium-5 columns">
@@ -120,10 +132,14 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+  global: selectGlobal(),
+});
+
 function mapDispatchToProps(dispatch) {
   return {
     submit: (data) => dispatch(submit(data)),
   };
 }
 
-export default connect(null, mapDispatchToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

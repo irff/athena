@@ -19,6 +19,7 @@ import Select from 'components/Select';
 import SectionTitle from 'components/SectionTitle';
 import FilterBar from 'containers/FilterBar';
 import InternshipPostCard from 'containers/InternshipPostCard';
+import ApplyInternship from 'containers/ApplyInternship';
 
 import TokopediaImg from 'containers/HomePage/tokopedia.png';
 import IndivaraImg from 'containers/HomePage/indivara.jpg';
@@ -34,6 +35,7 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
         ]}
       /> 
         <Navbar />
+        <ApplyInternship />
         <div className={styles.cariInternship}>
           <div className="row">
             <div className="small-12 columns">

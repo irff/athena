@@ -5,9 +5,11 @@
  */
 
 import { fromJS } from 'immutable';
+import { combineReducers } from 'redux';
 import {
   DEFAULT_ACTION,
 } from './constants';
+import applyInternshipReducer from 'containers/ApplyInternship/reducer';
 
 const initialState = fromJS({});
 
@@ -20,4 +22,7 @@ function cariInternshipReducer(state = initialState, action) {
   }
 }
 
-export default cariInternshipReducer;
+export default combineReducers({
+  cariInternship: cariInternshipReducer,
+  applyInternship: applyInternshipReducer,
+});
