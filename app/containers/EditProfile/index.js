@@ -18,11 +18,13 @@ import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 
 import { selectGlobal } from 'containers/App/selectors';
+import selectEditProfile from './selectors';
 
 export class EditProfile extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     submit: React.PropTypes.func,
     global: React.PropTypes.object,
+    local: React.PropTypes.object,
   };
 
   constructor(props) {
@@ -34,7 +36,7 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
       data: fromJS({
         firstName: userData.get('firstName'),
         lastName: userData.get('lastName'),
-        highlight:  userData.get('highlight'),
+        headline:  userData.get('headline'),
         major:  userData.get('major'),
         university:  userData.get('university'),
         achievement:  userData.get('achievement'),
@@ -42,7 +44,6 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
         job:  userData.get('job'),
         linkedIn:  userData.get('linkedIn'),
         resume:  userData.get('resume'),
-        valid:  userData.get('valid'),
       }),
     };
 
@@ -58,6 +59,7 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
 
   render() {
     const data = this.state.data;
+    console.log(this.props.local.message);
     return (
       <div>
       <Helmet
@@ -75,26 +77,30 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
             <div className="small-12 medium-5 columns">
               <h2>nama depan*</h2>
               <input type="text" placeholder="Ketik nama depan" value={data.get('firstName')} onChange={(evt) => this.changeInput(evt, 'firstName')} />
+              <h3 style={{display: this.props.local.message.firstName ? 'block' : 'none'}}>{this.props.local.message.firstName}</h3>
             </div>
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
-                <h2>nama belakang*</h2>
+                <h2>nama belakang</h2>
                 <input type="text" placeholder="Ketik nama belakang" value={data.get('lastName')} onChange={(evt) => this.changeInput(evt, 'lastName')} />
               </div>
             </div>
             <div className="small-12 medium-10 columns">
-              <h2>highlight*</h2>
-              <input type="text" placeholder="Ketik nama depan" value={data.get('highlight')} onChange={(evt) => this.changeInput(evt, 'highlight')} />
+              <h2>headline*</h2>
+              <input type="text" placeholder="Ketik headline profil anda" value={data.get('headline')} onChange={(evt) => this.changeInput(evt, 'headline')} />
+              <h3 style={{display: this.props.local.message.headline ? 'block' : 'none'}}>{this.props.local.message.headline}</h3>
             </div>
             <div className="small-12 columns" />
             <div className="small-12 medium-5 columns">
               <h2>Jurusan*</h2>
               <input type="text" placeholder="Ketik jurusanmu di sini" value={data.get('major')} onChange={(evt) => this.changeInput(evt, 'major')} />
+              <h3 style={{display: this.props.local.message.major ? 'block' : 'none'}}>{this.props.local.message.major}</h3>
             </div>
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
                 <h2>Universitas*</h2>
                 <input type="text" placeholder="Ketik universitasmu di sini" value={data.get('university')} onChange={(evt) => this.changeInput(evt, 'university')} />
+                <h3 style={{display: this.props.local.message.university ? 'block' : 'none'}}>{this.props.local.message.university}</h3>
               </div>
             </div>
             <div className="small-12 columns">
@@ -119,10 +125,13 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
                 <input type="text" placeholder="Ketik url disini" value={data.get('linkedIn')} onChange={(evt) => this.changeInput(evt, 'linkedIn')} />
                 <h2>URL Resume*</h2>
                 <input type="text" placeholder="Ketik url disini" value={data.get('resume')} onChange={(evt) => this.changeInput(evt, 'resume')} />
+                <h3 style={{display: this.props.local.message.resume ? 'block' : 'none'}}>{this.props.local.message.resume}</h3>
               </div>
             </div>
             <div className="small-12 columns">
               <button onClick={() => this.props.submit(data.toJS())}>Simpan</button>
+            </div>
+            <div className="small-12 columns">
             </div>
           </div>
         </div>
@@ -134,6 +143,7 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
 
 const mapStateToProps = createStructuredSelector({
   global: selectGlobal(),
+  local: selectEditProfile(),
 });
 
 function mapDispatchToProps(dispatch) {

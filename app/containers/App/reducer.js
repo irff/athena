@@ -26,7 +26,7 @@ const initialState = fromJS({
   userData: fromJS({
     firstName: 'Jeremy',
     lastName: 'Clarkson',
-    highlight: 'I am a still small voice of calm and reason.',
+    headline: 'I am a still small voice of calm and reason.',
     major: 'Power',
     university: 'University of Fossil Fuel',
     achievement: 1000,

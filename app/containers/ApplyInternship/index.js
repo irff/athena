@@ -35,7 +35,7 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
       data: fromJS({
         firstName: userData.get('firstName'),
         lastName: userData.get('lastName'),
-        highlight:  userData.get('highlight'),
+        headline:  userData.get('headline'),
         major:  userData.get('major'),
         university:  userData.get('university'),
         achievement:  userData.get('achievement'),
@@ -77,7 +77,7 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
                         <h1>{this.state.data.get('firstName')} {this.state.data.get('lastName')}</h1> 
                       </div>
                       <div className="small-12 columns">
-                        <h2>{this.state.data.get('highlight')}</h2> 
+                        <h2>{this.state.data.get('headline')}</h2> 
                       </div>
                       <div className="small-12 columns">
                         <p>Jurusan / Universitas</p>

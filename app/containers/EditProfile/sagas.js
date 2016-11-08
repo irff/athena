@@ -5,15 +5,57 @@ import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { SUBMIT } from './constants';
 import { editProfile } from 'containers/App/actions';
 import { fromJS } from 'immutable';
+import { isEmpty } from 'lodash';
+import { validate, invalidate, addErrorMessage, delErrorMessage } from './actions';
+import selectEditProfile from './selectors';
 
 /**
  * Github repos request/response handler
  */
 export function* submitData(action) {
-  if(action.payload.firstName && action.payload.lastName && action.payload.highlight && action.payload.major && action.payload.university && action.payload.resume) {
-  	action.payload.valid = true;
+  let flag = false;
+  let message = {
+    firstName: '',
+    headline: '',
+    major: '',
+    university: '',
+    resume: '',
+  };
 
-  	yield put(editProfile(fromJS(action.payload)));
+  if(isEmpty(action.payload.firstName)) {
+    flag = true;
+    message.firstName = '* Nama depan harus diisi';
+  }
+
+  if(isEmpty(action.payload.headline)) {
+    flag = true;
+    message.headline = '* Headline Profile harus diisi';
+  }
+
+  if(isEmpty(action.payload.major)) {
+    flag = true;
+    message.major = '* Jurusan harus diisi';
+  }
+
+  if(isEmpty(action.payload.university)) {
+    flag = true;
+    message.university = '* Universitas harus diisi';
+  }
+
+  if(isEmpty(action.payload.resume)) {
+    flag = true;
+    message.resume = '* Resume harus diisi';
+  }
+
+  if(!flag) {
+    action.payload.valid = true;
+
+    yield put(delErrorMessage());
+    yield put(invalidate());
+    yield put(editProfile(fromJS(action.payload)));
+  } else {
+    yield put(addErrorMessage(message));
+    yield put(validate());
   }
 }
 
