@@ -20,6 +20,7 @@ import globalStyles from 'containers/App/styles.css';
 
 import SpaciousMp from './Spacious.mp4';
 import SpaciousWebm from './Spacious.webm';
+import SpaciousJPG from './Spacious.jpg';
 
 import Logo from 'components/Logo';
 import Button from 'components/Button';
@@ -40,6 +41,11 @@ import ArunaHarsa from './aru.png';
 import MosesLo from './moses.png';
 import RakhaKanz from './rakha.png';
 import VictorArdianto from './victor.png';
+
+import CheckedImg from './checked.png';
+import SearchImg from './search.png';
+import TeamImg from './team.png';
+import WorkImg from './worker.png';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -99,31 +105,86 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
       <div>
         <div className="row expanded">
           <div className="small-12 columns">
-          	<div className={styles.hero}>
-            	<div className={styles.container}>
-            		<div className={styles.heroBackground}>
-            			<div className={styles.filter} />
-        	    		<video autoPlay loop className={styles.video}>
-        			        <source src={SpaciousMp} type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-        			        <source src={SpaciousWebm} type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
-        			    </video>
-        		    </div>
-        		    <div className={styles.heroContent}>
-        			 	  <div className={styles.container}>
-        	          <div className={styles.centralize}>
+            <div className="show-for-large">
+              <div className={styles.hero}>
+                <div className={styles.container}>
+                  <div className={styles.heroBackground}>
+                    <div className={styles.filter} />
+                    <video autoPlay loop className={styles.video}>
+                        <source src={SpaciousMp} type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                        <source src={SpaciousWebm} type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                    </video>
+                  </div>
+                  <div className={styles.heroContent}>
+                    <div className={styles.container}>
                       <Logo className={styles.logo} />
-        	            <h1 className={styles.tagline}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</h1>
+                      <h1 className={styles.tagline}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</h1>
+                      <h1 className={styles.principle}>Quint adalah <i>internship match making platform</i> berbasis web yang akan menyelesaikan permasalahan terkait <i>internship</i> yang dihadapi oleh mahasiswa, universitas, dan perusahaan.</h1>
                       <Button className={styles.blackButton} handleRoute={() => this.props.push('/mahasiswa/login')} >coba sekarang</Button>
-        	          </div>
-        		    	</div>
-        		    </div>
-            	</div>
-          	</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="hide-for-large">
+              <div className={styles.hero}>
+                <div className={styles.container}>
+                  <div className={styles.heroBackground}>
+                    <div className={styles.filter} />
+                    <img className={styles.coverImg} alt="cover" src={SpaciousJPG} />
+                  </div>
+                  <div className={styles.heroContent}>
+                    <div className={styles.container}>
+                      <Logo className={styles.logo} />
+                      <h1 className={styles.tagline}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</h1>
+                      <h1 className={styles.principle}>Quint adalah <i>internship match making platform</i> berbasis web yang akan menyelesaikan permasalahan terkait <i>internship</i> yang dihadapi oleh mahasiswa, universitas, dan perusahaan.</h1>
+                      <Button className={styles.blackButton} handleRoute={() => this.props.push('/mahasiswa/login')} >coba sekarang</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="small-12 columns">
             <div className={styles.content}>
               <div className={styles.secondPanel}>
-                <h1>Quint adalah internship <em>match making platform</em> berbasis web yang akan menyelesaikan permasalahan terkait internship yang dihadapi oleh mahasiswa, universitas, dan perusahaan.</h1>
+                <div className="row expanded">
+                  <div className="small-12 columns">
+                    <h1>Keunggulan Kami</h1>
+                  </div>
+                  <div className="small-12 medium-3 columns text-center">
+                    <div className={styles.advantage}>
+                      <h2>Mahasiswa</h2>
+                      <img src={SearchImg} alt="searchIcon" />
+                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h4>Tidak perlu lagi membuka puluhan website dan bertanya ke kerabat dekat untuk mencari tahu lowongan internship. Quint mengumpulkan lowongan internship dari perusahaan terbaik dan berkualitas di Indonesia.</h4>
+                    </div>
+                  </div>
+                  <div className="small-12 medium-3 columns text-center">
+                    <div className={styles.advantage}>
+                      <h2>Mahasiswa</h2>
+                      <img src={CheckedImg} alt="searchIcon" />
+                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h4>Penasaran mengetahui progess lamaran internship anda di perusahaan? Dengan Quint, anda akan terus mendapatkan update untuk mengetahui status seleksi anda.</h4>
+                    </div>
+                  </div>
+                  <div className="small-12 medium-3 columns text-center">
+                    <div className={styles.advantage}>
+                      <h2>Mahasiswa</h2>
+                      <img src={WorkImg} alt="searchIcon" />
+                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h4>Bingung mempersiapkan apa yang perlu dipelajari untuk tes/wawancara? Quint menyediakan materi dan sumber terbaik dalam satu tempat untuk persiapan terbaik anda.</h4>
+                    </div>
+                  </div>
+                  <div className="small-12 medium-3 columns text-center">
+                    <div className={styles.advantage}>
+                      <h2>Perusahaan</h2>
+                      <img src={TeamImg} alt="searchIcon" />
+                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h4>Quint merupakan tempat berkumpulnya mahasiswa bertalenta yang siap magang di perusahaan terbaik. Temukan mahasiswa berkualitas di Universitas Indonesia sesuai kriteria perusahaan anda.</h4>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className={styles.thirdPanel}>
                 <div className={styles.contentContainer}>
@@ -170,6 +231,9 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className="small-12 columns text-center">
                       <h3>Testimoni</h3>
                     </div>
+                    <div className="small-12 columns">
+                      <div className={styles.testimonyDivider} />
+                    </div>
                     <div className="small-12 columns text-center">
                       <p className={styles.testimonyText}>{this.state.testimonyList[this.state.testimony].testimonyText}</p>
                     </div>
@@ -183,9 +247,6 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="small-12 columns">
-                      <div className={styles.testimonyDivider} />
                     </div>
                     <div className="small-12 columns text-center">
                       <button className={styles.circle} disabled={this.state.testimony == 0} onClick={() => this.setPage(0)} />

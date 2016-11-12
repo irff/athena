@@ -26,6 +26,7 @@
   height: 100%;
   position: relative;
   min-height: 5rem;
+  margin-bottom: 2rem;
 }
 
 .testimonyContentContainer {
@@ -56,8 +57,8 @@
   width: 100%;
   height: 100%;
   z-index: 2;
-  background-image: linear-gradient(302deg, rgba(234, 199, 8, 0.77), rgba(221, 191, 27, 0.81) 52%, rgba(255, 220, 32, 0.95));
-  opacity: 0.5;
+  background-image: linear-gradient(286deg, #2d3038, #2c2f36);
+  opacity: 0.8;
 }
 
 .video {
@@ -71,7 +72,6 @@
   width: auto; 
   height: auto;
   z-index: -1000; 
-  overflow: hidden;
 }
 
 .heroContent {
@@ -83,7 +83,8 @@
   width: 100%;
   height: 100%;
   z-index: 5;
-  text-align: center;
+  text-align: left;
+  padding: 5rem;
 }
 
 .centralize {
@@ -96,33 +97,42 @@
 }
 
 .logo {
-  width: 25rem;
-  max-width: 50%;
-  height: auto;
+  height: 3rem;
+  width: auto;
   margin-bottom: 1.5rem;
 }
 
 .tagline {
+  margin-top: calc(40vh - 8rem);
   font-weight: 500;
+  font-size: 2.5rem;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+
+.principle {
+  margin-top: 5vh;
+  width: 60%;
   font-size: 1.5rem;
   line-height: 1.25;
-  color: #FFFFFF;
+  color: #FFF;
 }
 
 .blackButton {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #FFF;
-  background: linear-gradient(257deg, #40403c, #292929);
-  padding: 1rem 5rem;
+  color: #2c2c2c;
+  background: #e0d022;
+  padding: 1.25rem 5rem;
   border-radius: 3rem;
   margin-top: 2rem;
+  text-transform: capitalize;
 }
 
 .blackButton:hover,
 .blackButton:focus,
 .blackButton:active {
-  background: #333333;
+  background: #8c9225;
 }
 
 .content {
@@ -131,17 +141,49 @@
 
 .secondPanel {
   width: 100%;
-  padding: 10rem 0;
+  padding: 2.5rem 5rem;
   text-align: center;
-  background: linear-gradient(234deg, #40403c, #090908);
-  color: #FFFFFF;
+  background: linear-gradient(251deg, #e0d022, #f5d82a 81%, #f5d82a 81%, #fada2c);;
+  color: #313131;
+}
+
+.secondPanel .advantage {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
 }
 
 .secondPanel h1 {
-  max-width: 1200px;
   margin: 0 auto;
+  font-weight: 900;
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  margin-bottom: 3rem;
+}
+
+.secondPanel h2 {
+  font-size: 1.25rem;
   font-weight: 500;
-  font-size: 2rem;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.25rem;
+}
+
+.secondPanel img {
+  height: 2.5rem;
+  margin: 2rem 0;
+  width: auto;
+}
+
+.secondPanel h3 {
+  font-size: 1rem;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.secondPanel h4 {
+  font-size: 0.9rem;
+  line-height: 1.25;
 }
 
 .thirdPanel {
@@ -172,14 +214,15 @@
 .fourthPanel h3 {
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 3rem 0;
+  margin: 3rem 0 1rem;
 }
 
 .testimonyText {
   font-style: italic;
   font-size: 1.25rem;
-  line-height: 1;
-  margin: 0 0 3rem;
+  max-width: 1000px;
+  line-height: 1.5;
+  margin: 0 auto 3rem;
 }
 
 .testimonyPerson {
@@ -224,7 +267,7 @@
   width: 10%;
   height: 1px;
   background: #232321;
-  margin: 2rem auto;
+  margin: 0 auto 4rem;
 }
 
 .circleSelected,
@@ -259,18 +302,59 @@
   left: -2rem;
 }
 
+.coverImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 @media screen and (max-width: 40em) {
+  .content {
+    margin-top: 0;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
   .heroContent {
-    padding: 0 1rem;
+    position: relative;
+    padding: 2rem;
+    height: auto;
+    min-height: 200%;
+  }
+
+  .logo {
+    margin-bottom: 0;
+    margin-top: 1rem;
   }
 
   .tagline {
-    font-size: 1.25rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.5;
+    color: #FFFFFF;
+  }
+
+  .principle {
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #FFF;
   }
 
   .blackButton {
-    font-size: 1rem;
-    padding: 1rem 3.5rem;
+    width: 100%;
   }
 
   .secondPanel,
@@ -351,17 +435,46 @@
 }
 
 @media screen and (min-width: 40em) and (max-width: 64em) {
+  .content {
+    margin-top: 0;
+  }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
   .heroContent {
-    padding: 0 1rem;
+    position: relative;
+    padding: 2rem;
+    height: auto;
+    min-height: 200%;
+  }
+
+  .logo {
+    margin-bottom: 0;
+    margin-top: 1rem;
   }
 
   .tagline {
-    font-size: 1.25rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.5;
+    color: #FFFFFF;
+  }
+
+  .principle {
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #FFF;
   }
 
   .blackButton {
-    font-size: 1rem;
-    padding: 1rem 3.5rem;
+    width: 100%;
   }
 
   .secondPanel,
