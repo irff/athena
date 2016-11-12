@@ -12,6 +12,7 @@ import styles from './styles.css';
 import { submit } from './actions';
 import { createStructuredSelector } from 'reselect';
 
+import { loading, loadingDone } from 'containers/App/actions';
 import SectionTitle from 'components/SectionTitle';
 
 import Navbar from 'containers/Navbar';
@@ -25,6 +26,8 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
     submit: React.PropTypes.func,
     global: React.PropTypes.object,
     local: React.PropTypes.object,
+    loading: React.PropTypes.func,
+    loadingDone: React.PropTypes.func,
   };
 
   constructor(props) {
@@ -49,6 +52,14 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
     };
 
     this.changeInput = this.changeInput.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.loadingDone();
+  }
+
+  componentWillUnmount() {
+    this.props.loading();
   }
 
   changeInput(evt, field) {
@@ -156,6 +167,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     submit: (data) => dispatch(submit(data)),
+    loading: () => dispatch(loading()),
+    loadingDone: () => dispatch(loadingDone()),
   };
 }
 

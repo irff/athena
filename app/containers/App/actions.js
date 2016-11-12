@@ -11,6 +11,8 @@ import {
   LOG_OUT,
   ADD_TOKEN,
   EDIT_PROFILE,
+  LOADING,
+  LOADING_DONE,
 } from './constants';
 
 export function logIn() {
@@ -43,5 +45,17 @@ export function editProfile(payload) {
   return {
     type: EDIT_PROFILE,
     payload
+  };
+}
+
+export function loading() {
+  return {
+    type: LOADING,
+  };
+}
+
+export function loadingDone() {
+  return {
+    type: LOADING_DONE,
   };
 }

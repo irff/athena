@@ -10,6 +10,7 @@ import { push } from 'react-router-redux';
 import { isEmpty } from 'lodash';
 import { createStructuredSelector } from 'reselect';
 import { fromJS } from 'immutable';
+import { loading, loadingDone } from 'containers/App/actions';
 
 import { selectGlobal } from 'containers/App/selectors';
 import selectApplyInternship from './selectors';
@@ -24,6 +25,8 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
     hideApply: React.PropTypes.func,
     push: React.PropTypes.func,
     apply: React.PropTypes.func,
+    loading: React.PropTypes.func,
+    loadingDone: React.PropTypes.func,
   };
 
   constructor(props) {
@@ -49,6 +52,15 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
       }),
     };
   }
+
+  componentWillMount() {
+    this.props.loadingDone();
+  }
+
+  componentWillUnmount() {
+    this.props.loading();
+  }
+
 
 /*  componentDidMount() {
     document.addEventListener('click', this.props.hideApply);
@@ -139,6 +151,8 @@ function mapDispatchToProps(dispatch) {
     hideApply: () => dispatch(hideApply()),
     push: (url) => dispatch(push(url)),
     apply: () => dispatch(apply()),
+    loading: () => dispatch(loading()),
+    loadingDone: () => dispatch(loadingDone()),
     dispatch,
   };
 }

@@ -15,6 +15,7 @@ import styles from './styles.css';
 
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
+import { loading, loadingDone } from 'containers/App/actions';
 
 import Select from 'components/Select';
 import List from 'components/List';
@@ -29,11 +30,22 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
   static propTypes = {
     posts: React.PropTypes.array,
     loadData: React.PropTypes.func,
+    loading: React.PropTypes.func,
+    loadingDone: React.PropTypes.func,
   };
 
   componentDidMount() {
     this.props.loadData();
   }
+
+  componentWillMount() {
+    this.props.loadingDone();
+  }
+
+  componentWillUnmount() {
+    this.props.loading();
+  }
+
 
   render() {
     let mainContent = null;
@@ -71,6 +83,8 @@ const mapStateToProps = selectCariInternship();
 function mapDispatchToProps(dispatch) {
   return {
     loadData: () => dispatch(loadData()),
+    loading: () => dispatch(loading()),
+    loadingDone: () => dispatch(loadingDone()),
     dispatch,
   };
 }

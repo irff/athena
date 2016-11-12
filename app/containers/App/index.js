@@ -13,13 +13,16 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 
 import styles from './styles.css';
+import { selectGlobalToJS } from './selectors';
 
-export default class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
+    loading: React.PropTypes.bool,
   };
 
   render() {
@@ -33,7 +36,25 @@ export default class App extends React.Component { // eslint-disable-line react/
           ]}
         />
         {React.Children.toArray(this.props.children)}
+        <div className="spinnerContainer" style={{display: this.props.loading ? 'block' : 'none'}}>
+          <div className="spinnerContent">
+            <div className="spinner">
+              <div className="double-bounce1"></div>
+              <div className="double-bounce2"></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = selectGlobalToJS();
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

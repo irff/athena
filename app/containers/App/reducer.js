@@ -14,6 +14,8 @@ import {
   LOG_IN_SUCCESS,
   LOG_OUT,
   EDIT_PROFILE,
+  LOADING,
+  LOADING_DONE,
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -56,6 +58,12 @@ function appReducer(state = initialState, action) {
     case EDIT_PROFILE:
       return state
         .set('userData', action.payload);
+    case LOADING:
+      return state
+        .set('loading', true);
+    case LOADING_DONE:
+      return state
+        .set('loading', false);
     default:
       return state;
   }

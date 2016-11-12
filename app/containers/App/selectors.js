@@ -6,6 +6,8 @@ import { createSelector } from 'reselect';
 
 const selectGlobal = () => (state) => state.get('global');
 
+const selectGlobalToJS = () => (state) => state.get('global').toJS();
+
 const selectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -24,5 +26,6 @@ const selectLocationState = () => {
 
 export {
   selectGlobal,
+  selectGlobalToJS,
   selectLocationState,
 };

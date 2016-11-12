@@ -18,6 +18,8 @@ import messages from './messages';
 import styles from './styles.css';
 import globalStyles from 'containers/App/styles.css';
 
+import { loading, loadingDone } from 'containers/App/actions';
+
 import SpaciousMp from './Spacious.mp4';
 import SpaciousWebm from './Spacious.webm';
 import SpaciousJPG from './Spacious.jpg';
@@ -50,6 +52,8 @@ import WorkImg from './worker.png';
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     push: React.PropTypes.func,
+    loading: React.PropTypes.func,
+    loadingDone: React.PropTypes.func,
   };
 
   constructor(props) {
@@ -84,6 +88,18 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
         },
       ],
     };
+  }
+
+  componentWillMount() {
+    this.props.loading();
+  }
+
+  componentDidMount() {
+    this.props.loadingDone();
+  }
+
+  componentWillUnmount() {
+    this.props.loading();
   }
 
   next(currentPage) {
@@ -269,6 +285,8 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 function mapDispatchToProps(dispatch) {
   return {
     push: (url) => dispatch(push(url)),
+    loading: () => dispatch(loading()),
+    loadingDone: () => dispatch(loadingDone()),
   };
 }
 

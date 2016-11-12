@@ -10,6 +10,7 @@ import { push } from 'react-router-redux';
 import { fromJS } from 'immutable';
 import Helmet from 'react-helmet';
 import selectUserAccess from './selectors';
+import { loading, loadingDone } from 'containers/App/actions';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
@@ -25,6 +26,14 @@ import LinkedInLogo from './linkedinlogo.png';
 export class UserAccess extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
+  }
+
+  componentWillMount() {
+    this.props.loadingDone();
+  }
+
+  componentWillUnmount() {
+    this.props.loading();
   }
 
   openRoute = (route) => {
@@ -214,6 +223,8 @@ UserAccess.propTypes = {
   changeInput: React.PropTypes.func,
   logIn: React.PropTypes.func,
   signUp: React.PropTypes.func,
+  loading: React.PropTypes.func,
+  loadingDone: React.PropTypes.func,
 }
 
 const mapStateToProps = selectUserAccess();
@@ -224,6 +235,8 @@ function mapDispatchToProps(dispatch) {
     logIn: () => dispatch(logIn()),
     signUp: () => dispatch(signUp()),
     changeInput: (path, field, value) => dispatch(changeInput(path, field, value)),
+    loading: () => dispatch(loading()),
+    loadingDone: () => dispatch(loadingDone()),
     dispatch,
   };
 }
