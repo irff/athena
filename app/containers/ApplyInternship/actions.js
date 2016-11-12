@@ -8,6 +8,7 @@ import {
   DEFAULT_ACTION,
   DISPLAY_APPLY,
   HIDE_APPLY,
+  APPLY,
 } from './constants';
 
 export function defaultAction() {
@@ -26,5 +27,11 @@ export function displayApply(payload) {
 export function hideApply() {
   return {
     type: HIDE_APPLY,
+  };
+}
+
+export function apply() {
+  return {
+    type: APPLY,
   };
 }

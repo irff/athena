@@ -31,19 +31,20 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
     super(props);
 
     const userData = this.props.global.get('userData');
-
     this.state = {
       data: fromJS({
-        firstName: userData.get('firstName'),
-        lastName: userData.get('lastName'),
+        first_name: userData.get('first_name'),
+        last_name: userData.get('last_name'),
         headline:  userData.get('headline'),
         major:  userData.get('major'),
-        university:  userData.get('university'),
-        achievement:  userData.get('achievement'),
-        project:  userData.get('project'),
-        job:  userData.get('job'),
-        linkedIn:  userData.get('linkedIn'),
-        resume:  userData.get('resume'),
+        university: userData.get('university'),
+        experiences: {
+          achievement_num: userData.getIn(['experiences', 'achievement_num']),
+          project_num: userData.getIn(['experiences', 'project_num']),
+          work_num: userData.getIn(['experiences', 'work_num']),
+        },
+        linkedin_url: userData.get('linkedin_url'),
+        resume_url: userData.get('resume_url'),
       }),
     };
 
@@ -57,9 +58,15 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
     }));
   }
 
+  changeExperience(evt, field) {
+    const value = evt.target.value;
+    this.setState(({data}) => ({
+      data: data.updateIn(['experiences', field], firstName => value)
+    }));
+  }
+
   render() {
     const data = this.state.data;
-    console.log(this.props.local.message);
     return (
       <div>
       <Helmet
@@ -76,30 +83,30 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
             </div>
             <div className="small-12 medium-5 columns">
               <h2>nama depan*</h2>
-              <input type="text" placeholder="Ketik nama depan" value={data.get('firstName')} onChange={(evt) => this.changeInput(evt, 'firstName')} />
+              <input type="text" placeholder="Ketik nama depan" value={data.get('first_name')} onChange={(evt) => this.changeInput(evt, 'first_name')} />
               <h3 style={{display: this.props.local.message.firstName ? 'block' : 'none'}}>{this.props.local.message.firstName}</h3>
             </div>
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
                 <h2>nama belakang</h2>
-                <input type="text" placeholder="Ketik nama belakang" value={data.get('lastName')} onChange={(evt) => this.changeInput(evt, 'lastName')} />
+                <input type="text" placeholder="Ketik nama belakang" value={data.get('last_name')} onChange={(evt) => this.changeInput(evt, 'last_name')} />
               </div>
             </div>
             <div className="small-12 medium-10 columns">
               <h2>headline*</h2>
-              <input type="text" placeholder="Ketik headline profil anda" value={data.get('headline')} onChange={(evt) => this.changeInput(evt, 'headline')} />
+              <input type="text" placeholder="Ketik headline profil anda" value={data.get('headline') === 'iniDefaultEntryQuint' ? '' : data.get('headline')} onChange={(evt) => this.changeInput(evt, 'headline')} />
               <h3 style={{display: this.props.local.message.headline ? 'block' : 'none'}}>{this.props.local.message.headline}</h3>
             </div>
             <div className="small-12 columns" />
             <div className="small-12 medium-5 columns">
               <h2>Jurusan*</h2>
-              <input type="text" placeholder="Ketik jurusanmu di sini" value={data.get('major')} onChange={(evt) => this.changeInput(evt, 'major')} />
+              <input type="text" placeholder="Ketik jurusanmu di sini" value={data.get('major') === 'iniDefaultEntryQuint' ? '' : data.get('major')} onChange={(evt) => this.changeInput(evt, 'major')} />
               <h3 style={{display: this.props.local.message.major ? 'block' : 'none'}}>{this.props.local.message.major}</h3>
             </div>
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
                 <h2>Universitas*</h2>
-                <input type="text" placeholder="Ketik universitasmu di sini" value={data.get('university')} onChange={(evt) => this.changeInput(evt, 'university')} />
+                <input type="text" placeholder="Ketik universitasmu di sini" value={data.get('university') === 'iniDefaultEntryQuint' ? '' : data.get('university')} onChange={(evt) => this.changeInput(evt, 'university')} />
                 <h3 style={{display: this.props.local.message.university ? 'block' : 'none'}}>{this.props.local.message.university}</h3>
               </div>
             </div>
@@ -109,11 +116,11 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
                 <h2>Jumlah Prestasi</h2>
-                <input type="number" placeholder="Jumlah" value={data.get('achievement')} onChange={(evt) => this.changeInput(evt, 'achievement')} />
+                <input type="number" min={0} placeholder="Jumlah" value={data.getIn(['experiences', 'achievement_num'])} onChange={(evt) => this.changeExperience(evt, 'achievement_num')} />
                 <h2>Jumlah Proyek</h2>
-                <input type="number" placeholder="Jumlah" value={data.get('project')} onChange={(evt) => this.changeInput(evt, 'project')} />
+                <input type="number" min={0} placeholder="Jumlah" value={data.getIn(['experiences', 'project_num'])} onChange={(evt) => this.changeExperience(evt, 'project_num')} />
                 <h2>Jumlah Organisasi/Pekerjaan</h2>
-                <input type="number" placeholder="Jumlah" value={data.get('job')} onChange={(evt) => this.changeInput(evt, 'job')} />
+                <input type="number" min={0} placeholder="Jumlah" value={data.getIn(['experiences', 'work_num'])} onChange={(evt) => this.changeExperience(evt, 'work_num')} />
               </div>
             </div>
             <div className="small-12 columns">
@@ -122,9 +129,9 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
             <div className="small-12 medium-5 columns end">
               <div className={styles.marginContent}>
                 <h2>URL LinkedIn</h2>
-                <input type="text" placeholder="Ketik url disini" value={data.get('linkedIn')} onChange={(evt) => this.changeInput(evt, 'linkedIn')} />
+                <input type="text" placeholder="Ketik url disini" value={data.get('linkedin_url')} onChange={(evt) => this.changeInput(evt, 'linkedin_url')} />
                 <h2>URL Resume*</h2>
-                <input type="text" placeholder="Ketik url disini" value={data.get('resume')} onChange={(evt) => this.changeInput(evt, 'resume')} />
+                <input type="text" placeholder="Ketik url disini" value={data.get('resume_url') === 'http://iniDefaultEntryQui.nt' ? '' : data.get('resume_url')} onChange={(evt) => this.changeInput(evt, 'resume_url')} />
                 <h3 style={{display: this.props.local.message.resume ? 'block' : 'none'}}>{this.props.local.message.resume}</h3>
               </div>
             </div>

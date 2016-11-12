@@ -1,5 +1,4 @@
-
-
+import { push } from 'react-router-redux';
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { SUBMIT } from './constants';
@@ -7,12 +6,16 @@ import { editProfile } from 'containers/App/actions';
 import { fromJS } from 'immutable';
 import { isEmpty } from 'lodash';
 import { validate, invalidate, addErrorMessage, delErrorMessage } from './actions';
-import selectEditProfile from './selectors';
+import { selectGlobal } from 'containers/App/selectors';
+import request from 'utils/request';
 
 /**
  * Github repos request/response handler
  */
 export function* submitData(action) {
+  const globalState = yield select(selectGlobal());
+  const userId = globalState.get('id');
+  const currentToken = globalState.get('currentToken');
   let flag = false;
   let message = {
     firstName: '',
@@ -22,7 +25,7 @@ export function* submitData(action) {
     resume: '',
   };
 
-  if(isEmpty(action.payload.firstName)) {
+  if(isEmpty(action.payload.first_name)) {
     flag = true;
     message.firstName = '* Nama depan harus diisi';
   }
@@ -42,20 +45,34 @@ export function* submitData(action) {
     message.university = '* Universitas harus diisi';
   }
 
-  if(isEmpty(action.payload.resume)) {
+  if(isEmpty(action.payload.resume_url)) {
     flag = true;
     message.resume = '* Resume harus diisi';
   }
-
+  
   if(!flag) {
-    action.payload.valid = true;
-
     yield put(delErrorMessage());
-    yield put(invalidate());
-    yield put(editProfile(fromJS(action.payload)));
+    const requestURL = `http://localhost:5000/students/${userId}`;
+    const auth = `Bearer ${currentToken}`;
+
+    const editProfileCall = yield call(request, requestURL, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': auth
+      },
+      body: JSON.stringify(action.payload)
+    });
+
+    if (!editProfileCall.err) {
+      //yield put(logInSuccess(signupCall.data.token, loginCall.data));
+      console.log("uye sukses");
+      yield put(editProfile(fromJS(action.payload)));
+      yield put(push('/mahasiswa/cari-internship'));
+    }
   } else {
     yield put(addErrorMessage(message));
-    yield put(validate());
   }
 }
 

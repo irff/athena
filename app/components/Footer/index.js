@@ -36,7 +36,7 @@ function Footer(props) {
         <div className="small-12 medium-8 columns">
           <div className={styles.rightSide}>
             <h3>Our Team is open for any kind of collaboration</h3>
-            <h1>partnership@quint.id</h1>
+            <h1><a href="mailto:partnership@quint.id?Subject=Inquiry%20Quint">partnership@quint.id</a></h1>
           </div>
         </div>
         <div className="small-12 columns">

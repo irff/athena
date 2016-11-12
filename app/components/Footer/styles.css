@@ -66,6 +66,33 @@
   font-size: 2.5rem;
 }
 
+.rightSide h1 a {
+  color: #e5d224;
+}
+
 .rightSide h3 {
   font-size: 1.5rem;
+}
+
+@media screen and (max-width: 40em) {
+  .leftSide {
+    border: none;
+    padding: 1rem 0;
+  }
+
+  .rightSide {
+    padding: 1rem 0;
+  }
+
+  .rightSide h1 {
+    font-size: 1.5rem;
+  }
+
+  .rightSide h3 {
+    font-size: 1rem;
+  }
+
+  .copyrightNotice {
+    margin-top: 0;
+  }
 }

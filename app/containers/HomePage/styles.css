@@ -25,7 +25,7 @@
   width: 100%;
   height: 100%;
   position: relative;
-  min-height: 6rem;
+  min-height: 5rem;
 }
 
 .testimonyContentContainer {
@@ -62,12 +62,16 @@
 
 .video {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: 0;
+  top: 50%; 
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 100%; 
+  min-height: 100%; 
+  width: auto; 
+  height: auto;
+  z-index: -1000; 
+  overflow: hidden;
 }
 
 .heroContent {
@@ -92,24 +96,25 @@
 }
 
 .logo {
-  width: 30rem;
+  width: 25rem;
+  max-width: 50%;
   height: auto;
   margin-bottom: 1.5rem;
 }
 
 .tagline {
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1.25;
   color: #FFFFFF;
 }
 
 .blackButton {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #FFF;
   background: linear-gradient(257deg, #40403c, #292929);
-  padding: 1.25rem 5rem;
+  padding: 1rem 5rem;
   border-radius: 3rem;
   margin-top: 2rem;
 }
@@ -145,16 +150,17 @@
 }
 
 .thirdPanel h3 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: #4a4a4a;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .thirdPanel img {
-  height: 3.5rem;
+  height: 3rem;
   width: auto;
   margin: 2rem auto;
+  object-fit: contain;
 }
 
 .fourthPanel {
@@ -164,16 +170,16 @@
 }
 
 .fourthPanel h3 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  margin: 3rem 0 5rem;
+  margin: 3rem 0;
 }
 
 .testimonyText {
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1;
-  margin: 0 0 4rem;
+  margin: 0 0 3rem;
 }
 
 .testimonyPerson {
@@ -184,8 +190,8 @@
 }
 
 .testimonyPicture {
-  width: 6rem;
-  height: 6rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 5rem;
   background: #333;
   object-fit: cover;
@@ -205,14 +211,14 @@
 }
 
 .testimonyName {
-  margin-top: 1.25rem;
-  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.25rem;
   font-weight: 700;
   line-height: 1;
 }
 
 .testimonyPosition {
-  font-size: 1rem;
+  font-size: 0.75rem;
 }
 
 .testimonyDivider {
@@ -252,4 +258,184 @@
 
 .prevButton {
   left: -2rem;
+}
+
+@media screen and (max-width: 40em) {
+  .heroContent {
+    padding: 0 1rem;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+  }
+
+  .blackButton {
+    font-size: 1rem;
+    padding: 1rem 3.5rem;
+  }
+
+  .secondPanel,
+  .thirdPanel,
+  .fourthPanel {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .secondPanel {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  
+  .secondPanel h1 {
+    font-size: 1.5rem;
+  }
+
+  .thirdPanel h3 {
+    font-size: 2rem;
+  }
+
+  .thirdPanel img {
+    padding: 0.5rem;
+  }
+
+  .fourthPanel h3 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .testimonyText {
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 0 0 4rem;
+  }
+
+  .testimonyPerson {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: none;
+    text-align: center;
+  }
+
+  .testimonyPicture {
+    width: 6rem;
+    height: 6rem;
+    margin-left: 50%;
+    transform: translateX(-3rem);
+    float: none;
+    display: block;
+  }
+
+  .testimonyCred {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .testimonyName,
+  .testimonyPosition {
+    margin-left: 0.5rem;
+  }
+
+  .testimonyName {
+    font-size: 1rem;
+  }
+
+  .testimonyPosition {
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (min-width: 40em) and (max-width: 64em) {
+  .heroContent {
+    padding: 0 1rem;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+  }
+
+  .blackButton {
+    font-size: 1rem;
+    padding: 1rem 3.5rem;
+  }
+
+  .secondPanel,
+  .thirdPanel,
+  .fourthPanel {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .secondPanel {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  
+  .secondPanel h1 {
+    font-size: 1.5rem;
+  }
+
+  .thirdPanel h3 {
+    font-size: 2rem;
+  }
+
+  .thirdPanel img {
+    padding: 0.5rem;
+  }
+
+  .fourthPanel h3 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .testimonyText {
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1;
+    margin: 0 0 2rem;
+  }
+
+  .testimonyPerson {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: none;
+    text-align: center;
+  }
+
+  .testimonyPicture {
+    width: 6rem;
+    height: 6rem;
+    margin-left: 50%;
+    transform: translateX(-3rem);
+    float: none;
+    display: block;
+  }
+
+  .testimonyCred {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .testimonyName,
+  .testimonyPosition {
+    margin-left: 0.5rem;
+  }
+
+  .testimonyName {
+    font-size: 1rem;
+  }
+
+  .testimonyPosition {
+    font-size: 0.75rem;
+  }
 }

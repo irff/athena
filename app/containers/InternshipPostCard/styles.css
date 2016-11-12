@@ -90,15 +90,43 @@
   width: 100%;
   padding: 2rem;
   background: 
-    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-    url('./japan.jpg');
+    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
   background-size: cover;
   background-position: center;
   color: #FFF;
+  position: relative;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bgImg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bgImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .header .postContent {
   color: #FFF;
+  z-index: 10;
+}
+.header .postContact {
+  z-index: 10;
 }
 
 .header .postContent h5 a {
@@ -145,7 +173,7 @@
 .postDetail h1, 
 .postDetail h2, 
 .postDetail h3, 
-.postDetail p {
+.postDetail ul {
   margin: 0;
   line-height: 1;
 }
@@ -171,9 +199,9 @@
   margin-top: 1.5rem;
 }
 
-.postDetail p {
+.postDetail ul {
   margin-top: 0.5rem;
-  white-space: pre-line;
+  list-style: inside;
   line-height: 1.25;
   width: 80%;
   font-size: 0.8rem;
@@ -184,4 +212,15 @@
   top: 0;
   right: 0;
   font-size: 0.8rem;
+}
+
+@media screen and (max-width: 40em) {
+  .header .postContent {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .postContact {
+    text-align: center;
+  }
 }

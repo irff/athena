@@ -1,5 +1,5 @@
 .editProfile { /* stylelint-disable */
-  padding-top: 5rem;
+  padding: 5rem 2rem;
   min-height: calc(100vh - 3rem);
   color: #4a4a4a;
 }
@@ -44,4 +44,10 @@
   font-size: 1.25rem;
   padding: 0.75rem 5rem;
   background: linear-gradient(227deg, #b4ec51, #429321);
+}
+
+@media screen and (max-width: 40em) {
+  .editProfile .marginContent {
+    margin-left: 0;
+  }
 }

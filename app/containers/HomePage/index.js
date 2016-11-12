@@ -122,34 +122,34 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className="small-12 columns text-center">
                       <h3>Perusahaan yang Mempercayai Quint</h3>
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={BlibliImg} alt="Blibli.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={TokopediaImg} alt="Tokopedia.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={VeritransImg} alt="veritrans.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={DekorumaImg} alt="dekoruma.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={CermatiImg} alt="cermati.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={YesbossImg} alt="yesboss.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={RumaImg} alt="ruma.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={IndivaraImg} alt="indivara.com" />
                     </div>
-                    <div className="small-12 medium-4 columns text-center">
+                    <div className="small-6 medium-3 large-4 medium-offset-3 large-offset-0 columns text-center">
                       <img src={DmsumImg} alt="dmsum.com" />
                     </div>
-                    <div className="small-12 medium-4 medium-offset-4 columns text-center end">
+                    <div className="small-6 medium-3 large-4 large-offset-4 columns text-center end">
                       <img src={XenditImg} alt="xendit.com" />
                     </div>
                   </div>

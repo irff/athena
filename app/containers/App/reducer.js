@@ -22,19 +22,21 @@ const initialState = fromJS({
   loading: false,
   error: false,
   loggedIn: true,
-  currentToken: 'holaamigo',
+  currentToken: '',
+  id: '',
   userData: fromJS({
-    firstName: 'Jeremy',
-    lastName: 'Clarkson',
-    headline: 'I am a still small voice of calm and reason.',
-    major: 'Power',
-    university: 'University of Fossil Fuel',
-    achievement: 1000,
-    project: 300,
-    job: 1,
-    linkedIn: 'linkedin.com/jeremyclarkson',
-    resume: 'drive.google.com/ohdoicare',
-    valid: false,
+    first_name: 'Jeremy',
+    last_name: 'Clarkson',
+    headline: 'iniDefaultEntryQuint',
+    major: 'iniDefaultEntryQuint',
+    university: 'iniDefaultEntryQuint',
+    experiences: {
+      achievement_num: 0,
+      project_num: 0,
+      work_num: 0
+    },
+    linkedin_url: 'linkedin.com/jeremyclarkson',
+    resume_url: 'http://iniDefaultEntryQui.nt',
   }),
 });
 

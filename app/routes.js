@@ -118,8 +118,8 @@ export default function createRoutes(store) {
           },
         },
         {
-          path: '/mahasiswa/edit-profil',
-          name: 'edit-profil',
+          path: '/mahasiswa/ubah-profil',
+          name: 'ubah-profil',
           getComponent(nextState, cb) {
             const importModules = Promise.all([
               System.import('containers/EditProfile/reducer'),

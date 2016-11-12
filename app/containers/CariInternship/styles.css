@@ -1,6 +1,6 @@
 .cariInternship { /* stylelint-disable */
-  padding-top: 5rem;
   min-height: calc(100vh - 3rem);
+  padding: 5rem 1rem 1rem;
 }
 
 .sortBySelect {
@@ -12,5 +12,5 @@
   font-weight: 700;
   line-height: 1;
   color: #4a4a4a;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }

@@ -10,14 +10,12 @@ import {
   LOG_IN_FAIL,
   LOG_OUT,
   ADD_TOKEN,
-  VALIDATE_TOKEN,
   EDIT_PROFILE,
 } from './constants';
 
-export function logIn(payload) {
+export function logIn() {
   return {
     type: LOG_IN,
-    payload
   };
 }
 

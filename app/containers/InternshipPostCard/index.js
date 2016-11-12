@@ -12,10 +12,12 @@ import { fromJS, Map } from 'immutable';
 import { displayApply } from 'containers/ApplyInternship/actions';
 
 import TokopediaImg from 'containers/HomePage/tokopedia.png';
+import JapanBackground from './japan.jpg';
 
 export class InternshipPostCard extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     displayApply: React.PropTypes.func,
+    item: React.PropTypes.object,
   };
 
   constructor(props) {
@@ -24,30 +26,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
     this.state = {
       data: Map({
         detailed: false,
-        item: {
-          id: 'wololo',
-          role: 'Software Engineer Intern',
-          company: 'Bukalapak',
-          companyDescription: 'Bukalapak adalah company terkeren sedunia. Dengan intern di Bukalapak, kamu bisa dapat gaji yang besar, makan gratis, fasilitas gratis, dan kehidupan yang amat sangat layak. Ada gym-nya pula. Yuk, intern di Bukalapak!',
-          industry: 'E-Commerce',
-          address: 'Kemang, Jakarta Selatan',
-          mapLink: 'http://maps.google.com',
-          website: 'www.bukalapak.com',
-          salary: 4000000,
-          currency: 'IDR',
-          term: 'bulan',
-          requirement: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus tempus mi et rutrum:\n- plebplob\n- beepboop',
-          responsibility: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac mi ut neque pharetra aliquam. Etiam maximus tempus mi et rutrum:\n- plebplob\n- beepboop',
-          experience: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac mi ut neque pharetra aliquam. Etiam maximus tempus mi et rutrum:\n- plebplob\n- beepboop',
-          cp: {
-            id: 'wulala',
-            name: 'Illuvatar Samatarian',
-            role: 'Chief of Pleb',
-            phone: '+62 123 456 7890',
-            email: 'illuvatar@bukalapak.com',
-          },
-          timestamp: '2016-11-03T06:46:45.562Z'
-        },
+        item: this.props.item ? this.props.item : {}
       }),
     };
 
@@ -59,17 +38,15 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
     this.setState(({data}) => ({
       data: data.update('detailed', detailed => !detailed)
     }));
-    console.log(this.state.data.get('detailed'));
   }
 
   applyIntern() {
-    console.log('bleh');
     this.props.displayApply(fromJS(this.state.data));
   }  
 
   render() {
     const data = this.state.data;
-    let timePassed = new Date() - Date.parse(data.get('item').timestamp);
+    let timePassed = new Date() - Date.parse(data.get('item').created_at);
     timePassed /= 1000;
     timePassed /= 60;
     const minute = Math.floor(timePassed % 60);
@@ -82,6 +59,26 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
 
     const timestamp = `${weeks >= 1 ? `${weeks}mi`:`${days >= 1 ? `${days}h` : `${hours >= 1 ? `${hours}j` : `${minute}m`}`}`}`;
 
+    let duration = Date.parse(data.get('item').job_schedule.end_at) - Date.parse(data.get('item').job_schedule.start_at); 
+    duration /= 1000;
+    duration /= 60;
+    const minuteDur = Math.floor(duration % 60);
+    duration /= 60;
+    const hoursDur = Math.floor(duration % 24);
+    duration /= 24;
+    const daysDur = Math.floor(duration % 7);
+    duration /= 7;
+    const weeksDur = Math.floor(duration % 4);
+    duration = (duration * 7) / 30;
+    const monthsDur = Math.floor(duration);
+
+    const finalDur =`${monthsDur >=1 ? `${monthsDur} Bulan` : `${weeksDur >= 1 ? `${weeksDur} Minggu` : `${daysDur >= 1 ? `${daysDur} Hari` : `${hoursDur >= 1 ? `${hoursDur} Jam` : `${minuteDur} Menit`}`}`}`}`;
+
+    let salary = `${data.get('item').salary.currency} ${Math.round(data.get('item').salary.fee.minimal/100000) / 10} Juta - ${Math.round(data.get('item').salary.fee.maximal/100000) / 10} Juta/${data.get('item').salary.term}`;
+    if(data.get('item').salary.fee.minimal == data.get('item').salary.fee.maximal) {
+      salary = `${data.get('item').salary.currency} ${Math.round(data.get('item').salary.fee.minimal/100000) / 10} Juta/${data.get('item').salary.term}`; 
+    }
+
     const unDetailed = (
         <div className={styles.internshipPostCard}>
           <div className="row expanded">
@@ -89,14 +86,14 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
               <div className={styles.snipet}>
                 <div className="row expanded">
                   <div className="small-2 columns">
-                    <img className={styles.postLogo} src={TokopediaImg} alt="logo perusahaan" />
+                    <img className={styles.postLogo} src={data.get('item').company.logo_url} alt="logo perusahaan" />
                   </div>
                   <div className="small-10 columns">
                     <div className={styles.postContent}>
                       <h3>{data.get('item').role}</h3>
-                      <h4>{data.get('item').company}</h4>
-                      <h5><a href={data.get('item').mapLink}>{data.get('item').address}</a></h5>
-                      <h5>{data.get('item').currency}. {Math.round((data.get('item').salary/100000)) / 10} Juta/{data.get('item').term}</h5>
+                      <h4>{data.get('item').company.name}</h4>
+                      <h5><a href={data.get('item').company.company_address}>{data.get('item').company.company_address}</a></h5>
+                      <h5>{salary}</h5>
                       <h6>{timestamp}</h6>
                     </div>
                   </div>
@@ -117,27 +114,30 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
         <div className={styles.internshipPostCard}>
           <div className="row expanded">
             <div className="small-12 columns">
-              <div className={styles.header}>
-                <div className="row expanded">
-                  <div className="small-1 columns">
-                    <img className={styles.postLogo} src={TokopediaImg} alt="logo perusahaan" />   
-                  </div>
-                  <div className="small-8 columns">
-                    <div className={styles.postContent}>
-                      <h3>{data.get('item').company}</h3>
-                      <h4>{data.get('item').industry} Company</h4>
-                      <h5><a href={data.get('item').mapLink}>{data.get('item').address}</a></h5>
-                      <h5><a href={`http://${data.get('item').website}`}>{data.get('item').website}</a></h5>
-                      <p>{data.get('item').companyDescription}</p>
+              <div className={styles.container}>
+                <div className={styles.bgImg}><img src={data.get('item').company.background_img_url === 'iniDefaultEntryQuint' || data.get('item').company.background_img_url === '' ? JapanBackground : data.get('item').company.background_img_url} alt="cover background" /></div>
+                <div className={styles.header}>
+                  <div className="row expanded">
+                    <div className="small-12 medium-1 columns">
+                      <img className={styles.postLogo} src={data.get('item').company.logo_url} alt="logo perusahaan" />   
                     </div>
-                  </div>
-                  <div className="small-3 columns">
-                    <div className={styles.postContact}>
-                      <p>Contact person:</p>
-                      <h3>{data.get('item').cp.name}</h3>
-                      <h4>{data.get('item').cp.role}</h4>
-                      <h5>{data.get('item').cp.phone}</h5>
-                      <h5>{data.get('item').cp.email}</h5>
+                    <div className="small-12 medium-8 columns">
+                      <div className={styles.postContent}>
+                        <h3>{data.get('item').company.name}</h3>
+                        <h4>{data.get('item').company.category} Company</h4>
+                        <h5><a href={data.get('item').company.company_address}>{data.get('item').company.company_address}</a></h5>
+                        <h5><a href={`http://${data.get('item').company.website}`}>{data.get('item').company.website}</a></h5>
+                        <p>{data.get('item').why_us}</p>
+                      </div>
+                    </div>
+                    <div className="small-12 medium-3 columns">
+                      <div className={styles.postContact}>
+                        <p>Contact person:</p>
+                        <h3>{data.get('item').contact_person.name}</h3>
+                        <h4>{data.get('item').contact_person.role}</h4>
+                        <h5>{data.get('item').contact_person.phone}</h5>
+                        <h5>{data.get('item').contact_person.email}</h5>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -149,20 +149,27 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
                   <div className="row expanded">
                     <div className="small-12 columns">
                       <h1>{data.get('item').role}</h1>
-                      <h2>{data.get('item').address}</h2>
-                      <h2>{data.get('item').currency}. {Math.round((data.get('item').salary/100000)) / 10} Juta/{data.get('item').term}</h2>
+                      <h2>{salary}</h2>
+                      <h2>{finalDur}</h2>
                     </div>
-                    <div className="small-4 columns">
+                    <div className="small-12 medium-4 columns">
                       <h3>Kemampuan Teknis</h3>
-                      <p>{data.get('item').requirement}</p>
+                      <ul>
+                        {data.get('item').technical_requirements.map((value, index) => (<li key={index}>{value}</li>))}
+                      </ul>
                     </div>
-                    <div className="small-4 columns">
+                    <div className="small-12 medium-4 columns">
                       <h3>Tanggung Jawab / Pekerjaan</h3>
-                      <p>{data.get('item').responsibility}</p>
+                      <ul>
+                        {data.get('item').tasks.map((value, index) => (<li key={index}>{value}</li>))}
+                      </ul>
                     </div>
-                    <div className="small-4 columns">
+                    <div className="small-12 medium-4 columns">
                       <h3>Pengalaman yang Didapat</h3>
-                      <p>{data.get('item').experience}</p>
+                      <ul>
+                        {data.get('item').skills_gained.map((value, index) => (<li key={index}>{value}</li>))}
+                        {data.get('item').experiences_gained.map((value, index) => (<li key={index}>{value}</li>))}
+                      </ul>
                     </div>
                   </div>
                   <h6>{timestamp}</h6>
@@ -180,7 +187,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
       );
 
     const content = data.get('detailed') ? detailed : unDetailed; 
-    const grid = data.get('detailed') ? "small-12 columns" : "small-6 columns end";
+    const grid = data.get('detailed') ? "small-12 columns" : "small-12 medium-6 columns end";
 
     return (
       <div className={grid}>

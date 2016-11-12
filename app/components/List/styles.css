@@ -1,0 +1,13 @@
+/* Gives the scrollbar rounded edges via overflow: hidden */
+.listWrapper {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}

@@ -130,19 +130,26 @@ body {
   }
 }
 
-.iconuparrow,
+
 .icondownarrow,
-.iconfacebook,
+.iconuparrow,
+.iconedit,
 .iconleftarrow,
 .iconline,
-.iconrightarrow {  
+.iconlogout,
+.iconsearch,
+.iconrightarrow,
+.iconfacebook {  
   font-family: "Flaticon";
   font-style: normal;
 }
 
-.iconuparrow:before { content: "\f100"; }
-.icondownarrow:before { content: "\f101"; }
+.icondownarrow:before { content: "\f100"; }
+.iconedit:before { content: "\f101"; }
 .iconfacebook:before { content: "\f102"; }
 .iconleftarrow:before { content: "\f103"; }
 .iconline:before { content: "\f104"; }
-.iconrightarrow:before { content: "\f105"; }
+.iconlogout:before { content: "\f105"; }
+.iconrightarrow:before { content: "\f106"; }
+.iconsearch:before { content: "\f107"; }
+.iconuparrow:before { content: "\f108"; }
