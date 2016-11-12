@@ -193,7 +193,6 @@
   width: 5rem;
   height: 5rem;
   border-radius: 5rem;
-  background: #333;
   object-fit: cover;
   display: inline-block;
   float: left;
@@ -299,7 +298,7 @@
   }
 
   .fourthPanel h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 1.5rem 0;
   }
 
@@ -308,6 +307,7 @@
     font-size: 1.5rem;
     line-height: 1;
     margin: 0 0 4rem;
+    font-weight: 400;
   }
 
   .testimonyPerson {

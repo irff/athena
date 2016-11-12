@@ -36,6 +36,11 @@ import IndivaraImg from './indivara.jpg';
 import DmsumImg from './dmsum.jpg';
 import XenditImg from './xendit.jpg';
 
+import ArunaHarsa from './aru.png';
+import MosesLo from './moses.png';
+import RakhaKanz from './rakha.png';
+import VictorArdianto from './victor.png';
+
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     push: React.PropTypes.func,
@@ -48,24 +53,28 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
       testimony: 0,
       testimonyList: [
         {
-          'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
-          'testimonyName':'Gabe Newell Bellevue',
-          'testimonyPosition':'CEO of Valve Software Ltd.'
+          'testimonyText':"We used Quint to source top-notch quality of engineering internship, and the result was awesome. We were able to match with interns that are not only were great culture fit, but also built several core products, making huge impact towards our business. Their quality are definitely beyond any other platforms we've used before",
+          'testimonyName':'Aruna Harsa',
+          'testimonyPosition':'Co-Founder, CTO of Dekoruma',
+          'testimonyPicture': ArunaHarsa,
         },
         {
-          'testimonyText':'olala',
-          'testimonyName':'Son Goku',
-          'testimonyPosition':'CEO of Pleb Software Ltd.'
+          'testimonyText':"I think we have a few from Quint that are going through the process. It's filled up the pipeline which I appreciate",
+          'testimonyName':'Moses Lo',
+          'testimonyPosition':'Co-Founder, CTO of Xendit',
+          'testimonyPicture': MosesLo,
         },
         {
-          'testimonyText':'elolo',
-          'testimonyName':'Vallfard Samatarian',
-          'testimonyPosition':'CEO of Pl0b Software Ltd.'
+          'testimonyText':"Proses yang sangat cepat - hanya butuh 4 hari untuk saya dari submit resume sampai diterima di perusahaan yang saya inginkan. Tanpa Quint, saya rasa saya tidak akan melakukan internship di liburan kali ini. Terima kasih",
+          'testimonyName':'Rakha Kanz Kautsar',
+          'testimonyPosition':'Software Engineer Intern of Dekoruma',
+          'testimonyPicture': RakhaKanz,
         },
         {
-          'testimonyText':'An adaptable and responsible graduate seeking an entry-level position in public relations which will utilise the organisational and communication skills developed through my involvement with Kent Rag and promotional work during vacations.',
-          'testimonyName':'Ernest Blofeld',
-          'testimonyPosition':'CEO of Plab Software Ltd.'
+          'testimonyText':'Saya pernah menggunakan aplikasi internship match-making lain, namun karena alurnya tidak mudah, saya tidak lanjut menggunakan. Kemudian salah seorang teman saya merekomendasikan Quint. Setelah saya coba ternyata Quint lebih mudah dipakai, dan dalam waktu yang singkat saya langsung mendapatkan tempat internship yang saya inginkan.',
+          'testimonyName':'Victor Ardianto',
+          'testimonyPosition':'Quality Engineer Intern of HappyFresh',
+          'testimonyPicture': VictorArdianto,
         },
       ],
     };
@@ -167,7 +176,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className="small-12 columns text-center">
                       <div className={styles.testimonyContainer}>
                         <div className={styles.testimonyPerson}>
-                          <img className={styles.testimonyPicture} src={TokopediaImg} alt="xendit.com" />
+                          <img className={styles.testimonyPicture} src={this.state.testimonyList[this.state.testimony].testimonyPicture} alt="xendit.com" />
                           <div className={styles.testimonyCred}>
                             <h4 className={styles.testimonyName}>{this.state.testimonyList[this.state.testimony].testimonyName}</h4>
                             <h5 className={styles.testimonyPosition}>{this.state.testimonyList[this.state.testimony].testimonyPosition}</h5>
