@@ -27,15 +27,15 @@ import Button from 'components/Button';
 import Footer from 'components/Footer';
 
 import BlibliImg from './blibli.png';
+import CermatiImg from './cermati.png';
+import DekorumaImg from './dekoruma.png';
+import DmsumImg from './dmsum.png';
+import HappyfreshImg from './happyfresh.png';
+import IndivaraImg from './indivara.png';
+import QlapaImg from './qlapa.png';
 import TokopediaImg from './tokopedia.png';
 import VeritransImg from './veritrans.png';
-import DekorumaImg from './dekoruma.png';
-import CermatiImg from './cermati.png';
-import YesbossImg from './yesboss.png';
-import RumaImg from './ruma.png';
-import IndivaraImg from './indivara.jpg';
-import DmsumImg from './dmsum.jpg';
-import XenditImg from './xendit.jpg';
+import XenditImg from './xendit.png';
 
 import ArunaHarsa from './aru.png';
 import MosesLo from './moses.png';
@@ -208,10 +208,10 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                       <img src={CermatiImg} alt="cermati.com" />
                     </div>
                     <div className="small-6 medium-3 large-4 columns text-center">
-                      <img src={YesbossImg} alt="yesboss.com" />
+                      <img src={HappyfreshImg} alt="yesboss.com" />
                     </div>
                     <div className="small-6 medium-3 large-4 columns text-center">
-                      <img src={RumaImg} alt="ruma.com" />
+                      <img src={QlapaImg} alt="ruma.com" />
                     </div>
                     <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={IndivaraImg} alt="indivara.com" />

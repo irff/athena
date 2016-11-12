@@ -23,8 +23,6 @@ import FilterBar from 'containers/FilterBar';
 import InternshipPostCard from 'containers/InternshipPostCard';
 import ApplyInternship from 'containers/ApplyInternship';
 
-import TokopediaImg from 'containers/HomePage/tokopedia.png';
-import IndivaraImg from 'containers/HomePage/indivara.jpg';
 import { loadData } from './actions';
 
 export class CariInternship extends React.Component { // eslint-disable-line react/prefer-stateless-function
