@@ -49,6 +49,6 @@ function Footer(props) {
 
 Footer.propTypes = {
   hasMargin: React.PropTypes.bool,
-}
+};
 
 export default Footer;

@@ -9,10 +9,9 @@ import styles from './styles.css';
 
 function TextInput(props) {
   const className = props.className ? props.className : styles.textInput;
-  const inputType = props.type ? props.type : "text";
-  console.log(inputType);
+  const inputType = props.type ? props.type : 'text';
 
-  let maincontent = props.autoFocus ? <input type={inputType} className={className} onChange={props.handleChange} placeholder={props.placeholder} value={props.value} autoFocus={true} /> : <input type={inputType} className={className} onChange={props.handleChange} placeholder={props.placeholder} value={props.value} />;
+  let maincontent = props.autoFocus ? <input type={inputType} className={className} onChange={props.handleChange} placeholder={props.placeholder} value={props.value} autoFocus /> : <input type={inputType} className={className} onChange={props.handleChange} placeholder={props.placeholder} value={props.value} />;
 
   return (
     <div>

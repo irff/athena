@@ -7,7 +7,6 @@
 import {
   LOG_IN,
   LOG_IN_SUCCESS,
-  LOG_IN_FAIL,
   LOG_OUT,
   ADD_TOKEN,
   EDIT_PROFILE,
@@ -21,10 +20,12 @@ export function logIn() {
   };
 }
 
-export function logInSuccess(payload, token) {
+export function logInSuccess(token, id, payload) {
   return {
     type: LOG_IN_SUCCESS,
-    payload
+    token,
+    id,
+    payload,
   };
 }
 
@@ -37,14 +38,14 @@ export function logOut() {
 export function addToken(payload) {
   return {
     type: ADD_TOKEN,
-    payload
+    payload,
   };
 }
 
 export function editProfile(payload) {
   return {
     type: EDIT_PROFILE,
-    payload
+    payload,
   };
 }
 

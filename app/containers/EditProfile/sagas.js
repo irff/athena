@@ -1,13 +1,16 @@
-import { push } from 'react-router-redux';
+import { push, LOCATION_CHANGE } from 'react-router-redux';
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { SUBMIT } from './constants';
+import { LOG_IN_SUCCESS } from 'containers/App/constants';
 import { editProfile } from 'containers/App/actions';
 import { fromJS } from 'immutable';
 import { isEmpty } from 'lodash';
-import { validate, invalidate, addErrorMessage, delErrorMessage } from './actions';
+import { validate, invalidate, addErrorMessage, delErrorMessage, changeUserData } from './actions';
 import { selectGlobal } from 'containers/App/selectors';
 import request from 'utils/request';
+import { userAccessSaga } from 'containers/UserAccess/sagas';
+
 
 /**
  * Github repos request/response handler
@@ -52,9 +55,8 @@ export function* submitData(action) {
   
   if(!flag) {
     yield put(delErrorMessage());
-    const requestURL = `http://localhost:5000/students/${userId}`;
+    const requestURL = `https://api.quint.id/students/${userId}`;
     const auth = `Bearer ${currentToken}`;
-
     const editProfileCall = yield call(request, requestURL, {
       method: 'PUT',
       headers: {
@@ -62,15 +64,14 @@ export function* submitData(action) {
         'Content-Type': 'application/json',
         'Authorization': auth
       },
-      body: JSON.stringify(action.payload)
+      body: JSON.stringify(action.payload),
     });
 
-    if (!editProfileCall.err) {
+    //if (!editProfileCall.err) {
       //yield put(logInSuccess(signupCall.data.token, loginCall.data));
-      console.log("uye sukses");
       yield put(editProfile(fromJS(action.payload)));
       yield put(push('/mahasiswa/cari-internship'));
-    }
+    //}
   } else {
     yield put(addErrorMessage(message));
   }
@@ -84,14 +85,40 @@ export function* submitWatcher() {
 }
 
 /**
+ * Watches for LOAD_REPOS action and calls handler
+ */
+export function* dataFetchSaga(action) {
+  yield put(changeUserData(action.payload));
+}
+
+/**
+ * Watches for LOAD_REPOS action and calls handler
+ */
+export function* dataFetchWatcher() {
+  yield takeLatest(LOG_IN_SUCCESS, dataFetchSaga);
+}
+
+/**
  * Root saga manages watcher lifecycle
  */
 export function* editProfileSaga() {
   // Fork watcher so we can continue execution
   const watcher = yield fork(submitWatcher);
+  const watcherTwo = yield fork(dataFetchWatcher);
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+  yield cancel(watcherTwo);
+}
+
+export function* editProfileSagaFinal() {
+  yield [
+    fork(editProfileSaga),
+    fork(userAccessSaga),
+  ];
 }
 
 // Bootstrap sagas
 export default [
-  editProfileSaga,
+  editProfileSagaFinal,
 ];

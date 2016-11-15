@@ -9,7 +9,7 @@ function List(props) {
   // If we have items, render them
   if (props.items) {
     content = props.items.map((item, index) => (
-      <ComponentToRender key={`item-${index}`} item={item} />
+      <ComponentToRender key={`item-${index}`} item={item} validation={props.validation}/>
     ));
   } else {
     // Otherwise render a single component
@@ -26,6 +26,7 @@ function List(props) {
 List.propTypes = {
   component: React.PropTypes.func.isRequired,
   items: React.PropTypes.array,
+  validation: React.PropTypes.array,
 };
 
 export default List;

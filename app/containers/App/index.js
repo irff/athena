@@ -14,8 +14,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-
-import styles from './styles.css';
 import { selectGlobalToJS } from './selectors';
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -36,11 +34,12 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           ]}
         />
         {React.Children.toArray(this.props.children)}
-        <div className="spinnerContainer" style={{display: this.props.loading ? 'block' : 'none'}}>
+        <div className="spinnerContainer" style={{ display: this.props.loading ? 'block' : 'none' }}>
           <div className="spinnerContent">
             <div className="spinner">
               <div className="double-bounce1"></div>
               <div className="double-bounce2"></div>
+              <div className="double-bounce3"></div>
             </div>
           </div>
         </div>

@@ -8,12 +8,10 @@ import React from 'react';
 
 
 import styles from './styles.css';
-import LogoImg from './logo.png';
 import QuintImg from './QUINT.png';
 
 function Logo(props) {
   const className = props.className ? props.className : styles.logo;
-  
   return (
     <img src={QuintImg} alt="Quint - Logo" className={className} />
   );

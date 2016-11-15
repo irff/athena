@@ -1585,19 +1585,19 @@ kbd {
   width: 100%;
   height: 100%;
   z-index: 999;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
 }
 
 .spinner {
-  width: 40vh;
-  height: 40vh;
-  margin: 30vh auto;
+  width: 10vh;
+  height: 10vh;
+  margin: 45vh auto;
   position: relative;
 }
 
-.double-bounce1, .double-bounce2 {
-  width: 40vh;
-  height: 40vh;
+.double-bounce1, .double-bounce2, .double-bounce3 {
+  width: 10vh;
+  height: 10vh;
   border-radius: 50%;
   background-color: #fada2c;
   opacity: 0.6;
@@ -1612,6 +1612,11 @@ kbd {
 .double-bounce2 {
   -webkit-animation-delay: -1.0s;
   animation-delay: -1.0s;
+}
+
+.double-bounce3 {
+  -webkit-animation-delay: -1.5s;
+  animation-delay: -1.5s;
 }
 
 @-webkit-keyframes sk-bounce {

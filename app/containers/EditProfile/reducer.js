@@ -10,6 +10,7 @@ import {
   INVALIDATE_PROFILE,
   ADD_ERROR_MESSAGE,
   DEL_ERROR_MESSAGE,
+  CHANGE_USER_DATA,
 } from './constants';
 
 const initialState = fromJS({
@@ -21,6 +22,20 @@ const initialState = fromJS({
     university: '',
     resume: '',
   },
+  data: fromJS({
+    first_name: '',
+    last_name: '',
+    headline: '',
+    major: '',
+    university: '',
+    experiences: {
+      achievement_num: '',
+      project_num: '',
+      work_num: '',
+    },
+    linkedin_url: '',
+    resume_url: '',
+  }),
 });
 
 function editProfileReducer(state = initialState, action) {
@@ -39,6 +54,8 @@ function editProfileReducer(state = initialState, action) {
                                     university: '',
                                     resume: '',
                                   });
+    case CHANGE_USER_DATA:
+      return state.set('data', action.payload);
     default:
       return state;
   }

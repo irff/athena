@@ -20,6 +20,6 @@ Navlink.propTypes = {
   isRightElement: React.PropTypes.bool,
   isCurrentElement: React.PropTypes.bool,
   children: React.PropTypes.node.isRequired,
-}
+};
 
 export default Navlink;

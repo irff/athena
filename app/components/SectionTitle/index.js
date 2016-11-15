@@ -19,6 +19,6 @@ function SectionTitle(props) {
 
 SectionTitle.propTypes = {
   children: React.PropTypes.node.isRequired,
-}
+};
 
 export default SectionTitle;

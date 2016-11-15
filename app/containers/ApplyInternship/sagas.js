@@ -1,35 +1,34 @@
-import { push } from 'react-router-redux';
 import { takeLatest } from 'redux-saga';
-import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
+import { LOCATION_CHANGE } from 'react-router-redux';
+import { take, call, select, cancel, fork } from 'redux-saga/effects';
 import { APPLY } from './constants';
-import { fromJS } from 'immutable';
-import { isEmpty } from 'lodash';
 import { selectGlobal } from 'containers/App/selectors';
 import selectApplyInternship from './selectors';
 import request from 'utils/request';
+import { userAccessSaga } from 'containers/UserAccess/sagas';
 
 /**
  * Github repos request/response handler
  */
-export function* apply(action) {
+export function* apply() {
   const globalState = yield select(selectGlobal());
   const localState = yield select(selectApplyInternship());
   const currentToken = globalState.get('currentToken');
   const currentId = globalState.get('id');
-  const jobId = localState.job.item.job_id;
-  const requestURL = `http://localhost:5000/${currentId}/jobs`;
+  const jobId = localState.job.item.id;
+  const requestURL = `https://api.quint.id/students/${currentId}/jobs`;
   const auth = `Bearer ${currentToken}`;
-
-  const applyCall = yield call(request, requestURL, {
+  
+  yield call(request, requestURL, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': auth
+      Authorization: auth,
     },
     body: JSON.stringify({
-    	job_id: jobId
-    })
+      job_id: jobId,
+    }),
   });
 }
 
@@ -45,10 +44,17 @@ export function* applyInternship() {
  */
 export function* applyInternshipSaga() {
   // Fork watcher so we can continue execution
-  const watcher = yield fork(applyInternship);
+  const applyInternshipWatcher = yield fork(applyInternship);
+}
+
+export function* applyInternshipSagaFull() {
+  yield [
+    fork(applyInternshipSaga),
+    fork(userAccessSaga),
+  ];
 }
 
 // Bootstrap sagas
 export default [
-  applyInternshipSaga,
+  applyInternshipSagaFull,
 ];

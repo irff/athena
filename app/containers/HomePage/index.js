@@ -63,27 +63,27 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
       testimony: 0,
       testimonyList: [
         {
-          'testimonyText':"We used Quint to source top-notch quality of engineering internship, and the result was awesome. We were able to match with interns that are not only were great culture fit, but also built several core products, making huge impact towards our business. Their quality are definitely beyond any other platforms we've used before",
+          'testimonyText': `"We used Quint to source top-notch quality of engineering internship, and the result was awesome. We were able to match with interns that are not only were great culture fit, but also built several core products, making huge impact towards our business. Their quality are definitely beyond any other platforms we've used before."`,
           'testimonyName':'Aruna Harsa',
           'testimonyPosition':'Co-Founder, CTO of Dekoruma',
           'testimonyPicture': ArunaHarsa,
         },
         {
-          'testimonyText':"I think we have a few from Quint that are going through the process. It's filled up the pipeline which I appreciate",
-          'testimonyName':'Moses Lo',
-          'testimonyPosition':'Co-Founder, CTO of Xendit',
-          'testimonyPicture': MosesLo,
-        },
-        {
-          'testimonyText':"Proses yang sangat cepat - hanya butuh 4 hari untuk saya dari submit resume sampai diterima di perusahaan yang saya inginkan. Tanpa Quint, saya rasa saya tidak akan melakukan internship di liburan kali ini. Terima kasih",
+          'testimonyText':`"Proses yang sangat cepat - hanya butuh 4 hari untuk saya dari submit resume sampai diterima di perusahaan yang saya inginkan. Tanpa Quint, saya rasa saya tidak akan melakukan internship di liburan kali ini. Terima kasih."`,
           'testimonyName':'Rakha Kanz Kautsar',
-          'testimonyPosition':'Software Engineer Intern of Dekoruma',
+          'testimonyPosition':'Software Engineering Intern of Dekoruma',
           'testimonyPicture': RakhaKanz,
         },
         {
-          'testimonyText':'Saya pernah menggunakan aplikasi internship match-making lain, namun karena alurnya tidak mudah, saya tidak lanjut menggunakan. Kemudian salah seorang teman saya merekomendasikan Quint. Setelah saya coba ternyata Quint lebih mudah dipakai, dan dalam waktu yang singkat saya langsung mendapatkan tempat internship yang saya inginkan.',
+          'testimonyText': `"I think we have a few from Quint that are going through the process. It's filled up the pipeline which I appreciate."`,
+          'testimonyName':'Moses Lo',
+          'testimonyPosition':'Co-Founder, CEO of Xendit',
+          'testimonyPicture': MosesLo,
+        },
+        {
+          'testimonyText':`"Saya pernah menggunakan aplikasi internship match-making lain, namun karena alurnya tidak mudah, saya tidak lanjut menggunakan. Kemudian salah seorang teman saya merekomendasikan Quint. Setelah saya coba ternyata Quint lebih mudah dipakai, dan dalam waktu yang singkat saya langsung mendapatkan tempat internship yang saya inginkan."`,
           'testimonyName':'Victor Ardianto',
-          'testimonyPosition':'Quality Engineer Intern of HappyFresh',
+          'testimonyPosition':'Quality Engineering Intern of HappyFresh',
           'testimonyPicture': VictorArdianto,
         },
       ],
@@ -180,7 +180,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className={styles.advantage}>
                       <h2>Mahasiswa</h2>
                       <img src={CheckedImg} alt="searchIcon" />
-                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h3>Ketahui Status Seleksi Anda</h3>
                       <h4>Penasaran mengetahui progess lamaran internship anda di perusahaan? Dengan Quint, anda akan terus mendapatkan update untuk mengetahui status seleksi anda.</h4>
                     </div>
                   </div>
@@ -188,7 +188,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className={styles.advantage}>
                       <h2>Mahasiswa</h2>
                       <img src={WorkImg} alt="searchIcon" />
-                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h3>Siap Hadapi Tes/Wawancara</h3>
                       <h4>Bingung mempersiapkan apa yang perlu dipelajari untuk tes/wawancara? Quint menyediakan materi dan sumber terbaik dalam satu tempat untuk persiapan terbaik anda.</h4>
                     </div>
                   </div>
@@ -196,7 +196,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className={styles.advantage}>
                       <h2>Perusahaan</h2>
                       <img src={TeamImg} alt="searchIcon" />
-                      <h3>Cari Internship Lebih Mudah</h3>
+                      <h3>Dapatkan Mahasiswa Bertalenta</h3>
                       <h4>Quint merupakan tempat berkumpulnya mahasiswa bertalenta yang siap magang di perusahaan terbaik. Temukan mahasiswa berkualitas di Universitas Indonesia sesuai kriteria perusahaan anda.</h4>
                     </div>
                   </div>

@@ -18,6 +18,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
   static propTypes = {
     displayApply: React.PropTypes.func,
     item: React.PropTypes.object,
+    validation: React.PropTypes.array,
   };
 
   constructor(props) {
@@ -57,7 +58,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
     timePassed /= 7;
     const weeks = Math.floor(timePassed);
 
-    const timestamp = `${weeks >= 1 ? `${weeks}mi`:`${days >= 1 ? `${days}h` : `${hours >= 1 ? `${hours}j` : `${minute}m`}`}`}`;
+    const timestamp = `${weeks >= 1 ? `${weeks}w`:`${days >= 1 ? `${days}d` : `${hours >= 1 ? `${hours}h` : `${minute}m`}`}`}`;
 
     let duration = Date.parse(data.get('item').job_schedule.end_at) - Date.parse(data.get('item').job_schedule.start_at); 
     duration /= 1000;
@@ -77,6 +78,13 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
     let salary = `${data.get('item').salary.currency} ${Math.round(data.get('item').salary.fee.minimal/100000) / 10} Juta - ${Math.round(data.get('item').salary.fee.maximal/100000) / 10} Juta/${data.get('item').salary.term}`;
     if(data.get('item').salary.fee.minimal == data.get('item').salary.fee.maximal) {
       salary = `${data.get('item').salary.currency} ${Math.round(data.get('item').salary.fee.minimal/100000) / 10} Juta/${data.get('item').salary.term}`; 
+    }
+
+    let validation = false;
+    const validationItem = this.props.validation ? this.props.validation : [];
+
+    if(validationItem.indexOf(data.get('item').job_id) > -1) {
+      validation = true;
     }
 
     const unDetailed = (
@@ -104,7 +112,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
               <button className={styles.detailButton} onClick={this.toggleDetailed} >Lihat Detail Internship</button>
             </div>
             <div className="small-6 columns">
-              <button className={styles.applyButton} onClick={this.applyIntern}>Daftar Internship</button>
+              <button className={styles.applyButton} onClick={this.applyIntern} disabled={validation}>Daftar Internship</button>
             </div>
           </div>
         </div>
@@ -180,7 +188,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
               <button className={styles.detailButton} onClick={this.toggleDetailed} >Tutup</button>
             </div>
             <div className="small-6 columns">
-              <button className={styles.applyButton} onClick={this.applyIntern}>Daftar Internship</button>
+              <button className={styles.applyButton} onClick={this.applyIntern} disabled={validation}>Daftar Internship</button>
             </div>
           </div>
         </div>

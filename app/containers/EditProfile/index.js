@@ -7,9 +7,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
+import { push } from 'react-router-redux';
+import { isEmpty } from 'immutable';
 import Helmet from 'react-helmet';
 import styles from './styles.css';
-import { submit } from './actions';
+import { submit, changeUserData } from './actions';
+import { fetchUserData } from 'containers/UserAccess/actions';
 import { createStructuredSelector } from 'reselect';
 
 import { loading, loadingDone } from 'containers/App/actions';
@@ -23,11 +26,14 @@ import selectEditProfile from './selectors';
 
 export class EditProfile extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
+    push: React.PropTypes.func,
     submit: React.PropTypes.func,
     global: React.PropTypes.object,
     local: React.PropTypes.object,
     loading: React.PropTypes.func,
     loadingDone: React.PropTypes.func,
+    fetchUserData: React.PropTypes.func,
+    changeUserData: React.PropTypes.func,
   };
 
   constructor(props) {
@@ -54,36 +60,73 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
     this.changeInput = this.changeInput.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadingDone();
+  }
+
+  componentWillMount() {
+    if(this.props.global.get('token') == '' || this.props.global.get('id') == '') {
+      var token = this.getCookie("token");
+      var student_id = this.getCookie("student_id");
+      if (token !== '' && student_id !== '') {
+        this.props.fetchUserData({token: token, student_id: student_id});
+      } else {
+        this.props.push('/mahasiswa/login');
+      }
+    } else {
+      this.props.changeUserData(this.props.global.get('userData'));
+    }
   }
 
   componentWillUnmount() {
     this.props.loading();
   }
 
+  getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
   changeInput(evt, field) {
     const value = evt.target.value;
-    this.setState(({data}) => ({
-      data: data.update(field, firstName => value)
-    }));
+    const data = this.props.local.data;
+    data[field] = value;
+    this.props.changeUserData(fromJS(data));
   }
 
   changeExperience(evt, field) {
     const value = evt.target.value;
-    this.setState(({data}) => ({
-      data: data.updateIn(['experiences', field], firstName => value)
-    }));
+    const data = this.props.local.data;
+    if(data.experiences === '') {
+      data.experiences = {
+        achievement_num: 0,
+        project_num: 0,
+        work_num: 0,
+      }
+    }
+
+    data.experiences[field] = value;
+    this.props.changeUserData(fromJS(data));
   }
 
   render() {
-    const data = this.state.data;
+    const data = this.props.local.data ? fromJS(this.props.local.data) : fromJS({});
     return (
       <div>
       <Helmet
-        title="EditProfile"
+        title="Ubah Profil - Quint.id"
         meta={[
-          { name: 'description', content: 'Description of EditProfile' },
+          { name: 'description', content: 'Ubah Profil - Quint.id' },
         ]}
       />
         <Navbar />
@@ -169,6 +212,9 @@ function mapDispatchToProps(dispatch) {
     submit: (data) => dispatch(submit(data)),
     loading: () => dispatch(loading()),
     loadingDone: () => dispatch(loadingDone()),
+    fetchUserData: (data) => dispatch(fetchUserData(data)),
+    push: (url) => dispatch(push(url)),
+    changeUserData: (data) => dispatch(changeUserData(data)),
   };
 }
 

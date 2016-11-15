@@ -19,13 +19,8 @@ import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import useScroll from 'react-router-scroll';
-import FontFaceObserver from 'fontfaceobserver';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
-
-
-
-import styles from 'containers/App/styles.css';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -57,6 +52,15 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-87409670-1');
+
+const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+};
+
 
 const render = (translatedMessages) => {
   ReactDOM.render(
@@ -70,6 +74,7 @@ const render = (translatedMessages) => {
             // behaviour
             applyRouterMiddleware(useScroll())
           }
+          onUpdate={logPageView}
         />
       </LanguageProvider>
     </Provider>,

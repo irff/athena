@@ -10,6 +10,7 @@ import {
   INVALIDATE_PROFILE,
   ADD_ERROR_MESSAGE,
   DEL_ERROR_MESSAGE,
+  CHANGE_USER_DATA,
 } from './constants';
 
 export function submit(payload) {
@@ -41,6 +42,14 @@ export function addErrorMessage(payload) {
 export function delErrorMessage() {
   return {
     type: DEL_ERROR_MESSAGE
+  };
+}
+
+
+export function changeUserData(payload) {
+  return {
+    type: CHANGE_USER_DATA,
+    payload
   };
 }
 

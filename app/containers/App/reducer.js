@@ -26,20 +26,7 @@ const initialState = fromJS({
   loggedIn: true,
   currentToken: '',
   id: '',
-  userData: fromJS({
-    first_name: 'Jeremy',
-    last_name: 'Clarkson',
-    headline: 'iniDefaultEntryQuint',
-    major: 'iniDefaultEntryQuint',
-    university: 'iniDefaultEntryQuint',
-    experiences: {
-      achievement_num: 0,
-      project_num: 0,
-      work_num: 0
-    },
-    linkedin_url: 'linkedin.com/jeremyclarkson',
-    resume_url: 'http://iniDefaultEntryQui.nt',
-  }),
+  userData: fromJS({}),
 });
 
 function appReducer(state = initialState, action) {
@@ -49,11 +36,13 @@ function appReducer(state = initialState, action) {
         .set('loggedIn', true)
         .set('error', false)
         .set('currentToken', action.token)
+        .set('id', action.id)
         .set('userData', fromJS(action.payload));
     case LOG_OUT:
       return state
         .set('userData', fromJS({}))
         .set('currentToken', '')
+        .set('id', '')
         .set('loggedIn', false);
     case EDIT_PROFILE:
       return state

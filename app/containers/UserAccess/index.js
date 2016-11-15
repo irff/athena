@@ -16,7 +16,7 @@ import messages from './messages';
 import styles from './styles.css';
 import globalStyles from 'containers/App/styles.css';
 import { logIn } from 'containers/App/actions';
-import { changeInput, signUp } from './actions';
+import { changeInput, signUp, fetchUserData } from './actions';
 
 import Button from 'components/Button';
 
@@ -29,7 +29,29 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
   }
 
   componentWillMount() {
+    var token = this.getCookie("token");
+    var student_id = this.getCookie("student_id");
+    if (token !== '' && student_id !== '') {
+      this.props.fetchUserData({token: token, student_id: student_id});
+      this.props.changeRoute('/mahasiswa/cari-internship');
+    }
+
     this.props.loadingDone();
+  }
+
+  getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
   }
 
   componentWillUnmount() {
@@ -67,7 +89,7 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
   }
 
   linkedInLogin = () => {
-    window.open('http://localhost:5000/students/login/linkedin','quint_linkedin_login','width=600,height=600');
+    window.open('https://api.quint.id/students/login/linkedin','quint_linkedin_login','width=600,height=600');
   }
 
   toggleRemember = () => {
@@ -122,20 +144,6 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
               <Button className={styles.submitButton} onClick={this.props.logIn}>Log In</Button>
               <h4 className={styles.failCall} style={{display: this.props.lg.message.error ? 'block' : 'none'}}>{this.props.lg.message.error}</h4>
             </div>
-            <div className="small-4 columns">
-              <div className={styles.buttonDivider}>
-              </div>
-            </div>
-            <div className="small-4 columns">
-              <p className={styles.buttonDividerText}>atau</p>
-            </div>
-            <div className="small-4 columns">
-              <div className={styles.buttonDivider}>
-              </div>
-            </div>
-            <div className="small-12 columns">
-              <Button className={styles.linkedInButton} onClick={this.linkedInLogin}>Log In via <img src={LinkedInLogo} alt="linked in" className={styles.linkedInLogo} /></Button>
-            </div>
           </div>
       );
 
@@ -174,7 +182,7 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     return (
       <div className={mainStyle}>
       <Helmet
-        title="UserAccess"
+        title={window.location.pathname.endsWith('login') ? 'Login ke Quint.id' : 'Sign Up ke Quint.id'}
         meta={[
           { name: 'description', content: 'Description of UserAccess' },
         ]}
@@ -225,6 +233,7 @@ UserAccess.propTypes = {
   signUp: React.PropTypes.func,
   loading: React.PropTypes.func,
   loadingDone: React.PropTypes.func,
+  fetchUserData: React.PropTypes.func,
 }
 
 const mapStateToProps = selectUserAccess();
@@ -237,6 +246,7 @@ function mapDispatchToProps(dispatch) {
     changeInput: (path, field, value) => dispatch(changeInput(path, field, value)),
     loading: () => dispatch(loading()),
     loadingDone: () => dispatch(loadingDone()),
+    fetchUserData: (data) => dispatch(fetchUserData(data)),
     dispatch,
   };
 }
