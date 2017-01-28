@@ -12,11 +12,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 
 import styles from './styles.css';
-import globalStyles from 'containers/App/styles.css';
 
 import { loading, loadingDone } from 'containers/App/actions';
 
@@ -36,7 +33,8 @@ import HappyfreshImg from './happyfresh.png';
 import IndivaraImg from './indivara.png';
 import QlapaImg from './qlapa.png';
 import TokopediaImg from './tokopedia.png';
-import VeritransImg from './veritrans.png';
+import MidtransImg from './midtrans.png';
+import KudoImg from './kudo.png';
 import XenditImg from './xendit.png';
 
 import ArunaHarsa from './aru.png';
@@ -58,33 +56,33 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       testimony: 0,
       testimonyList: [
         {
-          'testimonyText': `"We used Quint to source top-notch quality of engineering internship, and the result was awesome. We were able to match with interns that are not only were great culture fit, but also built several core products, making huge impact towards our business. Their quality are definitely beyond any other platforms we've used before."`,
-          'testimonyName':'Aruna Harsa',
-          'testimonyPosition':'Co-Founder, CTO of Dekoruma',
-          'testimonyPicture': ArunaHarsa,
+          testimonyText: '"We used Quint to source top-notch quality of engineering internship, and the result was awesome. We were able to match with interns that are not only were great culture fit, but also built several core products, making huge impact towards our business. Their quality are definitely beyond any other platforms we\'ve used before."',
+          testimonyName: 'Aruna Harsa',
+          testimonyPosition: 'Co-Founder, CTO of Dekoruma',
+          testimonyPicture: ArunaHarsa,
         },
         {
-          'testimonyText':`"Proses yang sangat cepat - hanya butuh 4 hari untuk saya dari submit resume sampai diterima di perusahaan yang saya inginkan. Tanpa Quint, saya rasa saya tidak akan melakukan internship di liburan kali ini. Terima kasih."`,
-          'testimonyName':'Rakha Kanz Kautsar',
-          'testimonyPosition':'Software Engineering Intern of Dekoruma',
-          'testimonyPicture': RakhaKanz,
+          testimonyText: '"Proses yang sangat cepat - hanya butuh 4 hari untuk saya dari submit resume sampai diterima di perusahaan yang saya inginkan. Tanpa Quint, saya rasa saya tidak akan melakukan internship di liburan kali ini. Terima kasih."',
+          testimonyName: 'Rakha Kanz Kautsar',
+          testimonyPosition: 'Software Engineering Intern of Dekoruma',
+          testimonyPicture: RakhaKanz,
         },
         {
-          'testimonyText': `"I think we have a few from Quint that are going through the process. It's filled up the pipeline which I appreciate."`,
-          'testimonyName':'Moses Lo',
-          'testimonyPosition':'Co-Founder, CEO of Xendit',
-          'testimonyPicture': MosesLo,
+          testimonyText: '"I think we have a few from Quint that are going through the process. It\'s filled up the pipeline which I appreciate."',
+          testimonyName: 'Moses Lo',
+          testimonyPosition: 'Co-Founder, CEO of Xendit',
+          testimonyPicture: MosesLo,
         },
         {
-          'testimonyText':`"Saya pernah menggunakan aplikasi internship match-making lain, namun karena alurnya tidak mudah, saya tidak lanjut menggunakan. Kemudian salah seorang teman saya merekomendasikan Quint. Setelah saya coba ternyata Quint lebih mudah dipakai, dan dalam waktu yang singkat saya langsung mendapatkan tempat internship yang saya inginkan."`,
-          'testimonyName':'Victor Ardianto',
-          'testimonyPosition':'Quality Engineering Intern of HappyFresh',
-          'testimonyPicture': VictorArdianto,
+          testimonyText: '"Saya pernah menggunakan aplikasi internship match-making lain, namun karena alurnya tidak mudah, saya tidak lanjut menggunakan. Kemudian salah seorang teman saya merekomendasikan Quint. Setelah saya coba ternyata Quint lebih mudah dipakai, dan dalam waktu yang singkat saya langsung mendapatkan tempat internship yang saya inginkan."',
+          testimonyName: 'Victor Ardianto',
+          testimonyPosition: 'Quality Engineering Intern of HappyFresh',
+          testimonyPicture: VictorArdianto,
         },
       ],
     };
@@ -102,18 +100,8 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
     this.props.loading();
   }
 
-  next(currentPage) {
-    const nextPage = currentPage >= 3 ? 0 : currentPage + 1;
-    this.setState({'testimony':nextPage});
-  }
-
-  prev(currentPage) {
-    const prevPage = currentPage == 0 ? 3 : currentPage - 1;
-    this.setState({'testimony':prevPage});
-  }
-
   setPage(targetPage) {
-    this.setState({'testimony':targetPage});
+    this.setState({ testimony: targetPage });
   }
 
   render() {
@@ -127,15 +115,15 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                   <div className={styles.heroBackground}>
                     <div className={styles.filter} />
                     <video autoPlay loop className={styles.video}>
-                        <source src={SpaciousMp} type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-                        <source src={SpaciousWebm} type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                      <source src={SpaciousMp} type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                      <source src={SpaciousWebm} type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
                     </video>
                   </div>
                   <div className={styles.heroContent}>
                     <div className={styles.container}>
                       <Logo className={styles.logo} />
                       <h1 className={styles.tagline}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</h1>
-                      <h1 className={styles.principle}>Quint adalah <i>internship match making platform</i> berbasis web yang akan menyelesaikan permasalahan terkait <i>internship</i> yang dihadapi oleh mahasiswa, universitas, dan perusahaan.</h1>
+                      <h1 className={styles.principle}>Quint adalah <i>internship match making platform</i> yang menjadi solusi bagi mahasiswa, universitas, dan perusahaan.</h1>
                       <Button className={styles.blackButton} handleRoute={() => this.props.push('/mahasiswa/login')} >coba sekarang</Button>
                     </div>
                   </div>
@@ -153,7 +141,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className={styles.container}>
                       <Logo className={styles.logo} />
                       <h1 className={styles.tagline}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</h1>
-                      <h1 className={styles.principle}>Quint adalah <i>internship match making platform</i> berbasis web yang akan menyelesaikan permasalahan terkait <i>internship</i> yang dihadapi oleh mahasiswa, universitas, dan perusahaan.</h1>
+                      <h1 className={styles.principle}>Quint adalah <i>internship match making platform</i> yang menjadi solusi bagi mahasiswa, universitas, dan perusahaan.</h1>
                       <Button className={styles.blackButton} handleRoute={() => this.props.push('/mahasiswa/login')} >coba sekarang</Button>
                     </div>
                   </div>
@@ -188,7 +176,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className={styles.advantage}>
                       <h2>Mahasiswa</h2>
                       <img src={WorkImg} alt="searchIcon" />
-                      <h3>Siap Hadapi Tes/Wawancara</h3>
+                      <h3>Siap Hadapi Tes dan Wawancara</h3>
                       <h4>Bingung mempersiapkan apa yang perlu dipelajari untuk tes/wawancara? Quint menyediakan materi dan sumber terbaik dalam satu tempat untuk persiapan terbaik anda.</h4>
                     </div>
                   </div>
@@ -215,7 +203,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                       <img src={TokopediaImg} alt="Tokopedia.com" />
                     </div>
                     <div className="small-6 medium-3 large-4 columns text-center">
-                      <img src={VeritransImg} alt="veritrans.com" />
+                      <img src={MidtransImg} alt="midtrans.com" />
                     </div>
                     <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={DekorumaImg} alt="dekoruma.com" />
@@ -232,11 +220,14 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={IndivaraImg} alt="indivara.com" />
                     </div>
-                    <div className="small-6 medium-3 large-4 medium-offset-3 large-offset-0 columns text-center">
+                    <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={DmsumImg} alt="dmsum.com" />
                     </div>
-                    <div className="small-6 medium-3 large-4 large-offset-4 columns text-center end">
+                    <div className="small-6 medium-3 large-4 large-offset-2 columns text-center end">
                       <img src={XenditImg} alt="xendit.com" />
+                    </div>
+                    <div className="small-6 medium-3 large-4 columns text-center end">
+                      <img src={KudoImg} alt="kudo.co.id" />
                     </div>
                   </div>
                 </div>
@@ -265,10 +256,10 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                       </div>
                     </div>
                     <div className="small-12 columns text-center">
-                      <button className={styles.circle} disabled={this.state.testimony == 0} onClick={() => this.setPage(0)} />
-                      <button className={styles.circle} disabled={this.state.testimony == 1} onClick={() => this.setPage(1)}  />
-                      <button className={styles.circle} disabled={this.state.testimony == 2} onClick={() => this.setPage(2)}  />
-                      <button className={styles.circle} disabled={this.state.testimony == 3} onClick={() => this.setPage(3)}  />
+                      <button className={styles.circle} disabled={this.state.testimony === 0} onClick={() => this.setPage(0)} />
+                      <button className={styles.circle} disabled={this.state.testimony === 1} onClick={() => this.setPage(1)} />
+                      <button className={styles.circle} disabled={this.state.testimony === 2} onClick={() => this.setPage(2)} />
+                      <button className={styles.circle} disabled={this.state.testimony === 3} onClick={() => this.setPage(3)} />
                     </div>
                   </div>
                 </div>

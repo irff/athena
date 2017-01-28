@@ -7,8 +7,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import selectFilterBar from './selectors';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import styles from './styles.css';
 
 import TextInput from 'components/TextInput';
@@ -21,7 +19,7 @@ export class FilterBar extends React.Component { // eslint-disable-line react/pr
       <div className={styles.filterBar}>
         <div className="row expanded">
           <div className="small-12 columns">
-            <TextInput placeholder="cari internship" autoFocus={true} />
+            <TextInput placeholder="cari internship" autoFocus />
           </div>
           <div className="small-10 columns">
             <div className={styles.secondLevel}>

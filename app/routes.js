@@ -138,8 +138,8 @@ export default function createRoutes(store) {
             importModules.catch(errorLoading);
           },
         },
-      ]
-    },{
+      ],
+    }, {
       path: '/perusahaan',
       name: 'perusahaan',
       getComponent(nextState, cb) {
@@ -202,7 +202,7 @@ export default function createRoutes(store) {
             importModules.catch(errorLoading);
           },
         },
-      ]
+      ],
     }, {
       path: '*',
       name: 'notfound',

@@ -6,11 +6,11 @@ import { LOG_IN_SUCCESS } from 'containers/App/constants';
 import { editProfile } from 'containers/App/actions';
 import { fromJS } from 'immutable';
 import { isEmpty } from 'lodash';
-import { validate, invalidate, addErrorMessage, delErrorMessage, changeUserData } from './actions';
+import { addErrorMessage, delErrorMessage, changeUserData, dataUnmodified } from './actions';
 import { selectGlobal } from 'containers/App/selectors';
 import request from 'utils/request';
 import { userAccessSaga } from 'containers/UserAccess/sagas';
-
+import { API_STUDENTS } from 'containers/App/api';
 
 /**
  * Github repos request/response handler
@@ -19,59 +19,90 @@ export function* submitData(action) {
   const globalState = yield select(selectGlobal());
   const userId = globalState.get('id');
   const currentToken = globalState.get('currentToken');
+  const regexUrl = (/^(ftp|http|https):\/\/[^ "]+$/);
+
   let flag = false;
-  let message = {
+  const message = {
     firstName: '',
+    lastName: '',
     headline: '',
     major: '',
     university: '',
+    achievementNum: '',
+    projectNum: '',
+    workNum: '',
+    linkedin: '',
     resume: '',
   };
 
-  if(isEmpty(action.payload.first_name)) {
+  if (isEmpty(action.payload.first_name) || action.payload.first_name === 'iniDefaultEntryQuint') {
     flag = true;
     message.firstName = '* Nama depan harus diisi';
   }
 
-  if(isEmpty(action.payload.headline)) {
+  if (isEmpty(action.payload.headline) || action.payload.headline === 'iniDefaultEntryQuint') {
     flag = true;
     message.headline = '* Headline Profile harus diisi';
   }
 
-  if(isEmpty(action.payload.major)) {
+  if (isEmpty(action.payload.major) || action.payload.major === 'iniDefaultEntryQuint') {
     flag = true;
     message.major = '* Jurusan harus diisi';
   }
 
-  if(isEmpty(action.payload.university)) {
+  if (isEmpty(action.payload.university) || action.payload.university === 'iniDefaultEntryQuint') {
     flag = true;
     message.university = '* Universitas harus diisi';
   }
 
-  if(isEmpty(action.payload.resume_url)) {
+  if (isEmpty(action.payload.resume_url) || action.payload.resume_url === 'http://iniDefaultEntryQui.nt' || action.payload.resume_url === '' || action.payload.resume_url === null) {
     flag = true;
     message.resume = '* Resume harus diisi';
   }
-  
-  if(!flag) {
+
+  if (!regexUrl.test(action.payload.resume_url)) {
+    flag = true;
+    message.resume = 'Link resume tidak valid, Harus dimulai dengan http:// atau https://';
+  }
+
+  if (!isEmpty(action.payload.linkedin_url) && action.payload.linkedin_url !== '' && action.payload.linkedin_url !== null && !regexUrl.test(action.payload.linkedin_url)) {
+    flag = true;
+    message.linkedin = 'Link LinkedIn tidak valid, Harus dimulai dengan http:// atau https://';
+  }
+
+  if (isNaN(action.payload.experiences.achievement_num) || action.payload.experiences.achievement_num < 0) {
+    flag = true;
+    message.achievementNum = 'Jumlah harus diisi dalam bentuk angka tidak negatif';
+  }
+
+  if (isNaN(action.payload.experiences.project_num) || action.payload.experiences.project_num < 0) {
+    flag = true;
+    message.projectNum = 'Jumlah harus diisi dalam bentuk angka tidak negatif';
+  }
+
+  if (isNaN(action.payload.experiences.work_num) || action.payload.experiences.work_num < 0) {
+    flag = true;
+    message.workNum = 'Jumlah harus diisi dalam bentuk angka tidak negatif';
+  }
+
+  if (!flag) {
     yield put(delErrorMessage());
-    const requestURL = `https://api.quint.id/students/${userId}`;
+    const requestURL = `${API_STUDENTS}${userId}`;
     const auth = `Bearer ${currentToken}`;
-    const editProfileCall = yield call(request, requestURL, {
+
+    yield call(request, requestURL, {
       method: 'PUT',
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': auth
+        Authorization: auth,
       },
       body: JSON.stringify(action.payload),
     });
 
-    //if (!editProfileCall.err) {
-      //yield put(logInSuccess(signupCall.data.token, loginCall.data));
-      yield put(editProfile(fromJS(action.payload)));
-      yield put(push('/mahasiswa/cari-internship'));
-    //}
+    yield put(dataUnmodified());
+    yield put(editProfile(fromJS(action.payload)));
+    yield put(push('/mahasiswa/cari-internship'));
   } else {
     yield put(addErrorMessage(message));
   }

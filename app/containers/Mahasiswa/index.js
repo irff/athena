@@ -17,8 +17,6 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
 
-import Navbar from 'containers/Navbar';
-
 export class Mahasiswa extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     children: React.PropTypes.node,
@@ -30,8 +28,8 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
   constructor(props) {
     super(props);
 
-    if(window.location.pathname == '/mahasiswa' || window.location.pathname == '/mahasiswa/') {
-      if(this.props.global.get('loggedIn')) {
+    if (window.location.pathname === '/mahasiswa' || window.location.pathname === '/mahasiswa/') {
+      if (this.props.global.get('loggedIn')) {
         this.props.push('/mahasiswa/cari-internship');
       } else {
         this.props.push('/mahasiswa/login');
@@ -40,21 +38,20 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
   }
 
   render() {
-
     let mainContent = <div><FormattedMessage {...messages.header} /></div>;
 
-    if(!isEmpty(this.props.children)) {
+    if (!isEmpty(this.props.children)) {
       mainContent = <div>{React.Children.toArray(this.props.children)}</div>;
     }
 
     return (
       <div className={styles.mahasiswa}>
-      <Helmet
-        title="Mahasiswa"
-        meta={[
-          { name: 'description', content: 'Description of Mahasiswa' },
-        ]}
-      />
+        <Helmet
+          title="Mahasiswa"
+          meta={[
+            { name: 'description', content: 'Description of Mahasiswa' },
+          ]}
+        />
         {mainContent}
       </div>
     );

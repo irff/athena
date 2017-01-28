@@ -1,7 +1,7 @@
-.editProfile { /* stylelint-disable */
-  padding: 5rem 2rem;
+.editProfile {
+  padding: 8rem 2rem 5rem;
   min-height: calc(100vh - 3rem);
-  color: #4a4a4a;
+  color: #4A4A4A;
 }
 
 .editProfile .marginContent {
@@ -21,12 +21,20 @@
 .editProfile h3 {
   font-size: 0.75rem;
   margin-top: 0.25rem;
-  color: #bd3535;
+  color: #BD3535;
 }
 
 .editProfile input {
   width: 100%;
-  border-bottom: 0.1rem solid #d8d8d8;
+  border-bottom: 0.1rem solid #D8D8D8;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  outline: none;
+}
+
+.editProfile input.headline {
+  width: calc(100% + 3rem);
+  border-bottom: 0.1rem solid #D8D8D8;
   font-size: 1rem;
   padding: 0.5rem 0;
   outline: none;
@@ -34,7 +42,7 @@
 
 .editProfile input::-webkit-placeholder,
 .editProfile input::placeholder {
-  color: #d8d8d8;
+  color: #D8D8D8;
 }
 
 .editProfile button {
@@ -43,11 +51,15 @@
   border-radius: 2rem;
   font-size: 1.25rem;
   padding: 0.75rem 5rem;
-  background: linear-gradient(227deg, #b4ec51, #429321);
+  background: linear-gradient(227deg, #B4EC51, #429321);
 }
 
 @media screen and (max-width: 40em) {
   .editProfile .marginContent {
     margin-left: 0;
+  }
+
+  .editProfile input.headline {
+    width: 100%;
   }
 }

@@ -14,8 +14,8 @@ import {
 import applyInternshipReducer from 'containers/ApplyInternship/reducer';
 
 const initialState = fromJS({
-	posts: [],
-	applied: [],
+  posts: [],
+  applied: [],
 });
 
 function cariInternshipReducer(state = initialState, action) {
@@ -23,9 +23,9 @@ function cariInternshipReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case LOAD_DATA_SUCCESS:
-    	return state.set('posts', action.payload);
+      return state.set('posts', action.payload);
     case LOAD_APPLIED_SUCCESS:
-    	return state.set('applied', action.payload);
+      return state.set('applied', action.payload);
     default:
       return state;
   }

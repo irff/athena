@@ -11,37 +11,39 @@ import {
   ADD_ERROR_MESSAGE,
   DEL_ERROR_MESSAGE,
   CHANGE_USER_DATA,
+  DATA_MODIFIED,
+  DATA_UNMODIFIED,
 } from './constants';
 
 export function submit(payload) {
   return {
     type: SUBMIT,
-    payload
+    payload,
   };
 }
 
 export function validate() {
   return {
-    type: VALIDATE_PROFILE
+    type: VALIDATE_PROFILE,
   };
 }
 
 export function invalidate() {
   return {
-    type: INVALIDATE_PROFILE
+    type: INVALIDATE_PROFILE,
   };
 }
 
 export function addErrorMessage(payload) {
   return {
     type: ADD_ERROR_MESSAGE,
-    payload
+    payload,
   };
 }
 
 export function delErrorMessage() {
   return {
-    type: DEL_ERROR_MESSAGE
+    type: DEL_ERROR_MESSAGE,
   };
 }
 
@@ -49,7 +51,18 @@ export function delErrorMessage() {
 export function changeUserData(payload) {
   return {
     type: CHANGE_USER_DATA,
-    payload
+    payload,
   };
 }
 
+export function dataModified() {
+  return {
+    type: DATA_MODIFIED,
+  };
+}
+
+export function dataUnmodified() {
+  return {
+    type: DATA_UNMODIFIED,
+  };
+}

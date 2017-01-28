@@ -40,13 +40,13 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
   };
 
   componentWillMount() {
-    /*eslint camelcase: ["error", {properties: "never"}]*/
     const token = this.getCookie('token');
-    const student_id = this.getCookie('student_id');
+    const studentId = this.getCookie('student_id');
 
     if (this.props.global.get('token') === '' || this.props.global.get('id') === '') {
-      if (token !== '' && student_id !== '') {
-        this.props.fetchUserData({ token: token, student_id: student_id });
+      this.props.loading();
+      if (token !== '' && studentId !== '') {
+        this.props.fetchUserData({ token, student_id: studentId });
       } else {
         this.props.push('/mahasiswa/login');
       }
@@ -55,7 +55,6 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
 
   componentDidMount() {
     this.props.loadData();
-    this.props.loadingDone();
   }
 
   componentWillUnmount() {
@@ -78,11 +77,10 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
   }
 
   render() {
-    /*eslint react/jsx-boolean-value: ["error", {properties: "always"}]*/
     let mainContent = null;
-    
+
     if (!isEmpty(this.props.cariInternship.posts)) {
-      mainContent = (<List items={this.props.cariInternship.posts} component={InternshipPostCard} validation={this.props.cariInternship.applied.jobs_id}/>);
+      mainContent = (<List items={this.props.cariInternship.posts} component={InternshipPostCard} validation={this.props.cariInternship.applied.jobs_id} />);
     }
 
     return (

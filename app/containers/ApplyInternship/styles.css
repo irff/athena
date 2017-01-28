@@ -90,7 +90,8 @@
 	text-decoration: underline;
 }
 
-.overlay {
+.overlay,
+.overlayConf {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -100,6 +101,15 @@
 	color: #FFF;
 	padding: 0 2rem;
 	text-align: center;
+}
+
+.overlayConf {
+	background: #FFF;
+	color: #333;
+}
+
+.overlayConf h3 {
+	font-weight: 700;
 }
 
 .centralize {
@@ -174,8 +184,24 @@
 	}
 }
 
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) {
+	.profile {
+		height: calc(100vh - 10rem - 44px);
+		padding: 2rem;
+		overflow: auto;
+	}
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+	.profile {
+		height: calc(100vh - 10rem - 44px);
+		padding: 2rem;
+		overflow: auto;
+	}
+}
+
 @media screen and (min-width: 40em) and (max-width: 64em) {
 	.profile {
-		height: calc(100vh - 7rem);
+		height: calc(100vh - 7rem - 44px);
 	}
 }

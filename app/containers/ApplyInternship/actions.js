@@ -9,6 +9,8 @@ import {
   DISPLAY_APPLY,
   HIDE_APPLY,
   APPLY,
+  APPLY_SUCCESS,
+  APPLY_FAIL,
 } from './constants';
 
 export function defaultAction() {
@@ -33,5 +35,17 @@ export function hideApply() {
 export function apply() {
   return {
     type: APPLY,
+  };
+}
+
+export function applySuccess() {
+  return {
+    type: APPLY_SUCCESS,
+  };
+}
+
+export function applyFail() {
+  return {
+    type: APPLY_FAIL,
   };
 }

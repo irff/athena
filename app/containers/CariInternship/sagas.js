@@ -1,28 +1,28 @@
-import { push, LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOAD_DATA, LOAD_APPLIED } from './constants';
-import { editProfile, loading, loadingDone } from 'containers/App/actions';
-import { fromJS } from 'immutable';
-import { isEmpty } from 'lodash';
+import { loading, loadingDone } from 'containers/App/actions';
 import { loadDataSuccess, loadApplied, loadAppliedSuccess } from './actions';
 import { selectGlobal } from 'containers/App/selectors';
 import request from 'utils/request';
 import { userAccessSaga } from 'containers/UserAccess/sagas';
 import { APPLY } from 'containers/ApplyInternship/constants';
 import selectApplyInternship from 'containers/ApplyInternship/selectors';
+import { applySuccess, applyFail } from 'containers/ApplyInternship/actions';
+import { API_JOBS, API_STUDENTS } from 'containers/App/api';
 
 /**
  * Github repos request/response handler
  */
-export function* loadData(action) {
+export function* loadData() {
   const globalState = yield select(selectGlobal());
   let currentToken = globalState.get('currentToken');
   let currentId = globalState.get('id');
-  const requestURL = `https://api.quint.id/jobs`;
+  const requestURL = API_JOBS;
   yield put(loading());
 
-  if(currentToken === '') {
+  if (currentToken === '') {
     const name = 'token=';
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -33,10 +33,10 @@ export function* loadData(action) {
       if (c.indexOf(name) === 0) {
         currentToken = c.substring(name.length, c.length);
       }
-    } 
+    }
   }
 
-  if(currentId === '') {
+  if (currentId === '') {
     const name = 'student_id=';
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -47,7 +47,7 @@ export function* loadData(action) {
       if (c.indexOf(name) === 0) {
         currentId = c.substring(name.length, c.length);
       }
-    } 
+    }
   }
 
   const auth = `Bearer ${currentToken}`;
@@ -55,10 +55,10 @@ export function* loadData(action) {
   const loadDataCall = yield call(request, requestURL, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': auth
-    }
+      Authorization: auth,
+    },
   });
 
   if (!loadDataCall.err) {
@@ -71,14 +71,13 @@ export function* loadData(action) {
 /**
  * Github repos request/response handler
  */
-export function* loadAppliedCall(action) {
+export function* loadAppliedCall() {
   const globalState = yield select(selectGlobal());
   let currentToken = globalState.get('currentToken');
   let currentId = globalState.get('id');
-  const requestURL = `https://api.quint.id/jobs`;
   yield put(loading());
 
-  if(currentToken === '') {
+  if (currentToken === '') {
     const name = 'token=';
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -89,10 +88,10 @@ export function* loadAppliedCall(action) {
       if (c.indexOf(name) === 0) {
         currentToken = c.substring(name.length, c.length);
       }
-    } 
+    }
   }
 
-  if(currentId === '') {
+  if (currentId === '') {
     const name = 'student_id=';
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -103,18 +102,19 @@ export function* loadAppliedCall(action) {
       if (c.indexOf(name) === 0) {
         currentId = c.substring(name.length, c.length);
       }
-    } 
+    }
   }
 
   const auth = `Bearer ${currentToken}`;
+  const requestURLValidateData = `${API_STUDENTS}${currentId}/jobs`;
 
-  const validateDataCall = yield call(request, `https://api.quint.id/students/${currentId}/jobs`, {
+  const validateDataCall = yield call(request, requestURLValidateData, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': auth
-    }
+      Authorization: auth,
+    },
   });
 
   if (!validateDataCall.err) {
@@ -160,7 +160,7 @@ export function* apply() {
   const currentToken = globalState.get('currentToken');
   const currentId = globalState.get('id');
   const jobId = localState.job.item.id;
-  const requestURL = `https://api.quint.id/students/${currentId}/jobs`;
+  const requestURL = `${API_STUDENTS}${currentId}/jobs`;
   const auth = `Bearer ${currentToken}`;
 
   const applyCall = yield call(request, requestURL, {
@@ -175,8 +175,13 @@ export function* apply() {
     }),
   });
 
-  if(!applyCall.err) {
+  if (!(applyCall.err === 'TypeError: Failed to fetch')) {
     yield put(loadApplied());
+    yield put(applySuccess());
+    yield put(loadingDone());
+  } else {
+    yield put(applyFail());
+    yield put(loadingDone());
   }
 }
 

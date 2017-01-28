@@ -28,14 +28,14 @@ function Footer(props) {
                 <p className={styles.desc}>Quality Internship for Talented Students,<br />Top Universities, and Qualified Companies.</p>
               </div>
               <div className="small-12 columns">
-                <p className={styles.icon}><a><span className={globalStyles.iconfacebook}></span></a><a><span className={globalStyles.iconline}></span></a></p>
+                <p className={styles.icon}><a href="http://quint.id/facebook"><span className={globalStyles.iconfacebook}></span></a><a href="http://quint.id/line"><span className={globalStyles.iconline}></span></a></p>
               </div>
             </div>
           </div>
         </div>
         <div className="small-12 medium-8 columns">
           <div className={styles.rightSide}>
-            <h3>Our Team is open for any kind of collaboration</h3>
+            <h3>Hubungi kami untuk berkolaborasi dengan Quint</h3>
             <h1><a href="mailto:partnership@quint.id?Subject=Inquiry%20Quint">partnership@quint.id</a></h1>
           </div>
         </div>

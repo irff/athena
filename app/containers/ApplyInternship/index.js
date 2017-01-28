@@ -29,12 +29,6 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
     loadingDone: React.PropTypes.func,
   };
 
-  constructor(props) {
-    super(props);
-
-    const userData = this.props.global.get('userData');
-  }
-
   componentWillMount() {
     this.props.loadingDone();
   }
@@ -57,13 +51,15 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
     const visibility = this.props.local.visibility ? 'block' : 'none';
     const job = isEmpty(this.props.local.job) ? fromJS({}) : fromJS(this.props.local.job.item);
     const valid = userData.get('headline') === 'iniDefaultEntryQuint' || userData.get('major') === 'iniDefaultEntryQuint' || userData.get('university') === 'iniDefaultEntryQuint' || userData.get('resume_url') === 'http://iniDefaultEntryQui.nt';
+    const success = this.props.local.success;
+    const fail = this.props.local.fail;
 
     return (
       <div className={styles.applyInternship} style={{ display: visibility }}>
         <div className={styles.container}>
           <div className={styles.content}>
             <div className="row expanded">
-              <div className="small-12 columns">
+              <div className={success ? 'hide' : 'small-12 columns'}>
                 <div className={styles.header}><p>Review Profile Anda</p><h1>{job.get('role')} at {job.getIn(['company', 'name'])}</h1></div>
               </div>
               <div className="small-12 columns">
@@ -93,7 +89,7 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
                         <h2>{userData.getIn(['experiences', 'project_num'])}</h2>
                       </div>
                       <div className="small-12 columns">
-                        <p>Jumlah Organisasi / Kepanitiaan</p>
+                        <p>Jumlah Pekerjaan</p>
                         <h2>{userData.getIn(['experiences', 'work_num'])}</h2>
                       </div>
                     </div>
@@ -106,13 +102,29 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
                         </div>
                       </div>
                     </div>
+                    <div className={styles.overlayConf} style={{ display: success ? 'block' : 'none' }}>
+                      <div className={styles.container}>
+                        <div className={styles.centralize}>
+                          <h4>Anda telah mendaftar di <b>{job.getIn(['company', 'name'])}</b> sebagai</h4>
+                          <h3>{job.get('role')}</h3>
+                          <h4>Cek E-Mail anda untuk melihat progress selanjutnya.</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.overlayConf} style={{ display: fail ? 'block' : 'none' }}>
+                      <div className={styles.container}>
+                        <div className={styles.centralize}>
+                          <h4>Pendaftaran Gagal</h4>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="small-12 medium-6 columns">
+              <div className={success ? 'small-12 columns' : 'small-12 medium-6 columns'}>
                 <button className={styles.detailButton} onClick={this.props.hideApply}>Kembali</button>
               </div>
-              <div className="small-12 medium-6 columns">
+              <div className={success ? 'hide' : 'small-12 medium-6 columns'}>
                 <button className={styles.applyButton} onClick={this.props.apply} disabled={valid} >Daftar Internship</button>
               </div>
             </div>

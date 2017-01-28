@@ -32,7 +32,7 @@ module.exports = (options) => ({
       // they will be a part of our compilation either way.
       // So, no need for ExtractTextPlugin here.
       test: /\.css$/,
-      include: [ 
+      include: [
         /node_modules/,
         path.resolve('app/app.css'),
       ],
@@ -45,6 +45,11 @@ module.exports = (options) => ({
       loaders: [
         'file-loader',
         'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}',
+      ],
+    }, {
+      test: /\.(ico)$/,
+      loaders: [
+        'static-loader',
       ],
     }, {
       test: /\.html$/,

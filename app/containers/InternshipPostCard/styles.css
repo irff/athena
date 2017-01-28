@@ -1,9 +1,15 @@
-
+/* stylelint-disable */
 .internshipPostCard {
   width: calc(100% - 1rem);
-  background-color: #fcfcfc;
+  background-color: #FCFCFC;
   margin: 1rem 0.5rem;
   box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.19);
+}
+
+.snipetSmall {
+  width: 100%;
+  padding: 1.25rem 1.25rem 0.5rem;
+  height: 7.5rem;
 }
 
 .snipet {
@@ -24,21 +30,23 @@
   width: 100%;
   min-height: 5rem;
   position: relative;
-  color: #4a4a4a;
+  color: #4A4A4A;
   padding: 0 1rem;
 }
 
 .postContent h3 {
   font-size: 1.25rem;
+  max-height: 2.5rem;
+  overflow: hidden;
   line-height: 1;
   margin: 0;
 }
 
 .postContent h4 {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1;
-  margin: 0 0 1rem;
+  margin: 0 0 0.75rem;
 }
 
 .postContent h5 {
@@ -51,7 +59,7 @@
 
 .postContent h5 a {
   text-decoration: underline;
-  color: #4a4a4a;
+  color: #4A4A4A;
 }
 
 .postContent h6 {
@@ -75,15 +83,15 @@
 }
 
 .detailButton {
-  background: #e4e4e4;
+  background: #E4E4E4;
 }
 
 .applyButton {
-  background: #e5d224;
+  background: #E5D224;
 }
 
 .applyButton:disabled {
-  background: #d1d1d1;
+  background: #D1D1D1;
 }
 
 .header {
@@ -130,7 +138,7 @@
 }
 
 .header .postContent h5 a {
-  color: #fff;
+  color: #FFF;
 }
 
 .header .postContent p {
@@ -165,7 +173,7 @@
 }
 
 .postDetail {
-  color: #4a4a4a;
+  color: #4A4A4A;
   padding: 1rem;
   position: relative;
 }
@@ -201,16 +209,19 @@
 
 .postDetail ul {
   margin-top: 0.5rem;
-  list-style: inside;
   line-height: 1.25;
   width: 80%;
   font-size: 0.8rem;
 }
 
+.listContainer {
+  padding: 0 0 0 1rem;
+}
+
 .postDetail h6 {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 1.25rem;
+  right: 1.25rem;
   font-size: 0.8rem;
 }
 

@@ -9,7 +9,7 @@ import {
   LOAD_DATA,
   LOAD_DATA_SUCCESS,
   LOAD_APPLIED,
-  LOAD_APPLIED_SUCCESS
+  LOAD_APPLIED_SUCCESS,
 } from './constants';
 
 export function defaultAction() {

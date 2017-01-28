@@ -10,8 +10,13 @@ import styles from './styles.css';
 
 function Navlink(props) {
   let navStyle = props.isRightElement ? styles.rightlink : styles.leftlink;
+
+  if (props.isPlaceholder) {
+    navStyle = styles.placeholder;
+  }
+
   return (
-    <button className={navStyle} disabled={props.isCurrentElement} onClick={props.handleRoute} >{React.Children.toArray(props.children)}</button>
+    <button className={navStyle} disabled={props.isCurrentElement || props.isPlaceholder} onClick={props.handleRoute} >{React.Children.toArray(props.children)}</button>
   );
 }
 
@@ -20,6 +25,7 @@ Navlink.propTypes = {
   isRightElement: React.PropTypes.bool,
   isCurrentElement: React.PropTypes.bool,
   children: React.PropTypes.node.isRequired,
+  isPlaceholder: React.PropTypes.bool,
 };
 
 export default Navlink;

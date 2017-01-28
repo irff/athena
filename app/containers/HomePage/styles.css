@@ -1,3 +1,4 @@
+/* stylelint-disable */
 .hero {
   position: absolute;
   top: 0;
@@ -57,7 +58,7 @@
   width: 100%;
   height: 100%;
   z-index: 2;
-  background-image: linear-gradient(286deg, #2d3038, #2c2f36);
+  background-image: linear-gradient(286deg, #2D3038, #2C2F36);
   opacity: 0.8;
 }
 
@@ -107,7 +108,7 @@
   font-weight: 500;
   font-size: 2.5rem;
   line-height: 1.5;
-  color: #FFFFFF;
+  color: #FFF;
 }
 
 .principle {
@@ -121,8 +122,8 @@
 .blackButton {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #2c2c2c;
-  background: #e0d022;
+  color: #2C2C2C;
+  background: #E0D022;
   padding: 1.25rem 5rem;
   border-radius: 3rem;
   margin-top: 2rem;
@@ -132,7 +133,7 @@
 .blackButton:hover,
 .blackButton:focus,
 .blackButton:active {
-  background: #8c9225;
+  background: #8C9225;
 }
 
 .content {
@@ -143,7 +144,7 @@
   width: 100%;
   padding: 2.5rem 5rem;
   text-align: center;
-  background: linear-gradient(251deg, #e0d022, #f5d82a 81%, #f5d82a 81%, #fada2c);;
+  background: linear-gradient(251deg, #E0D022, #F5D82A 81%, #F5D82A 81%, #FADA2C);;
   color: #313131;
 }
 
@@ -177,7 +178,6 @@
 
 .secondPanel h3 {
   font-size: 1rem;
-  text-transform: capitalize;
   font-weight: 500;
 }
 
@@ -194,7 +194,7 @@
 .thirdPanel h3 {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #4a4a4a;
+  color: #4A4A4A;
   margin-bottom: 1rem;
 }
 
@@ -206,7 +206,7 @@
 }
 
 .fourthPanel {
-  background: linear-gradient(253deg, #e0d022, #fada2c);
+  background: linear-gradient(253deg, #E0D022, #FADA2C);
   color: #232321;
   padding: 2rem 0;
 }
@@ -280,11 +280,11 @@
 }
 
 .circle {
-  background: #ccb018;
+  background: #CCB018;
 }
 
 .circle:disabled {
-  background: #65570e;
+  background: #65570E;
 }
 
 .nextButton,
@@ -342,7 +342,7 @@
     font-weight: 500;
     font-size: 2rem;
     line-height: 1.5;
-    color: #FFFFFF;
+    color: #FFF;
   }
 
   .principle {
@@ -462,7 +462,7 @@
     font-weight: 500;
     font-size: 2rem;
     line-height: 1.5;
-    color: #FFFFFF;
+    color: #FFF;
   }
 
   .principle {
