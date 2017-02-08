@@ -118,13 +118,17 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     this.props.changeInput(path, field, value);
   }
 
+  isCompanyPage() {
+    return (window.location.pathname.indexOf('/perusahaan') === 0);
+  }
+
   render() {
     let mainStyle = styles.userAccessStudent;
 
     let heroHeader = <h1>Dapatkan<br /><i>internship</i><br />lebih mudah,<br />sekarang</h1>;
     // let heroLink = <a>Temukan masa depanmu lewat Quint.<br />Sekarang →</a>;
 
-    if (window.location.pathname.indexOf('/perusahaan') === 0) {
+    if (this.isCompanyPage()) {
       mainStyle = styles.userAccessCompany;
       heroHeader = <h1>Raihlah anak<br />anak TOKI & ambis,<br />secepatnya.</h1>;
       // heroLink = <a>Temukan masa depanmu lewat Quint.<br />Sekarang →</a>;
@@ -220,8 +224,12 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
                   <div className="small-12 columns">
                     <div className={styles.switchMenu}>
                       <Button containerClassName={styles.switchContainer} className={loginSwitchStyle} handleRoute={this.openLogin} >Masuk</Button>
-                      <span className={styles.switchDivider}> atau </span>
-                      <Button containerClassName={styles.switchContainer} className={signupSwitchStyle} handleRoute={this.openSignup} >Daftar</Button>
+                      { !this.isCompanyPage() &&
+                        <span>
+                          <span className={styles.switchDivider}> atau </span>
+                          <Button containerClassName={styles.switchContainer} className={signupSwitchStyle} handleRoute={this.openSignup} >Daftar</Button>
+                        </span>
+                      }
                     </div>
                   </div>
                   {mainContent}

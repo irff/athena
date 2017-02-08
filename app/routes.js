@@ -144,16 +144,12 @@ export default function createRoutes(store) {
       name: 'perusahaan',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/Mahasiswa/reducer'),
-          System.import('containers/Mahasiswa/sagas'),
-          System.import('containers/Mahasiswa'),
+          System.import('containers/Perusahaan'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('mahasiswa', reducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 
@@ -181,27 +177,27 @@ export default function createRoutes(store) {
             importModules.catch(errorLoading);
           },
         },
-        {
-          path: '/perusahaan/signup',
-          name: 'signupPerusahaan',
-          getComponent(nextState, cb) {
-            const importModules = Promise.all([
-              System.import('containers/UserAccess/reducer'),
-              System.import('containers/UserAccess/sagas'),
-              System.import('containers/UserAccess'),
-            ]);
+        // {
+        //   path: '/perusahaan/signup',
+        //   name: 'signupPerusahaan',
+        //   getComponent(nextState, cb) {
+        //     const importModules = Promise.all([
+        //       System.import('containers/UserAccess/reducer'),
+        //       System.import('containers/UserAccess/sagas'),
+        //       System.import('containers/UserAccess'),
+        //     ]);
 
-            const renderRoute = loadModule(cb);
+        //     const renderRoute = loadModule(cb);
 
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('userAccess', reducer.default);
-              injectSagas(sagas.default);
-              renderRoute(component);
-            });
+        //     importModules.then(([reducer, sagas, component]) => {
+        //       injectReducer('userAccess', reducer.default);
+        //       injectSagas(sagas.default);
+        //       renderRoute(component);
+        //     });
 
-            importModules.catch(errorLoading);
-          },
-        },
+        //     importModules.catch(errorLoading);
+        //   },
+        // },
       ],
     }, {
       path: '*',
