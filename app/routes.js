@@ -157,7 +157,7 @@ export default function createRoutes(store) {
       },
       childRoutes: [
         {
-          path: '/perusahaan/login',
+          path: 'login',
           name: 'loginPerusahaan',
           getComponent(nextState, cb) {
             const importModules = Promise.all([
@@ -170,6 +170,27 @@ export default function createRoutes(store) {
 
             importModules.then(([reducer, sagas, component]) => {
               injectReducer('userAccess', reducer.default);
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
+          },
+        },
+        {
+          path: 'home',
+          name: 'companyDashboard',
+          getComponent(nextState, cb) {
+            const importModules = Promise.all([
+              System.import('containers/CompanyDashboard/reducer'),
+              System.import('containers/CompanyDashboard/sagas'),
+              System.import('containers/CompanyDashboard'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([reducer, sagas, component]) => {
+              injectReducer('companyDashboard', reducer.default);
               injectSagas(sagas.default);
               renderRoute(component);
             });

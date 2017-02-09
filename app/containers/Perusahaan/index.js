@@ -9,18 +9,20 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectGlobal } from 'containers/App/selectors';
+import isEmpty from 'lodash/lang/isEmpty';
 
 export class Perusahaan extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    global: PropTypes.object,
-    push: PropTypes.func,
+    global: PropTypes.object.isRequired,
+    push: PropTypes.func.isRequired,
+    children: PropTypes.node,
   };
 
   constructor(props) {
     super(props);
     if (window.location.pathname === '/perusahaan' || window.location.pathname === '/perusahaan/') {
       if (this.props.global.get('loggedIn')) {
-        this.props.push('/perusahaan/lihat-pendaftar');
+        this.props.push('/perusahaan/home');
       } else {
         this.props.push('/perusahaan/login');
       }
@@ -28,7 +30,13 @@ export class Perusahaan extends React.Component { // eslint-disable-line react/p
   }
 
   render() {
-    return null;
+    let mainContent = null;
+
+    if (!isEmpty(this.props.children)) {
+      mainContent = <div>{React.Children.toArray(this.props.children)}</div>;
+    }
+
+    return mainContent;
   }
 }
 
