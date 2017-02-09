@@ -1,11 +1,12 @@
-// import Perusahaan from '../index';
+import { Perusahaan } from '../index';
 
 import expect from 'expect';
-// import { shallow } from 'enzyme';
-// import React from 'react';
+import { shallow } from 'enzyme';
+import React from 'react';
 
 describe('<Perusahaan />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('renders null component', () => {
+    const wrapper = shallow(<Perusahaan />);
+    expect(wrapper.html()).toNotExist();
   });
 });
