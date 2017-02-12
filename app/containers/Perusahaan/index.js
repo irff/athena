@@ -13,8 +13,8 @@ import isEmpty from 'lodash/lang/isEmpty';
 
 export class Perusahaan extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    global: PropTypes.object.isRequired,
-    push: PropTypes.func.isRequired,
+    global: PropTypes.object,
+    push: PropTypes.func,
     children: PropTypes.node,
   };
 

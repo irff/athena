@@ -214,6 +214,7 @@
     "redux-saga": "0.11.0",
     "reselect": "2.5.3",
     "sanitize.css": "4.1.0",
+    "styled-components": "^1.4.3",
     "warning": "3.0.0",
     "whatwg-fetch": "1.0.0"
   },

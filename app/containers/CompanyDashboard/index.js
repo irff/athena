@@ -25,7 +25,17 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
           ]}
         />
         <FormattedMessage {...messages.header} />
-        <Accordion />
+        <Accordion>
+          <Accordion.Item title="asd">
+            <p>lorem ipsum</p>
+          </Accordion.Item>
+          <Accordion.Item title="asd">
+            <p>lorem ipsum</p>
+          </Accordion.Item>
+          <Accordion.Item title="asd">
+            <p>lorem ipsum</p>
+          </Accordion.Item>
+        </Accordion>
       </div>
     );
   }

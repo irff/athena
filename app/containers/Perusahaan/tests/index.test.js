@@ -19,7 +19,7 @@ describe('<Perusahaan />', () => {
 
     const expected = shallow(
       <div>
-        <div></div>
+        <div />
       </div>
     );
 
