@@ -26,7 +26,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
         />
         <FormattedMessage {...messages.header} />
         <Accordion>
-          <Accordion.Item title="asd">
+          <Accordion.Item title={<span><strong>Product Designer Intern &middot;</strong> 0 pendaftar</span>}>
             <p>lorem ipsum</p>
           </Accordion.Item>
           <Accordion.Item title="asd">

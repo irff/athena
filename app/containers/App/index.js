@@ -30,6 +30,7 @@ const theme = {
   darkBlack: '#3D3D3D',
   lightBlack: '#464646',
   gray: '#979797',
+  lightGray: '#e5e5e5',
   yellow: '#E5D224',
 };
 

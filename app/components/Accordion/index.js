@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import globalStyle from 'containers/App/styles.css';
 
 class Accordion extends Component {
   static propTypes = {
@@ -52,40 +53,54 @@ class Accordion extends Component {
   }
 }
 
-const AccordionWrapper = styled.div`
-  background: #eee;
-`;
-
 const AccordionHeader = styled.button`
-  background: #666;
-  color: #fff;
+  background: ${props => props.theme.darkBlack};
+  color: ${props => props.theme.white};
   width: 100%;
   text-align: left;
-  padding: 1em;
+  font-size: 1.33rem;
+  padding: 1.25rem;
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.14);
+  display: flex;
 `;
 
 const AccordionBody = styled.div`
-  background: #eee;
-  color: #333;
+  background: ${props => props.theme.lightGray};
+  color: ${props => props.theme.darkBlack};
   padding: 1em;
-  padding-left: 2em;
+  padding-left: 2rem;
+`;
+
+const TitleContainer = styled.span`
+  flex: 1;
+`;
+
+const ArrowContainer = styled.span`
+  text-align: right;
 `;
 
 export const Item = props => (
-  <AccordionWrapper>
+  <div>
     <AccordionHeader onClick={props.onClick}>
-      {props.title}
+      <TitleContainer>{props.title}</TitleContainer>
+      <ArrowContainer>
+        { !props.opened && <span className={globalStyle.icondownarrow} /> }
+        { !!props.opened && <span className={globalStyle.iconuparrow} /> }
+      </ArrowContainer>
     </AccordionHeader>
     { !!props.opened &&
       <AccordionBody>
         {props.children}
       </AccordionBody>
     }
-  </AccordionWrapper>
+  </div>
 );
 
 Item.propTypes = {
-  title: React.PropTypes.string,
+  title: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.node,
+  ]),
   children: React.PropTypes.node,
   opened: React.PropTypes.bool,
   onClick: React.PropTypes.func,
