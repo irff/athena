@@ -32,6 +32,7 @@ const theme = {
   gray: '#979797',
   lightGray: '#e5e5e5',
   yellow: '#E5D224',
+  lightBlue: '#2699d3',
 };
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function

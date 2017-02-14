@@ -18,8 +18,7 @@ export class Perusahaan extends React.Component { // eslint-disable-line react/p
     children: PropTypes.node,
   };
 
-  constructor(props) {
-    super(props);
+  componentWillMount() {
     if (window.location.pathname === '/perusahaan' || window.location.pathname === '/perusahaan/') {
       if (this.props.global.get('loggedIn')) {
         this.props.push('/perusahaan/home');
