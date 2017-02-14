@@ -67,8 +67,7 @@ const AccordionHeader = styled.button`
 const AccordionBody = styled.div`
   background: ${props => props.theme.lightGray};
   color: ${props => props.theme.darkBlack};
-  padding: 1em;
-  padding-left: 2rem;
+  padding: 1.3125rem;
 `;
 
 const TitleContainer = styled.span`

@@ -16,6 +16,8 @@ import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 import SectionTitle from 'components/SectionTitle';
 import CompanyHeader from 'components/CompanyHeader';
+import SubsectionTitle from 'components/SubsectionTitle';
+import ApplicantCard from 'components/ApplicantCard';
 
 export class CompanyDashboard extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -39,9 +41,13 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
               <CompanyHeader />
             </div>
             <div className="small-12 columns sectionMargin">
-              <Accordion>
+              <Accordion initialState={[0]}>
                 <Accordion.Item title={<span><strong>Pendaftar Baru &middot;</strong> 0 pendaftar</span>} backgroundColor="#5fb81e">
-                  <p>lorem ipsum</p>
+                  <SubsectionTitle>Product Designer Intern</SubsectionTitle>
+                  <ApplicantCard />
+                  <ApplicantCard />
+                  <SubsectionTitle>Software Engineer Intern</SubsectionTitle>
+                  <ApplicantCard />
                 </Accordion.Item>
               </Accordion>
             </div>
