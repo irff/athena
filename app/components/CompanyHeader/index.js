@@ -7,6 +7,69 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const CompanyHeader = () => (
+  <CompanyHeaderWrapper>
+    <div className="row expanded">
+      <div className="small-12 columns">
+        <div className="topModule">
+          <div className="row">
+            <div className="medium-1 columns">
+              <img src="http://2.bp.blogspot.com/-qY4-nRo26Mg/VkyNFIdWR2I/AAAAAAAAJFM/shFlwYW3gG0/s1600/bukalapak%2Bmarketplace%2Bjual%2Bbeli%2Bonline.png" alt="logo" />
+            </div>
+            <div className="medium-6 columns">
+              <h1>Bukalapak <small>&middot; &nbsp; E-commerce Company</small></h1>
+              <div className="companyLinks">
+                <a href="https://maps.google.com/" className="maps">Kemang, Jakarta Selatan</a>
+                <a href="https://bukalapak.com/">www.bukalapak.com</a>
+              </div>
+              <p>Bukalapak adalah company terkeren sedunia. Dengan intern di Bukalapak, kamu bisa dapat gaji yang besar, makan gratis, fasilitas gratis, dan kehidupan yang amat sangat layak. Ada gym-nya pula. Yuk, intern di Bukalapak!</p>
+            </div>
+            <div className="medium-3 medium-offset-2 columns contactPerson">
+              <h3>Contact Person</h3>
+              <strong>Khloe Kardashian</strong>
+              <p>Head of People Operations</p>
+              <p>+6221 972 9727</p>
+              <p>khloe@bukalapak.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="small-12 columns">
+        <div className="bottomModule">
+          <div className="row expanded">
+            <div className="small-12 columns">
+              <div className="counterContainer first">
+                <h1>88</h1>
+                <h2>posisi intern</h2>
+              </div>
+              <div className="counterContainer">
+                <h1>88</h1>
+                <h2>pendaftar</h2>
+              </div>
+              <div className="counterContainer">
+                <h1>88</h1>
+                <h2>diterima</h2>
+              </div>
+              <div className="counterContainer">
+                <h1>88</h1>
+                <h2>dalam proses</h2>
+              </div>
+              <div className="counterContainer">
+                <h1>88</h1>
+                <h2>ditolak</h2>
+              </div>
+              <button>Ubah Profil Perusahaan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="small-12 columns">
+        <button className="addJob">+ Tambah Lowongan Posisi Intern</button>
+      </div>
+    </div>
+  </CompanyHeaderWrapper>
+);
+
 const CompanyHeaderWrapper = styled.div`
   width: 100%;
   background: ${props => props.theme.darkBlack};
@@ -135,67 +198,5 @@ const CompanyHeaderWrapper = styled.div`
   }
 `;
 
-const CompanyHeader = () => (
-  <CompanyHeaderWrapper>
-    <div className="row expanded">
-      <div className="small-12 columns">
-        <div className="topModule">
-          <div className="row">
-            <div className="medium-1 columns">
-              <img src="http://2.bp.blogspot.com/-qY4-nRo26Mg/VkyNFIdWR2I/AAAAAAAAJFM/shFlwYW3gG0/s1600/bukalapak%2Bmarketplace%2Bjual%2Bbeli%2Bonline.png" alt="logo" />
-            </div>
-            <div className="medium-6 columns">
-              <h1>Bukalapak <small>&middot; &nbsp; E-commerce Company</small></h1>
-              <div className="companyLinks">
-                <a href="https://maps.google.com/" className="maps">Kemang, Jakarta Selatan</a>
-                <a href="https://bukalapak.com/">www.bukalapak.com</a>
-              </div>
-              <p>Bukalapak adalah company terkeren sedunia. Dengan intern di Bukalapak, kamu bisa dapat gaji yang besar, makan gratis, fasilitas gratis, dan kehidupan yang amat sangat layak. Ada gym-nya pula. Yuk, intern di Bukalapak!</p>
-            </div>
-            <div className="medium-3 medium-offset-2 columns contactPerson">
-              <h3>Contact Person</h3>
-              <strong>Khloe Kardashian</strong>
-              <p>Head of People Operations</p>
-              <p>+6221 972 9727</p>
-              <p>khloe@bukalapak.com</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="small-12 columns">
-        <div className="bottomModule">
-          <div className="row expanded">
-            <div className="small-12 columns">
-              <div className="counterContainer first">
-                <h1>88</h1>
-                <h2>posisi intern</h2>
-              </div>
-              <div className="counterContainer">
-                <h1>88</h1>
-                <h2>pendaftar</h2>
-              </div>
-              <div className="counterContainer">
-                <h1>88</h1>
-                <h2>diterima</h2>
-              </div>
-              <div className="counterContainer">
-                <h1>88</h1>
-                <h2>dalam proses</h2>
-              </div>
-              <div className="counterContainer">
-                <h1>88</h1>
-                <h2>ditolak</h2>
-              </div>
-              <button>Ubah Profil Perusahaan</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="small-12 columns">
-        <button className="addJob">+ Tambah Lowongan Posisi Intern</button>
-      </div>
-    </div>
-  </CompanyHeaderWrapper>
-);
 
 export default CompanyHeader;

@@ -54,7 +54,7 @@ class Accordion extends Component {
 }
 
 const AccordionHeader = styled.button`
-  background: ${props => props.theme.darkBlack};
+  background: ${props => props.backgroundColor || props.theme.darkBlack};
   color: ${props => props.theme.white};
   width: 100%;
   text-align: left;
@@ -81,7 +81,7 @@ const ArrowContainer = styled.span`
 
 export const Item = props => (
   <div>
-    <AccordionHeader onClick={props.onClick}>
+    <AccordionHeader onClick={props.onClick} backgroundColor={props.backgroundColor}>
       <TitleContainer>{props.title}</TitleContainer>
       <ArrowContainer>
         { !props.opened && <span className={globalStyle.icondownarrow} /> }
@@ -101,6 +101,7 @@ Item.propTypes = {
     React.PropTypes.string,
     React.PropTypes.node,
   ]),
+  backgroundColor: React.PropTypes.string,
   children: React.PropTypes.node,
   opened: React.PropTypes.bool,
   onClick: React.PropTypes.func,

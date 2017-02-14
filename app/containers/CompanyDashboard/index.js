@@ -38,6 +38,13 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
             <div className="small-12 columns">
               <CompanyHeader />
             </div>
+            <div className="small-12 columns sectionMargin">
+              <Accordion>
+                <Accordion.Item title={<span><strong>Pendaftar Baru &middot;</strong> 0 pendaftar</span>} backgroundColor="#5fb81e">
+                  <p>lorem ipsum</p>
+                </Accordion.Item>
+              </Accordion>
+            </div>
             <div className="small-12 columns">
               <SectionTitle>Data Pendaftar</SectionTitle>
               <Accordion>
@@ -65,6 +72,10 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
 const ContentContainer = styled.div`
   min-height: calc(100vh - 3rem);
   padding: 8rem 1rem 1rem;
+
+  .sectionMargin {
+    margin-bottom: 2.75rem;
+  }
 `;
 
 const mapStateToProps = selectCompanyDashboard();
