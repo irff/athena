@@ -85,7 +85,13 @@ const Card = styled.div`
 
       .head {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        margin-bottom: 1.25rem;
+
+        @media screen and (min-width: 40em) {
+          flex-direction: row;
+          margin-bottom: 0;
+        }
 
         h1 {
           flex: 1;
