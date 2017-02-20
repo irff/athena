@@ -19,7 +19,19 @@ import CompanyHeader from 'components/CompanyHeader';
 import SubsectionTitle from 'components/SubsectionTitle';
 import ApplicantCard from 'components/ApplicantCard';
 
+import searchIcon from './search.svg';
+
 export class CompanyDashboard extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  renderEmptyState() {
+    return (
+      <EmptyStateWrapper>
+        <img src={searchIcon} alt="empty" />
+        <div>Belum ada Posisi Intern yang ditawarkan.</div>
+        <div><a href="http://null">Tambah Posisi Intern</a> Sekarang</div>
+      </EmptyStateWrapper>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -53,6 +65,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
             </div>
             <div className="small-12 columns">
               <SectionTitle>Data Pendaftar</SectionTitle>
+              {this.renderEmptyState()}
               <Accordion>
                 <Accordion.Item title={<span><strong>Product Designer Intern &middot;</strong> 0 pendaftar</span>}>
                   <p>lorem ipsum</p>
@@ -74,6 +87,22 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
   }
 }
 
+
+const EmptyStateWrapper = styled.div`
+  padding: 4.5rem 0;
+  text-align: center;
+  color: ${props => props.theme.gray};
+
+  img {
+    margin-bottom: 1.375rem;
+  }
+
+  a {
+    color: ${props => props.theme.darkGray};
+    font-weight: 700;
+    text-decoration: underline;
+  }
+`;
 
 const ContentContainer = styled.div`
   min-height: calc(100vh - 3rem);

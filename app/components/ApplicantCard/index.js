@@ -20,6 +20,7 @@ function ApplicantCard() {
             </div>
           </div>
           <p>Former Product Designer at Google</p>
+          <a className="email" href="mailto:uvuvwevwe@gmail.com">uvuvwevwe@gmail.com</a>
         </div>
         <div className="counter">
           <h1>88</h1>
@@ -35,6 +36,11 @@ function ApplicantCard() {
         </div>
         <div className="status">
           <h2>Update status</h2>
+          <select>
+            <option selected value="">Pilih status</option>
+            <option value="review">Review Resume</option>
+            <option value="interview">Phone Interview</option>
+          </select>
         </div>
       </div>
     </Card>
@@ -54,6 +60,7 @@ const Card = styled.div`
 
     @media screen and (min-width: 40em) {
       flex-direction: row;
+      align-items: center;
     }
 
     h1, h2 {
@@ -63,6 +70,7 @@ const Card = styled.div`
 
     .profile {
       flex: 1;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -77,8 +85,14 @@ const Card = styled.div`
         line-height: 1;
       }
 
+      a.email {
+        font-size: .875rem;
+        color: ${props => props.theme.black};
+        text-decoration: underline;
+      }
+
       @media screen and (min-width: 40em) {
-        p {
+        a {
           margin: 0;
         }
       }
@@ -87,14 +101,17 @@ const Card = styled.div`
         display: flex;
         flex-direction: column;
         margin-bottom: 1.25rem;
+        overflow: hidden;
 
-        @media screen and (min-width: 40em) {
+        @media screen and (min-width: 60em) {
           flex-direction: row;
           margin-bottom: 0;
         }
 
-        h1 {
-          flex: 1;
+        & > h1 {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .links a {
@@ -120,6 +137,10 @@ const Card = styled.div`
       min-width: 6.75rem;
       text-align: center;
       padding: 0.5rem;
+      max-height: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       @media screen and (min-width: 40em) {
         border-left: 1px solid ${props => props.theme.altGray};
@@ -153,7 +174,9 @@ const Card = styled.div`
         color: ${props => props.theme.gray};
       }
     }
+
   }
+
 `;
 
 export default ApplicantCard;
