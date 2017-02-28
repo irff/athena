@@ -221,6 +221,26 @@ export default function createRoutes(store) {
         // },
       ],
     }, {
+      path: '/perusahaan/new-job',
+      name: 'createJobPost',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/CreateJobPost/reducer'),
+          System.import('containers/CreateJobPost/sagas'),
+          System.import('containers/CreateJobPost'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('createJobPost', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

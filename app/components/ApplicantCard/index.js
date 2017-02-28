@@ -36,11 +36,11 @@ function ApplicantCard() {
         </div>
         <div className="status">
           <h2>Update status</h2>
-          <select>
+          <SelectStatus>
             <option selected value="">Pilih status</option>
             <option value="review">Review Resume</option>
             <option value="interview">Phone Interview</option>
-          </select>
+          </SelectStatus>
         </div>
       </div>
     </Card>
@@ -177,6 +177,15 @@ const Card = styled.div`
 
   }
 
+`;
+
+const SelectStatus = styled.select`
+  border-radius: 0.15rem;
+  background: ${props => props.theme.lightBlue};
+  color: ${props => props.theme.white};
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
 `;
 
 export default ApplicantCard;

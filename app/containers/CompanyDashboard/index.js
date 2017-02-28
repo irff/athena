@@ -15,7 +15,7 @@ import Accordion from 'components/Accordion';
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 import SectionTitle from 'components/SectionTitle';
-import CompanyHeader from 'components/CompanyHeader';
+import CompanyInfoCard from 'components/CompanyInfoCard';
 import SubsectionTitle from 'components/SubsectionTitle';
 import ApplicantCard from 'components/ApplicantCard';
 
@@ -36,9 +36,9 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
     return (
       <div>
         <Helmet
-          title="CompanyDashboard"
+          title="Dasbor Perusahaan"
           meta={[
-            { name: 'description', content: 'Description of CompanyDashboard' },
+            { name: 'description', content: 'Dasbor Perusahaan' },
           ]}
         />
 
@@ -50,7 +50,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
               <SectionTitle>Dashboard</SectionTitle>
             </div>
             <div className="small-12 columns">
-              <CompanyHeader />
+              <CompanyInfoCard />
             </div>
             <div className="small-12 columns sectionMargin">
               <Accordion initialState={[0]}>
