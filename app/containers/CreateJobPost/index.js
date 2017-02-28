@@ -107,19 +107,19 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
             <div className="small-12 columns">
               <div className="input multiline">
                 <span>Kemampuan Teknis <em>(Requirements)</em></span>
-                <span className="subhead">Tuliskan kemampuan teknis yang harus dimiliki untuk posisi ini. Pisahkan dengan titik koma (;).</span>
+                <span className="subhead">Tuliskan kemampuan teknis yang harus dimiliki untuk posisi ini. Pisahkan dengan enter / baris baru.</span>
                 <textarea placeholder="Tuliskan per-poin disini" />
               </div>
 
               <div className="input multiline">
                 <span>Tanggung Jawab <em>(Jobdesk)</em></span>
-                <span className="subhead">Tuliskan pekerjaan yang akan dilakukan oleh posisi ini. Pisahkan dengan titik koma (;).</span>
+                <span className="subhead">Tuliskan pekerjaan yang akan dilakukan oleh posisi ini. Pisahkan dengan enter / baris baru.</span>
                 <textarea placeholder="Tuliskan per-poin disini" />
               </div>
 
               <div className="input multiline">
                 <span>Pengalaman yang Didapat</span>
-                <span className="subhead">Tuliskan pengalaman yang didapat setelah intern di posisi ini. Pisahkan dengan titik koma (;).</span>
+                <span className="subhead">Tuliskan pengalaman yang didapat setelah intern di posisi ini. Pisahkan dengan enter / baris baru.</span>
                 <textarea placeholder="Tuliskan per-poin disini" />
               </div>
             </div>
@@ -131,7 +131,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
             <div className="small-12 columns">
               <div className="input multiline">
                 <span>Status Proses Rekrutmen</span>
-                <span className="subhead has-margin">Tuliskan kemampuan teknis yang harus dimiliki untuk posisi ini. Pisahkan dengan titik koma (;).</span>
+                <span className="subhead has-margin">Tuliskan kemampuan teknis yang harus dimiliki untuk posisi ini. Pisahkan dengan enter / baris baru.</span>
                 <label htmlFor="status[0]">
                   <input type="checkbox" name="status[]" />
                   Review Resume
