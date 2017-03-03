@@ -241,6 +241,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/perusahaan/edit-profil',
+      name: 'companyProfileEdit',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/CompanyProfileEdit/reducer'),
+          System.import('containers/CompanyProfileEdit/sagas'),
+          System.import('containers/CompanyProfileEdit'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('companyProfileEdit', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
