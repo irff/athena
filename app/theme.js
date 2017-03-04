@@ -8,7 +8,9 @@ const theme = {
   altGray: '#c8c8c8',
   lightGray: '#e5e5e5',
   yellow: '#E5D224',
+  red: '#f0624e',
   lightBlue: '#2699d3',
+  green: '#9adc56',
 };
 
 export default theme;

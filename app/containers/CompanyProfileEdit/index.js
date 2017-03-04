@@ -13,10 +13,26 @@ import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 import CompanyHeader from 'components/CompanyHeader';
 import Dropzone from 'react-dropzone';
+import has from 'lodash/object/has';
+
+import { inputChange, save } from './actions';
 
 import placeholderIcon from './placeholder.svg';
 
 export class CompanyProfileEdit extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    name: React.PropTypes.string,
+    category: React.PropTypes.string,
+    logo: React.PropTypes.string,
+    header: React.PropTypes.string,
+    site: React.PropTypes.string,
+    description: React.PropTypes.string,
+    isSaving: React.PropTypes.bool,
+    validationErrors: React.PropTypes.array,
+    inputChange: React.PropTypes.func,
+    save: React.PropTypes.func,
+  }
+
   state = {
     logo: null,
     header: null,
@@ -38,7 +54,18 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
     this.headerDropzone.open();
   }
 
+  renderErrorMessage = (field, label) => {
+    const { validationErrors } = this.props;
+    if (has(validationErrors, field)) {
+      return <ErrorMessage>{`${label} ${validationErrors[field][0]}`}</ErrorMessage>;
+    }
+
+    return null;
+  }
+
   render() {
+    const { name, isSaving, site, description } = this.props;
+
     return (
       <div>
         <Helmet
@@ -54,17 +81,28 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
             <div className="small-12 columns">
               <div className="input">
                 <span>Nama Perusahaan</span>
-                <Input fullWidth placeholder="Ketik nama perusahaan anda" />
+                <Input
+                  fullWidth
+                  placeholder="Ketik nama perusahaan anda"
+                  value={name}
+                  onChange={e => this.props.inputChange('name', e.target.value)}
+                />
               </div>
+              {this.renderErrorMessage('name', 'Nama Perusahaan')}
               <div className="input">
                 <span>Kategori Perusahaan</span>
-                <Select width="16rem" placeholder="Pilih kategori perusahaan">
+                <Select
+                  width="16rem"
+                  placeholder="Pilih kategori perusahaan"
+                  onChange={e => this.props.inputChange('category', e.target.value)}
+                >
                   <option>Design</option>
                   <option>Design</option>
                   <option>Design</option>
                   <option>Design</option>
                 </Select>
               </div>
+              {this.renderErrorMessage('category', 'Kategori Perusahaan')}
             </div>
           </div>
 
@@ -88,6 +126,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   <DeleteButton>Hapus</DeleteButton>
                 </UploadContainer>
               </div>
+              {this.renderErrorMessage('logo', 'Logo Perusahaan')}
 
               <div className="input">
                 <span>Foto Header</span>
@@ -105,6 +144,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   <DeleteButton>Hapus</DeleteButton>
                 </UploadContainer>
               </div>
+              {this.renderErrorMessage('header', 'Foto Header Perusahaan')}
             </div>
           </div>
 
@@ -114,8 +154,14 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
             <div className="small-12 columns">
               <div className="input">
                 <span>Situs Perusahaan</span>
-                <Input width="23rem" placeholder="http://" />
+                <Input
+                  width="23rem"
+                  placeholder="http://"
+                  value={site}
+                  onChange={e => this.props.inputChange('site', e.target.value)}
+                />
               </div>
+              {this.renderErrorMessage('site', 'Situs Perusahaan')}
             </div>
           </div>
 
@@ -125,8 +171,13 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
             <div className="small-12 columns">
               <div className="input multiline">
                 <span>Deskripsi Singkat Perusahaan</span>
-                <textarea placeholder="Tuliskan deskripsi singkat yang menjelaskan perusahaan anda" />
+                <textarea
+                  value={description}
+                  placeholder="Tuliskan deskripsi singkat yang menjelaskan perusahaan anda"
+                  onChange={e => this.props.inputChange('description', e.target.value)}
+                />
               </div>
+              {this.renderErrorMessage('description', 'Deskripsi Perusahaan')}
             </div>
           </div>
 
@@ -134,7 +185,12 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
 
           <div className="row">
             <div className="small-12 columns">
-              <SubmitButton className="submit">Simpan</SubmitButton>
+              <SubmitButton
+                className="submit"
+                onClick={this.props.save}
+              >
+                {isSaving ? 'Menyimpan...' : 'Simpan'}
+              </SubmitButton>
             </div>
           </div>
 
@@ -145,7 +201,9 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
   }
 }
 
-const mapStateToProps = selectCompanyProfileEdit();
+const ErrorMessage = styled.span`
+  color: ${props => props.theme.red};
+`;
 
 const UploadContainer = styled.div`
   display: flex;
@@ -183,6 +241,7 @@ const SubmitButton = styled.button`
   font-weight: 700;
   padding: 0.75rem 3.5rem;
   border-radius: 3.5rem;
+  margin-top: 2.4rem;
   float: right;
 `;
 
@@ -238,7 +297,7 @@ const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     line-height: 1.25;
-    margin-bottom: 1.4rem;
+    margin-top: 1.4rem;
 
     &:not(.multiline) {
       @media screen and (min-width: 40rem) {
@@ -286,7 +345,7 @@ const ContentWrapper = styled.div`
 const Line = styled.div`
   height: .1rem;
   border: solid .1rem #cccccc;
-  margin-bottom: 2.4rem;
+  margin-top: 2.4rem;
 `;
 
 const Input = styled.input`
@@ -307,9 +366,14 @@ const Select = styled.select`
   }
 `;
 
+
+const mapStateToProps = selectCompanyProfileEdit();
+
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    inputChange: (label, value) => dispatch(inputChange(label, value)),
+    save: () => dispatch(save()),
   };
 }
 

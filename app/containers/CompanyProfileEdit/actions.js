@@ -12,6 +12,7 @@ import {
   LOAD,
   LOAD_FAIL,
   LOAD_SUCCESS,
+  UPDATE_ERRORS,
 } from './constants';
 
 export function inputChange(label, data) {
@@ -59,6 +60,13 @@ export function loadFail(payload) {
 export function loadSuccess(payload) {
   return {
     type: LOAD_SUCCESS,
+    payload,
+  };
+}
+
+export function updateErrors(payload) {
+  return {
+    type: UPDATE_ERRORS,
     payload,
   };
 }

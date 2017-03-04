@@ -13,6 +13,7 @@ import {
   LOAD,
   LOAD_FAIL,
   LOAD_SUCCESS,
+  UPDATE_ERRORS,
 } from './constants';
 
 const initialState = fromJS({
@@ -25,6 +26,7 @@ const initialState = fromJS({
   isSaving: false,
   isLoading: false,
   isNew: false,
+  validationErrors: {},
   error: null,
 });
 
@@ -46,6 +48,8 @@ function companyProfileEditReducer(state = initialState, action) {
       return state
         .set('isLoading', false)
         .merge(action.payload);
+    case UPDATE_ERRORS:
+      return state.set('validationErrors', action.payload);
     default:
       return state;
   }
