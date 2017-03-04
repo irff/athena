@@ -16,9 +16,10 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
 
+import AssetEmpty from './asset-empty.svg';
+
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
-import { loading, loadingDone } from 'containers/App/actions';
 
 import List from 'components/List';
 import SectionTitle from 'components/SectionTitle';
@@ -26,7 +27,42 @@ import InternshipPostCard from 'containers/InternshipPostCard';
 import ApplyInternship from 'containers/ApplyInternship';
 
 import { loadData } from './actions';
-import { fetchUserData } from 'containers/UserAccess/actions';
+
+import styled from 'styled-components';
+
+const EmptyState = styled.div`
+  display: ${(props) => {
+    if (props.isEmpty) {
+      return 'block';
+    }
+
+    return 'none';
+  }};
+  width: 100%;
+  padding: 0 2rem 5rem;
+
+  .asset {
+    width: 100%;
+    max-width: 15rem;
+    margin: 7.5rem auto 3rem;
+    display: block;
+  }
+
+  .info {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    color: ${props => props.theme.black};
+    margin: 0;
+    line-height: 1;
+    font-size: 1.1rem;
+
+    strong {
+      display: inline;
+      font-weight: 700;
+    }
+  }
+`;
 
 export class CariInternship extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -34,31 +70,10 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
     global: React.PropTypes.object,
     cariInternship: React.PropTypes.object,
     loadData: React.PropTypes.func,
-    loading: React.PropTypes.func,
-    loadingDone: React.PropTypes.func,
-    fetchUserData: React.PropTypes.func,
   };
-
-  componentWillMount() {
-    const token = this.getCookie('token');
-    const studentId = this.getCookie('student_id');
-
-    if (this.props.global.get('token') === '' || this.props.global.get('id') === '') {
-      this.props.loading();
-      if (token !== '' && studentId !== '') {
-        this.props.fetchUserData({ token, student_id: studentId });
-      } else {
-        this.props.push('/mahasiswa/login');
-      }
-    }
-  }
 
   componentDidMount() {
     this.props.loadData();
-  }
-
-  componentWillUnmount() {
-    this.props.loading();
   }
 
   getCookie(cname) {
@@ -98,6 +113,10 @@ export class CariInternship extends React.Component { // eslint-disable-line rea
             <div className="small-12 columns">
               <SectionTitle><FormattedMessage {...messages.header} /></SectionTitle>
             </div>
+            <EmptyState isEmpty={isEmpty(this.props.cariInternship.posts)}>
+              <img className="asset" src={AssetEmpty} alt="asset" />
+              <div className="info">Belum ada internship yang tersedia, silahkan cek kembali <strong>Quint.id</strong> lain waktu</div>
+            </EmptyState>
             {mainContent}
           </div>
         </div>
@@ -116,9 +135,6 @@ function mapDispatchToProps(dispatch) {
   return {
     push: (url) => dispatch(push(url)),
     loadData: () => dispatch(loadData()),
-    loading: () => dispatch(loading()),
-    loadingDone: () => dispatch(loadingDone()),
-    fetchUserData: (data) => dispatch(fetchUserData(data)),
     dispatch,
   };
 }

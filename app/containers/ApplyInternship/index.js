@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { isEmpty } from 'lodash';
 import { createStructuredSelector } from 'reselect';
-import { fromJS } from 'immutable';
 import { loading, loadingDone } from 'containers/App/actions';
 
 import { selectGlobal } from 'containers/App/selectors';
@@ -29,28 +28,30 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
     loadingDone: React.PropTypes.func,
   };
 
-  componentWillMount() {
-    this.props.loadingDone();
-  }
-
-  componentWillUnmount() {
-    this.props.loading();
-  }
-
-
-/*  componentDidMount() {
-    document.addEventListener('click', this.props.hideApply);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click",this.props.hideApply);
-  } */
-
   render() {
-    const userData = this.props.global.get('userData');
+    let userData = this.props.global.userData;
+
+    if (isEmpty(this.props.global.userData)) {
+      userData = {
+        photo_url: '',
+        experiences: {
+          achievement_num: '',
+          project_num: '',
+          work_num: '',
+        },
+        university: '',
+        linkedin_url: '',
+        headline: '',
+        last_name: '',
+        major: '',
+        first_name: '',
+        resume_url: '',
+      };
+    }
+
     const visibility = this.props.local.visibility ? 'block' : 'none';
-    const job = isEmpty(this.props.local.job) ? fromJS({}) : fromJS(this.props.local.job.item);
-    const valid = userData.get('headline') === 'iniDefaultEntryQuint' || userData.get('major') === 'iniDefaultEntryQuint' || userData.get('university') === 'iniDefaultEntryQuint' || userData.get('resume_url') === 'http://iniDefaultEntryQui.nt';
+    const job = this.props.local.job;
+    const valid = userData.headline === 'iniDefaultEntryQuint' || userData.major === 'iniDefaultEntryQuint' || userData.university === 'iniDefaultEntryQuint' || userData.resume_url === 'http://iniDefaultEntryQui.nt';
     const success = this.props.local.success;
     const fail = this.props.local.fail;
 
@@ -60,37 +61,37 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
           <div className={styles.content}>
             <div className="row expanded">
               <div className={success ? 'hide' : 'small-12 columns'}>
-                <div className={styles.header}><p>Review Profile Anda</p><h1>{job.get('role')} at {job.getIn(['company', 'name'])}</h1></div>
+                <div className={styles.header}><p>Review Profile Anda</p><h1>{job.role} at {job.company.name}</h1></div>
               </div>
               <div className="small-12 columns">
                 <div className={styles.container}>
                   <div className={styles.profile}>
                     <div className="row expanded">
                       <div className="small-12 columns">
-                        <h1>{userData.get('first_name')} {userData.get('last_name')}</h1>
+                        <h1>{userData.first_name} {userData.last_name}</h1>
                       </div>
                       <div className="small-12 columns">
-                        <h2>{userData.get('headline') === 'iniDefaultEntryQuint' ? '' : userData.get('headline')}</h2>
+                        <h2>{userData.headline === 'iniDefaultEntryQuint' ? '' : userData.headline}</h2>
                       </div>
                       <div className="small-12 columns">
                         <p>Jurusan / Universitas</p>
-                        <h2>{userData.get('major') === 'iniDefaultEntryQuint' ? '' : userData.get('major')}, {userData.get('university') === 'iniDefaultEntryQuint' ? '' : userData.get('university')}</h2>
+                        <h2>{userData.major === 'iniDefaultEntryQuint' ? '' : userData.major}, {userData.university === 'iniDefaultEntryQuint' ? '' : userData.university}</h2>
                       </div>
                       <div className="small-12 columns">
                         <p>Profil Selanjutnya</p>
-                        <h2><a href={userData.get('resume_url') === 'http://iniDefaultEntryQui.nt' ? '' : userData.get('resume_url')}>Resume</a> • <a href={userData.get('linkedin_url')}>LinkedIn</a></h2>
+                        <h2><a href={userData.resume_url === 'http://iniDefaultEntryQui.nt' ? '' : userData.resume_url}>Resume</a> • <a href={userData.linkedin_url}>LinkedIn</a></h2>
                       </div>
                       <div className="small-12 columns">
                         <p>Jumlah Prestasi</p>
-                        <h2>{userData.getIn(['experiences', 'achievement_num'])}</h2>
+                        <h2>{userData.experiences.achievement_num}</h2>
                       </div>
                       <div className="small-12 columns">
                         <p>Jumlah Proyek</p>
-                        <h2>{userData.getIn(['experiences', 'project_num'])}</h2>
+                        <h2>{userData.experiences.project_num}</h2>
                       </div>
                       <div className="small-12 columns">
                         <p>Jumlah Pekerjaan</p>
-                        <h2>{userData.getIn(['experiences', 'work_num'])}</h2>
+                        <h2>{userData.experiences.work_num}</h2>
                       </div>
                     </div>
                     <button onClick={() => this.props.push('/mahasiswa/ubah-profil')}>Ubah Profil</button>
@@ -105,8 +106,8 @@ export class ApplyInternship extends React.Component { // eslint-disable-line re
                     <div className={styles.overlayConf} style={{ display: success ? 'block' : 'none' }}>
                       <div className={styles.container}>
                         <div className={styles.centralize}>
-                          <h4>Anda telah mendaftar di <b>{job.getIn(['company', 'name'])}</b> sebagai</h4>
-                          <h3>{job.get('role')}</h3>
+                          <h4>Anda telah mendaftar di <b>{job.company.name}</b> sebagai</h4>
+                          <h3>{job.role}</h3>
                           <h4>Cek E-Mail anda untuk melihat progress selanjutnya.</h4>
                         </div>
                       </div>

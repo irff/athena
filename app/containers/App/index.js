@@ -14,7 +14,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { selectGlobalToJS } from './selectors';
+import { selectGlobal } from './selectors';
 import { ThemeProvider } from 'styled-components';
 
 import AppleIcon from 'apple-touch-icon.png';
@@ -30,7 +30,12 @@ const theme = {
   darkBlack: '#3D3D3D',
   lightBlack: '#464646',
   gray: '#979797',
+  lightGray: '#E4E4E4',
+  darkGray: '#AFAFAF',
   yellow: '#E5D224',
+  blue: '#62B9F3',
+  green: '#9ADC56',
+  red: '#F0624E',
 };
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -77,7 +82,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-const mapStateToProps = selectGlobalToJS();
+const mapStateToProps = selectGlobal();
 
 function mapDispatchToProps(dispatch) {
   return {

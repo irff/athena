@@ -1,7 +1,7 @@
 /**
  * The global state selectors
  */
-const selectGlobal = () => (state) => state.get('global');
+const selectGlobal = () => (state) => state.get('global').toJS();
 
 const selectGlobalToJS = () => (state) => state.get('global').toJS();
 

@@ -6,7 +6,6 @@ import { loading, loadingDone } from 'containers/App/actions';
 import { loadDataSuccess, loadApplied, loadAppliedSuccess } from './actions';
 import { selectGlobal } from 'containers/App/selectors';
 import request from 'utils/request';
-import { userAccessSaga } from 'containers/UserAccess/sagas';
 import { APPLY } from 'containers/ApplyInternship/constants';
 import selectApplyInternship from 'containers/ApplyInternship/selectors';
 import { applySuccess, applyFail } from 'containers/ApplyInternship/actions';
@@ -17,8 +16,8 @@ import { API_JOBS, API_STUDENTS } from 'containers/App/api';
  */
 export function* loadData() {
   const globalState = yield select(selectGlobal());
-  let currentToken = globalState.get('currentToken');
-  let currentId = globalState.get('id');
+  let currentToken = globalState.currentToken;
+  let currentId = globalState.id;
   const requestURL = API_JOBS;
   yield put(loading());
 
@@ -73,8 +72,8 @@ export function* loadData() {
  */
 export function* loadAppliedCall() {
   const globalState = yield select(selectGlobal());
-  let currentToken = globalState.get('currentToken');
-  let currentId = globalState.get('id');
+  let currentToken = globalState.currentToken;
+  let currentId = globalState.id;
   yield put(loading());
 
   if (currentToken === '') {
@@ -106,7 +105,7 @@ export function* loadAppliedCall() {
   }
 
   const auth = `Bearer ${currentToken}`;
-  const requestURLValidateData = `${API_STUDENTS}${currentId}/jobs`;
+  const requestURLValidateData = `${API_STUDENTS}/${currentId}/jobs`;
 
   const validateDataCall = yield call(request, requestURLValidateData, {
     method: 'GET',
@@ -157,10 +156,10 @@ export function* cariInternshipSaga() {
 export function* apply() {
   const globalState = yield select(selectGlobal());
   const localState = yield select(selectApplyInternship());
-  const currentToken = globalState.get('currentToken');
-  const currentId = globalState.get('id');
-  const jobId = localState.job.item.id;
-  const requestURL = `${API_STUDENTS}${currentId}/jobs`;
+  const currentToken = globalState.currentToken;
+  const currentId = globalState.id;
+  const jobId = localState.job.id;
+  const requestURL = `${API_STUDENTS}/${currentId}/jobs`;
   const auth = `Bearer ${currentToken}`;
 
   const applyCall = yield call(request, requestURL, {
@@ -210,7 +209,6 @@ export function* cariInternshipSagaFull() {
   yield [
     fork(applyInternshipSaga),
     fork(cariInternshipSaga),
-    fork(userAccessSaga),
   ];
 }
 

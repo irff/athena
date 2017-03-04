@@ -55,7 +55,7 @@ export class Navbar extends React.Component { // eslint-disable-line react/prefe
   }
 
   render() {
-    const firstName = this.props.global.get('userData') ? this.props.global.get('userData').get('first_name') : 'Please Login First';
+    const firstName = this.props.global.userData ? this.props.global.userData.first_name : 'Please Login First';
 
     return (
       <div className={styles.navbar}>
@@ -63,10 +63,11 @@ export class Navbar extends React.Component { // eslint-disable-line react/prefe
           <div className="small-12 columns">
             <button className={styles.logo} onClick={() => this.navOnClick('/mahasiswa/cari-internship')} ><Logo className={styles.logoImg} /></button>
             <div className="show-for-large">
-              <Navlink isCurrentElement={window.location.pathname === '/mahasiswa/cari-internship'} handleRoute={() => this.navOnClick('/mahasiswa/cari-internship')}>Cari Internship</Navlink>
+              <Navlink isCurrentElement={window.location.pathname === '/mahasiswa' || window.location.pathname === '/mahasiswa/'} handleRoute={() => this.navOnClick('/mahasiswa')}>Dashboard</Navlink>
+              <Navlink isCurrentElement={window.location.pathname.startsWith('/mahasiswa/cari-internship')} handleRoute={() => this.navOnClick('/mahasiswa/cari-internship')}>Cari Internship</Navlink>
               <Navlink isRightElement handleRoute={this.logOut}>Keluar</Navlink>
               <Navlink isPlaceholder>Hi <strong>{firstName}!</strong></Navlink>
-              <Navlink isCurrentElement={window.location.pathname === '/mahasiswa/ubah-profil'} handleRoute={() => this.navOnClick('/mahasiswa/ubah-profil')} isRightElement>Ubah Profil</Navlink>
+              <Navlink isCurrentElement={window.location.pathname.startsWith('/mahasiswa/ubah-profil')} handleRoute={() => this.navOnClick('/mahasiswa/ubah-profil')} isRightElement>Ubah Profil</Navlink>
             </div>
             <div className="show-for-small hide-for-large">
               <Navlink isCurrentElement={window.location.pathname === '/mahasiswa/cari-internship'} handleRoute={() => this.navOnClick('/mahasiswa/cari-internship')}><span className={globalStyles.iconsearch} /></Navlink>

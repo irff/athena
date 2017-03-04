@@ -11,10 +11,9 @@ import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import styles from './styles.css';
 import { submit, changeUserData, dataModified, dataUnmodified } from './actions';
-import { fetchUserData } from 'containers/UserAccess/actions';
 import { createStructuredSelector } from 'reselect';
 
-import { loading, loadingDone } from 'containers/App/actions';
+import { loadingDone } from 'containers/App/actions';
 import SectionTitle from 'components/SectionTitle';
 
 import Navbar from 'containers/Navbar';
@@ -29,9 +28,7 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
     submit: React.PropTypes.func,
     global: React.PropTypes.object,
     local: React.PropTypes.object,
-    loading: React.PropTypes.func,
     loadingDone: React.PropTypes.func,
-    fetchUserData: React.PropTypes.func,
     changeUserData: React.PropTypes.func,
     dataModified: React.PropTypes.func,
     dataUnmodified: React.PropTypes.func,
@@ -40,24 +37,6 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
   constructor(props) {
     super(props);
 
-    const userData = this.props.global.get('userData');
-    this.state = {
-      data: fromJS({
-        first_name: userData.get('first_name'),
-        last_name: userData.get('last_name'),
-        headline: userData.get('headline'),
-        major: userData.get('major'),
-        university: userData.get('university'),
-        experiences: {
-          achievement_num: userData.getIn(['experiences', 'achievement_num']),
-          project_num: userData.getIn(['experiences', 'project_num']),
-          work_num: userData.getIn(['experiences', 'work_num']),
-        },
-        linkedin_url: userData.get('linkedin_url'),
-        resume_url: userData.get('resume_url'),
-      }),
-    };
-
     this.changeInput = this.changeInput.bind(this);
     this.onEnter = this.onEnter.bind(this);
   }
@@ -65,25 +44,12 @@ export class EditProfile extends React.Component { // eslint-disable-line react/
   componentDidMount() {
     this.props.loadingDone();
     this.props.dataUnmodified();
-    const token = this.getCookie('token');
-    const studentId = this.getCookie('student_id');
 
-    if (this.props.global.get('token') === '' || this.props.global.get('id') === '') {
-      this.props.loading();
-      if (token !== '' && studentId !== '') {
-        this.props.fetchUserData({ token, student_id: studentId });
-      } else {
-        this.props.push('/mahasiswa/login');
-      }
-    } else {
-      this.props.changeUserData(this.props.global.get('userData'));
+    if (!(this.props.global.token === '' || this.props.global.id === '')) {
+      this.props.changeUserData(this.props.global.userData);
     }
 
     document.addEventListener('keyup', this.onEnter);
-  }
-
-  componentWillUnmount() {
-    this.props.loading();
   }
 
   onEnter(event) {
@@ -226,9 +192,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     submit: (data) => dispatch(submit(data)),
-    loading: () => dispatch(loading()),
     loadingDone: () => dispatch(loadingDone()),
-    fetchUserData: (data) => dispatch(fetchUserData(data)),
     push: (url) => dispatch(push(url)),
     changeUserData: (data) => dispatch(changeUserData(data)),
     dataModified: () => dispatch(dataModified()),

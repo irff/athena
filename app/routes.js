@@ -55,48 +55,6 @@ export default function createRoutes(store) {
       },
       childRoutes: [
         {
-          path: '/mahasiswa/login',
-          name: 'loginMahasiswa',
-          getComponent(nextState, cb) {
-            const importModules = Promise.all([
-              System.import('containers/UserAccess/reducer'),
-              System.import('containers/UserAccess/sagas'),
-              System.import('containers/UserAccess'),
-            ]);
-
-            const renderRoute = loadModule(cb);
-
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('userAccess', reducer.default);
-              injectSagas(sagas.default);
-              renderRoute(component);
-            });
-
-            importModules.catch(errorLoading);
-          },
-        },
-        {
-          path: '/mahasiswa/signup',
-          name: 'signupMahasiswa',
-          getComponent(nextState, cb) {
-            const importModules = Promise.all([
-              System.import('containers/UserAccess/reducer'),
-              System.import('containers/UserAccess/sagas'),
-              System.import('containers/UserAccess'),
-            ]);
-
-            const renderRoute = loadModule(cb);
-
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('userAccess', reducer.default);
-              injectSagas(sagas.default);
-              renderRoute(component);
-            });
-
-            importModules.catch(errorLoading);
-          },
-        },
-        {
           path: '/mahasiswa/cari-internship',
           name: 'cari-internship',
           getComponent(nextState, cb) {
@@ -139,6 +97,46 @@ export default function createRoutes(store) {
           },
         },
       ],
+    }, {
+      path: '/mahasiswa/login',
+      name: 'loginMahasiswa',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/UserAccess/reducer'),
+          System.import('containers/UserAccess/sagas'),
+          System.import('containers/UserAccess'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('userAccess', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/mahasiswa/signup',
+      name: 'signupMahasiswa',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/UserAccess/reducer'),
+          System.import('containers/UserAccess/sagas'),
+          System.import('containers/UserAccess'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('userAccess', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
     }, {
       path: '/perusahaan',
       name: 'perusahaan',

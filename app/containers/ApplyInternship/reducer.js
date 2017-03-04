@@ -16,7 +16,43 @@ const initialState = fromJS({
   visibility: false,
   success: false,
   fail: false,
-  job: fromJS({}),
+  job: {
+    company: {
+      background_img_url: '',
+      category: '',
+      company_address: '',
+      logo_url: '',
+      name: '',
+      website: '',
+    },
+    contact_person: {
+      email: '',
+      name: '',
+      phone: '',
+      role: '',
+    },
+    created_at: '',
+    experiences_gained: [],
+    id: '',
+    job_schedule: {
+      end_at: '',
+      start_at: '',
+    },
+    job_type: '',
+    role: '',
+    salary: {
+      currency: '',
+      fee: {
+        maximal: 0,
+        minimal: 0,
+      },
+      term: '',
+    },
+    skills_gained: [],
+    tasks: [],
+    technical_requirements: [],
+    why_us: '',
+  },
 });
 
 function applyInternshipReducer(state = initialState, action) {

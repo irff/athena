@@ -52,13 +52,14 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
-ReactGA.initialize('UA-87409670-1');
+// ReactGA.initialize('UA-87409670-1');
 
 const logPageView = () => {
-  ReactGA.set({ page: window.location.pathname });
-  ReactGA.pageview(window.location.pathname);
+  console.log('turn analytics on upon building, lul');
+  // ReactGA.set({ page: window.location.pathname });
+  // ReactGA.pageview(window.location.pathname);
 };
 
 

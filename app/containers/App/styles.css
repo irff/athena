@@ -119,7 +119,7 @@ body {
   }
 }
 
-
+.iconlink,
 .icondownarrow,
 .iconuparrow,
 .iconedit,
@@ -133,12 +133,13 @@ body {
   font-style: normal;
 }
 
-.icondownarrow:before { content: "\f100"; }
-.iconedit:before { content: "\f101"; }
-.iconfacebook:before { content: "\f102"; }
-.iconleftarrow:before { content: "\f103"; }
-.iconline:before { content: "\f104"; }
+.iconlink:before { content: "\f100"; }
+.iconleftarrow:before { content: "\f101"; }
+.iconuparrow:before { content: "\f102"; }
+.icondownarrow:before { content: "\f103"; }
+.iconrightarrow:before { content: "\f104"; }
 .iconlogout:before { content: "\f105"; }
-.iconrightarrow:before { content: "\f106"; }
-.iconsearch:before { content: "\f107"; }
-.iconuparrow:before { content: "\f108"; }
+.iconedit:before { content: "\f106"; }
+.iconline:before { content: "\f107"; }
+.iconsearch:before { content: "\f108"; }
+.iconfacebook:before { content: "\f109"; }

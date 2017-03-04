@@ -10,7 +10,7 @@ import { API_STUDENTS } from 'containers/App/api';
 
 export function* logIn() {
   const currentState = yield select(selectUserAccess());
-  const requestURL = `${API_STUDENTS}login`;
+  const requestURL = `${API_STUDENTS}/login`;
 
   const errMessage = {
     email: '',
@@ -67,7 +67,7 @@ export function* logInWatcher() {
 
 export function* signUp() {
   const currentState = yield select(selectUserAccess());
-  const requestURL = `${API_STUDENTS}register`;
+  const requestURL = `${API_STUDENTS}/register`;
 
   const errMessage = {
     email: '',
@@ -174,7 +174,7 @@ export function* crStudent(value) {
 
 export function* autoLogInAfterCreated() {
   const currentState = yield select(selectUserAccess());
-  const requestURL = `${API_STUDENTS}login`;
+  const requestURL = `${API_STUDENTS}/login`;
 
   const errMessage = {
     email: '',
@@ -207,7 +207,7 @@ export function* autoLogInAfterCreated() {
 }
 
 export function* fetchUserDataSaga(data) {
-  const requestURL = `${API_STUDENTS}${data.student_id}`;
+  const requestURL = `${API_STUDENTS}/${data.student_id}`;
   const auth = `Bearer ${data.token}`;
 
   const fetchDataCall = yield call(request, requestURL, {
