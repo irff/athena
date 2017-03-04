@@ -93,8 +93,14 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                     </Select>
                   </div>
                   <div>
-                    <input type="radio" name="gaji" />
-                    <span>Tidak dipublikasikan</span>
+                    <label htmlFor="hideSalary">
+                      <input type="checkbox" name="hideSalary" />
+                      Sembunyikan gaji dari profil perusahaan saya
+                    </label>
+                    <div className="hideSalaryInfo">
+                      Apabila gaji disembunyikan, tim Quint akan menjaga kerahasiaan informasi gaji
+                      tersebut dan data akan hanya digunakan untuk keperluan blabla.
+                    </div>
                   </div>
                 </MultiLine>
               </div>
@@ -248,6 +254,12 @@ const ContentWrapper = styled.div`
     margin-right: 1.3rem;
   }
 
+  .hideSalaryInfo {
+    margin-left: 2.5rem;
+    color: ${props => props.theme.gray};
+    margin-bottom: 0;
+  }
+
   label {
     display: flex;
     flex-direction: row;
@@ -259,8 +271,8 @@ const ContentWrapper = styled.div`
 
     & > input[type="checkbox"] {
       margin-right: 1.5rem;
-      height: 1.5rem;
-      width: 1.5rem;
+      height: 1rem;
+      width: 1rem;
       background: ${props => props.theme.white};
       box-shadow: 0;
     }
