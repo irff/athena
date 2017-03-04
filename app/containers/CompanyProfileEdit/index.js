@@ -14,6 +14,8 @@ import Footer from 'components/Footer';
 import CompanyHeader from 'components/CompanyHeader';
 import Dropzone from 'react-dropzone';
 
+import placeholderIcon from './placeholder.svg';
+
 export class CompanyProfileEdit extends React.Component { // eslint-disable-line react/prefer-stateless-function
   state = {
     logo: null,
@@ -76,7 +78,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   <LogoDropZone
                     onDrop={this.onLogoDrop}
                     multiple={false}
-                    imageSrc={this.state.logo ? this.state.logo.preview : null}
+                    imageSrc={this.state.logo ? this.state.logo.preview : placeholderIcon}
                     innerRef={(node) => { this.logoDropzone = node; }}
                   />
                   <div>
@@ -93,7 +95,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   <HeaderDropZone
                     onDrop={this.onHeaderDrop}
                     multiple={false}
-                    imageSrc={this.state.header ? this.state.header.preview : null}
+                    imageSrc={this.state.header ? this.state.header.preview : placeholderIcon}
                     innerRef={(node) => { this.headerDropzone = node; }}
                   />
                   <div>
@@ -185,7 +187,7 @@ const SubmitButton = styled.button`
 `;
 
 const UploadButton = styled.button`
-  background: ${props => props.theme.lightGray};
+  background: ${props => props.theme.altGray};
   color: ${props => props.theme.black};
   padding: 0.75rem 2.25rem;
   border-radius: 3.5rem;

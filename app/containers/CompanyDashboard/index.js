@@ -18,6 +18,8 @@ import SectionTitle from 'components/SectionTitle';
 import CompanyInfoCard from 'components/CompanyInfoCard';
 import SubsectionTitle from 'components/SubsectionTitle';
 import ApplicantCard from 'components/ApplicantCard';
+import Modal from 'components/Modal';
+import RejectionLetterPrompt from 'components/RejectionLetterPrompt';
 
 import searchIcon from './search.svg';
 
@@ -80,6 +82,10 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
             </div>
           </div>
         </ContentContainer>
+
+        <Modal>
+          <RejectionLetterPrompt to="John Maeda" />
+        </Modal>
 
         <Footer hasMargin />
       </div>
