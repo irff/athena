@@ -134,21 +134,17 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 <span className="subhead has-margin">Tuliskan kemampuan teknis yang harus dimiliki untuk posisi ini. Pisahkan dengan enter / baris baru.</span>
                 <label htmlFor="status[0]">
                   <input type="checkbox" name="status[]" />
-                  Review Resume
+                  Phone Interview
                 </label>
                 <label htmlFor="status[1]">
                   <input type="checkbox" name="status[]" />
-                  Phone Interview
+                  Online Test
                 </label>
                 <label htmlFor="status[2]">
                   <input type="checkbox" name="status[]" />
-                  Online Test
-                </label>
-                <label htmlFor="status[3]">
-                  <input type="checkbox" name="status[]" />
                   Task Submission
                 </label>
-                <label htmlFor="status[4]">
+                <label htmlFor="status[3]">
                   <input type="checkbox" name="status[]" />
                   On-Site Interview
                 </label>
