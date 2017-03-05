@@ -7,7 +7,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CompanyInfoCard = () => (
+const CompanyInfoCard = ({ onAddJob, onEditProfile }) => (
   <CompanyInfoCardWrapper>
     <div className="row expanded">
       <div className="small-12 columns">
@@ -52,17 +52,22 @@ const CompanyInfoCard = () => (
                 <h1>88</h1>
                 <h2>ditolak</h2>
               </div>
-              <button>Ubah Profil Perusahaan</button>
+              <button onClick={onEditProfile}>Ubah Profil Perusahaan</button>
             </div>
           </div>
         </div>
       </div>
       <div className="small-12 columns">
-        <button className="addJob">+ Tambah Lowongan Posisi Intern</button>
+        <button className="addJob" onClick={onAddJob}>+ Tambah Lowongan Posisi Intern</button>
       </div>
     </div>
   </CompanyInfoCardWrapper>
 );
+
+CompanyInfoCard.propTypes = {
+  onAddJob: React.PropTypes.func,
+  onEditProfile: React.PropTypes.func,
+};
 
 const CompanyInfoCardWrapper = styled.div`
   width: 100%;

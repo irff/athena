@@ -7,10 +7,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { push } from 'react-router-redux';
 import selectCompanyDashboard from './selectors';
-
 import styled from 'styled-components';
-
 import Accordion from 'components/Accordion';
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
@@ -24,12 +23,16 @@ import RejectionLetterPrompt from 'components/RejectionLetterPrompt';
 import searchIcon from './search.svg';
 
 export class CompanyDashboard extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    push: React.PropTypes.func,
+  };
+
   renderEmptyState() {
     return (
       <EmptyStateWrapper>
         <img src={searchIcon} alt="empty" />
         <div>Belum ada Posisi Intern yang ditawarkan.</div>
-        <div><a href="http://null">Tambah Posisi Intern</a> Sekarang</div>
+        <div><button onClick={() => this.props.push('/perusahaan/new-job')}>Tambah Posisi Intern</button> Sekarang</div>
       </EmptyStateWrapper>
     );
   }
@@ -52,7 +55,10 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
               <SectionTitle>Dashboard</SectionTitle>
             </div>
             <div className="small-12 columns">
-              <CompanyInfoCard />
+              <CompanyInfoCard
+                onAddJob={() => this.props.push('/perusahaan/new-job')}
+                onEditProfile={() => this.props.push('/perusahaan/edit-profil')}
+              />
             </div>
             <div className="small-12 columns sectionMargin">
               <Accordion initialState={[0]}>
@@ -103,7 +109,7 @@ const EmptyStateWrapper = styled.div`
     margin-bottom: 1.375rem;
   }
 
-  a {
+  button {
     color: ${props => props.theme.darkGray};
     font-weight: 700;
     text-decoration: underline;
@@ -124,6 +130,7 @@ const mapStateToProps = selectCompanyDashboard();
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    push: (url) => dispatch(push(url)),
   };
 }
 
