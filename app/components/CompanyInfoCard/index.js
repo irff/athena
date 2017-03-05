@@ -19,7 +19,6 @@ const CompanyInfoCard = () => (
             <div className="medium-6 columns">
               <h1>Bukalapak <small>&middot; &nbsp; E-commerce Company</small></h1>
               <div className="companyLinks">
-                <a href="https://maps.google.com/" className="maps">Kemang, Jakarta Selatan</a>
                 <a href="https://bukalapak.com/">www.bukalapak.com</a>
               </div>
               <p>Bukalapak adalah company terkeren sedunia. Dengan intern di Bukalapak, kamu bisa dapat gaji yang besar, makan gratis, fasilitas gratis, dan kehidupan yang amat sangat layak. Ada gym-nya pula. Yuk, intern di Bukalapak!</p>
@@ -122,11 +121,6 @@ const CompanyInfoCardWrapper = styled.div`
 
       a {
         color: ${props => props.theme.white};
-      }
-
-      .maps {
-        text-decoration: underline;
-        margin-right: 2.5rem;
       }
 
     }

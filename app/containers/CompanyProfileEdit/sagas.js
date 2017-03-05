@@ -51,6 +51,8 @@ export function* save() {
   delete data.isNew;
   delete data.isLoading;
   delete data.isSaving;
+  delete data.error;
+  delete data.validation_errors;
   const requestURL = 'http://requestb.in/1c84t7h1'; // @TODO
   const auth = `Bearer ${currentToken}`;
 
