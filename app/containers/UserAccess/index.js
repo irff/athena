@@ -9,9 +9,8 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import selectUserAccess from './selectors';
-import { loading, loadingDone, logIn } from 'containers/App/actions';
+import { loading, loadingDone, logInStudent, logInCompany } from 'containers/App/actions';
 import styles from './styles.css';
-import globalStyles from 'containers/App/styles.css';
 import { changeInput, signUp, fetchUserData } from './actions';
 
 import Button from 'components/Button';
@@ -23,6 +22,7 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
   constructor(props) {
     super(props);
 
+    this.logIn = this.logIn.bind(this);
     this.onEnter = this.onEnter.bind(this);
     this.openRoute = this.openRoute.bind(this);
     this.openLogin = this.openLogin.bind(this);
@@ -33,11 +33,25 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     this.props.loadingDone();
 
     const token = this.getCookie('token');
-    const studentId = this.getCookie('student_id');
-    if (token !== '' && studentId !== '') {
-      this.props.loading();
-      this.props.fetchUserData({ token, student_id: studentId });
+    let id = '';
+
+    if (this.isCompanyPage()) {
+      id = this.getCookie('company_id');
+      if (token !== '' && id !== '') {
+        this.props.loading();
+        this.props.fetchUserData({ token, id, isCompany: true });
+      }
+    } else {
+      id = this.getCookie('student_id');
+      if (token !== '' && id !== '') {
+        this.props.loading();
+        this.props.fetchUserData({ token, id });
+      }
     }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keyup', this.onEnter);
   }
 
   componentWillUnmount() {
@@ -45,20 +59,12 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     document.removeEventListener('keyup', this.onEnter);
   }
 
-  // componentDidMount() {
-  //   window.processLogin = (user) => {
-  //     //console.log(user);
-  //   }
-
-  //   document.addEventListener('keyup', this.onEnter);
-  // }
-
   onEnter(event) {
     if (event.keyCode === 13) {
       if (window.location.pathname.endsWith('/signup') || window.location.pathname.endsWith('/signup/')) {
         this.props.signUp();
       } else {
-        this.props.logIn();
+        this.logIn();
       }
     }
   }
@@ -77,6 +83,15 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     }
     return '';
   }
+
+  logIn() {
+    if (window.location.pathname.indexOf('/mahasiswa') === 0) {
+      this.props.logInStudent();
+    } else if (window.location.pathname.indexOf('/perusahaan') === 0) {
+      this.props.logInCompany();
+    }
+  }
+
 
   openRoute(route) {
     this.props.changeRoute(route);
@@ -160,7 +175,7 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
           <input type="checkbox" className={styles.checkBox} checked={this.props.lg.remember} onChange={this.toggleRemember} /><span className={styles.checkBoxLabel}>Ingat Saya</span>
         </div>
         <div className="small-12 columns">
-          <Button className={styles.submitButton} onClick={this.props.logIn}>Masuk</Button>
+          <Button className={styles.submitButton} onClick={this.logIn}>Masuk</Button>
           <h4 className={styles.failCall} style={{ display: this.props.lg.message.error ? 'block' : 'none' }}>{this.props.lg.message.error}</h4>
         </div>
       </div>
@@ -207,17 +222,12 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
           ]}
         />
         <div className="row expanded">
-          <div className="small-12 medium-6 columns">
+          <div className="large-6 columns show-for-large">
             <div className={styles.hero}>
               {heroHeader}
-              <div className="show-for-small-only">
-                <div className={styles.scrollDownNotice}>
-                  {window.location.pathname.endsWith('signup') || window.location.pathname.endsWith('signup/') ? 'Daftar' : 'Masuk'}<span className={globalStyles.icondownarrow} />
-                </div>
-              </div>
             </div>
           </div>
-          <div className="small-12 medium-6 columns text-center">
+          <div className="small-12 large-6 columns text-center">
             <div className={styles.content}>
               <div className={styles.contentContainer}>
                 <div className="row expanded">
@@ -252,7 +262,8 @@ UserAccess.propTypes = {
   lg: React.PropTypes.object,
   su: React.PropTypes.object,
   changeInput: React.PropTypes.func,
-  logIn: React.PropTypes.func,
+  logInStudent: React.PropTypes.func,
+  logInCompany: React.PropTypes.func,
   signUp: React.PropTypes.func,
   loading: React.PropTypes.func,
   loadingDone: React.PropTypes.func,
@@ -264,7 +275,8 @@ const mapStateToProps = selectUserAccess();
 function mapDispatchToProps(dispatch) {
   return {
     changeRoute: (url) => dispatch(push(url)),
-    logIn: () => dispatch(logIn()),
+    logInStudent: () => dispatch(logInStudent()),
+    logInCompany: () => dispatch(logInCompany()),
     signUp: () => dispatch(signUp()),
     changeInput: (path, field, value) => dispatch(changeInput(path, field, value)),
     loading: () => dispatch(loading()),

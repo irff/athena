@@ -2,7 +2,7 @@ import { push, LOCATION_CHANGE } from 'react-router-redux';
 import { SAVE, LOAD } from './constants';
 import { loadSuccess, loadFail, saveSuccess, saveFail, updateErrors } from './actions';
 import { fromJS } from 'immutable';
-import isEmpty from 'lodash/lang/isEmpty';
+import { isEmpty } from 'lodash';
 import { take, call, select, put, fork, cancel } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import request from 'utils/request';

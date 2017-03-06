@@ -16,8 +16,7 @@ import CompanyHeader from 'components/CompanyHeader';
 import AlertSuccess from 'components/AlertSuccess';
 import Modal from 'components/Modal';
 import Cleave from 'cleave.js/react';
-import has from 'lodash/object/has';
-import xor from 'lodash/array/xor';
+import { has, xor } from 'lodash';
 import { submit, review, cancelReview, inputChange } from './actions';
 
 export class CreateJobPost extends React.Component { // eslint-disable-line react/prefer-stateless-function

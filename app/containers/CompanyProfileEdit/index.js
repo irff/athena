@@ -13,7 +13,7 @@ import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 import CompanyHeader from 'components/CompanyHeader';
 import Dropzone from 'react-dropzone';
-import has from 'lodash/object/has';
+import { has } from 'lodash';
 
 import { inputChange, save } from './actions';
 

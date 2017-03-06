@@ -5,8 +5,10 @@
  */
 
 import {
-  LOG_IN,
-  LOG_IN_SUCCESS,
+  LOG_IN_STUDENT,
+  LOG_IN_SUCCESS_STUDENT,
+  LOG_IN_COMPANY,
+  LOG_IN_SUCCESS_COMPANY,
   LOG_OUT,
   ADD_TOKEN,
   EDIT_PROFILE,
@@ -14,15 +16,30 @@ import {
   LOADING_DONE,
 } from './constants';
 
-export function logIn() {
+export function logInStudent() {
   return {
-    type: LOG_IN,
+    type: LOG_IN_STUDENT,
   };
 }
 
-export function logInSuccess(token, id, payload) {
+export function logInSuccessStudent(token, id, payload) {
   return {
-    type: LOG_IN_SUCCESS,
+    type: LOG_IN_SUCCESS_STUDENT,
+    token,
+    id,
+    payload,
+  };
+}
+
+export function logInCompany() {
+  return {
+    type: LOG_IN_COMPANY,
+  };
+}
+
+export function logInSuccessCompany(token, id, payload) {
+  return {
+    type: LOG_IN_SUCCESS_COMPANY,
     token,
     id,
     payload,
