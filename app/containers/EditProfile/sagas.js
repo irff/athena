@@ -9,7 +9,6 @@ import { isEmpty } from 'lodash';
 import { addErrorMessage, delErrorMessage, changeUserData, dataUnmodified } from './actions';
 import { selectGlobal } from 'containers/App/selectors';
 import request from 'utils/request';
-import { userAccessSaga } from 'containers/UserAccess/sagas';
 import { API_STUDENTS } from 'containers/App/api';
 
 /**
@@ -17,8 +16,8 @@ import { API_STUDENTS } from 'containers/App/api';
  */
 export function* submitData(action) {
   const globalState = yield select(selectGlobal());
-  const userId = globalState.get('id');
-  const currentToken = globalState.get('currentToken');
+  const userId = globalState.id;
+  const currentToken = globalState.currentToken;
   const regexUrl = (/^(ftp|http|https):\/\/[^ "]+$/);
 
   let flag = false;
@@ -87,7 +86,7 @@ export function* submitData(action) {
 
   if (!flag) {
     yield put(delErrorMessage());
-    const requestURL = `${API_STUDENTS}${userId}`;
+    const requestURL = `${API_STUDENTS}/${userId}`;
     const auth = `Bearer ${currentToken}`;
 
     yield call(request, requestURL, {
@@ -142,14 +141,7 @@ export function* editProfileSaga() {
   yield cancel(watcherTwo);
 }
 
-export function* editProfileSagaFinal() {
-  yield [
-    fork(editProfileSaga),
-    fork(userAccessSaga),
-  ];
-}
-
 // Bootstrap sagas
 export default [
-  editProfileSagaFinal,
+  editProfileSaga,
 ];

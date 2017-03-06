@@ -24,6 +24,9 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     super(props);
 
     this.onEnter = this.onEnter.bind(this);
+    this.openRoute = this.openRoute.bind(this);
+    this.openLogin = this.openLogin.bind(this);
+    this.openSignup = this.openSignup.bind(this);
   }
 
   componentWillMount() {

@@ -20,7 +20,7 @@ export class Perusahaan extends React.Component { // eslint-disable-line react/p
 
   componentWillMount() {
     if (window.location.pathname === '/perusahaan' || window.location.pathname === '/perusahaan/') {
-      if (this.props.global.get('loggedIn')) {
+      if (this.props.global.loggedIn) {
         this.props.push('/perusahaan/home');
       } else {
         this.props.push('/perusahaan/login');

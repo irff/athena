@@ -16,7 +16,7 @@ function Navlink(props) {
   }
 
   return (
-    <button className={navStyle} disabled={props.isCurrentElement || props.isPlaceholder} onClick={props.handleRoute} >{React.Children.toArray(props.children)}</button>
+    <button className={navStyle} disabled={props.isCurrentElement} onClick={props.handleRoute} >{React.Children.toArray(props.children)}</button>
   );
 }
 

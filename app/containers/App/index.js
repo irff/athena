@@ -14,7 +14,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { selectGlobalToJS } from './selectors';
+import { selectGlobal } from './selectors';
 import { ThemeProvider } from 'styled-components';
 
 import AppleIcon from 'apple-touch-icon.png';
@@ -70,7 +70,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
   }
 }
 
-const mapStateToProps = selectGlobalToJS();
+const mapStateToProps = selectGlobal();
 
 function mapDispatchToProps(dispatch) {
   return {
