@@ -54,7 +54,11 @@ export class Navbar extends React.Component { // eslint-disable-line react/prefe
     }
   }
 
-  render() {
+  isCompanyPage() {
+    return (window.location.pathname.indexOf('/perusahaan') === 0);
+  }
+
+  renderStudentNav() {
     const firstName = this.props.global.get('userData') ? this.props.global.get('userData').get('first_name') : 'Please Login First';
 
     return (
@@ -77,6 +81,40 @@ export class Navbar extends React.Component { // eslint-disable-line react/prefe
         </div>
       </div>
     );
+  }
+
+  renderCompanyNav() {
+    const name = this.props.global.get('userData') ? this.props.global.get('userData').get('name') : 'Please Login First';
+
+    return (
+      <div className={styles.navbar}>
+        <div className="row expanded">
+          <div className="small-12 columns">
+            <button className={styles.logo} onClick={() => this.navOnClick('/perusahaan/home')} ><Logo className={styles.logoImg} /></button>
+            <div className="show-for-large">
+              <Navlink isCurrentElement={window.location.pathname === '/perusahaan/home'} handleRoute={() => this.navOnClick('/perusahaan/home')}>Dashboard</Navlink>
+              <Navlink isCurrentElement={window.location.pathname === '/perusahaan/new-job'} handleRoute={() => this.navOnClick('/perusahaan/new-job')}>Tambah Posisi Internship</Navlink>
+              <Navlink isRightElement handleRoute={this.logOut}>Keluar</Navlink>
+              <Navlink isPlaceholder>Hi <strong>{name}!</strong></Navlink>
+              <Navlink isCurrentElement={window.location.pathname === '/perusahaan/edit-profil'} handleRoute={() => this.navOnClick('/perusahaan/edit-profil')} isRightElement>Ubah Profil</Navlink>
+            </div>
+            <div className="show-for-small hide-for-large">
+              <Navlink isCurrentElement={window.location.pathname === '/perusahaan/home'} handleRoute={() => this.navOnClick('/perusahaan/home')}><span className={globalStyles.iconsearch} /></Navlink>
+              <Navlink isRightElement handleRoute={this.logOut}><span className={globalStyles.iconlogout} /></Navlink>
+              <Navlink isCurrentElement={window.location.pathname === '/perusahaan/edit-profil'} handleRoute={() => this.navOnClick('/perusahaan/edit-profil')} isRightElement><span className={globalStyles.iconedit} /></Navlink>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    if (this.isCompanyPage()) {
+      return this.renderCompanyNav();
+    }
+
+    return this.renderStudentNav();
   }
 }
 
