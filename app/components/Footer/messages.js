@@ -6,14 +6,12 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  licenseMessage: {
-    id: 'boilerplate.components.Footer.license.message',
-    defaultMessage: 'This project is licensed under the MIT license.',
+  footer: {
+    id: 'app.components.Footer.footer',
+    defaultMessage: '© Copyright 2016 Quint, All Rights Reserved',
   },
-  authorMessage: {
-    id: 'boilerplate.components.Footer.author.message',
-    defaultMessage: `
-      Made with love by {author}.
-    `,
+  quintDesc: {
+    id: 'app.components.Footer.quintDesc',
+    defaultMessage: 'Quality Internship for Talented Students, Top Universities, and Qualified Companies.',
   },
 });

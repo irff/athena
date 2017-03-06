@@ -11,9 +11,11 @@
  */
 
 import {
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS,
-  LOAD_REPOS_ERROR,
+  LOG_IN_SUCCESS,
+  LOG_OUT,
+  EDIT_PROFILE,
+  LOADING,
+  LOADING_DONE,
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -21,27 +23,35 @@ import { fromJS } from 'immutable';
 const initialState = fromJS({
   loading: false,
   error: false,
-  currentUser: false,
-  userData: fromJS({
-    repositories: false,
-  }),
+  loggedIn: true,
+  currentToken: '',
+  id: '',
+  userData: fromJS({}),
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_REPOS:
+    case LOG_IN_SUCCESS:
       return state
-        .set('loading', true)
+        .set('loggedIn', true)
         .set('error', false)
-        .setIn(['userData', 'repositories'], false);
-    case LOAD_REPOS_SUCCESS:
+        .set('currentToken', action.token)
+        .set('id', action.id)
+        .set('userData', fromJS(action.payload));
+    case LOG_OUT:
       return state
-        .setIn(['userData', 'repositories'], action.repos)
-        .set('loading', false)
-        .set('currentUser', action.username);
-    case LOAD_REPOS_ERROR:
+        .set('userData', fromJS({}))
+        .set('currentToken', '')
+        .set('id', '')
+        .set('loggedIn', false);
+    case EDIT_PROFILE:
       return state
-        .set('error', action.error)
+        .set('userData', action.payload);
+    case LOADING:
+      return state
+        .set('loading', true);
+    case LOADING_DONE:
+      return state
         .set('loading', false);
     default:
       return state;

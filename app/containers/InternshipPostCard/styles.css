@@ -1,0 +1,237 @@
+/* stylelint-disable */
+.internshipPostCard {
+  width: calc(100% - 1rem);
+  background-color: #FCFCFC;
+  margin: 1rem 0.5rem;
+  box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.19);
+}
+
+.snipetSmall {
+  width: 100%;
+  padding: 1.25rem 1.25rem 0.5rem;
+  height: 7.5rem;
+}
+
+.snipet {
+  width: 100%;
+  padding: 1.25rem 1.25rem 0.5rem;
+}
+
+.postLogo {
+  width: 100%;
+  height: 5rem;
+  object-fit: contain;
+  object-position: center;
+  line-height: 1;
+  margin: 0;
+}
+
+.postContent {
+  width: 100%;
+  min-height: 5rem;
+  position: relative;
+  color: #4A4A4A;
+  padding: 0 1rem;
+}
+
+.postContent h3 {
+  font-size: 1.25rem;
+  max-height: 2.5rem;
+  overflow: hidden;
+  line-height: 1;
+  margin: 0;
+}
+
+.postContent h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 0.75rem;
+}
+
+.postContent h5 {
+  font-size: 0.8rem;
+  line-height: 1;
+  margin: 0;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+.postContent h5 a {
+  text-decoration: underline;
+  color: #4A4A4A;
+}
+
+.postContent h6 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.8rem;
+}
+
+.postContent p {
+  white-space: pre-line;
+}
+
+.detailButton,
+.applyButton {
+  font-size: 0.8rem;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  height: 3rem;
+}
+
+.detailButton {
+  background: #E4E4E4;
+}
+
+.applyButton {
+  background: #E5D224;
+}
+
+.applyButton:disabled {
+  background: #D1D1D1;
+}
+
+.header {
+  width: 100%;
+  padding: 2rem;
+  background: 
+    linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+  background-size: cover;
+  background-position: center;
+  color: #FFF;
+  position: relative;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bgImg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.bgImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header .postContent {
+  color: #FFF;
+  z-index: 10;
+}
+.header .postContact {
+  z-index: 10;
+}
+
+.header .postContent h5 a {
+  color: #FFF;
+}
+
+.header .postContent p {
+  margin: 0.5rem 0 0;
+  line-height: 1;
+  font-size: 0.8rem;
+}
+
+.postContact p {
+  margin: 0 0 0.5rem;
+  line-height: 1;
+  font-size: 0.8rem;
+}
+
+.postContact h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+}
+
+.postContact h4 {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+  line-height: 1;
+}
+
+.postContact h5 {
+  margin: 0;
+  line-height: 1;
+  font-size: 0.8rem;
+}
+
+.postDetail {
+  color: #4A4A4A;
+  padding: 1rem;
+  position: relative;
+}
+
+.postDetail h1, 
+.postDetail h2, 
+.postDetail h3, 
+.postDetail ul {
+  margin: 0;
+  line-height: 1;
+}
+
+.postDetail h1,
+.postDetail h2 {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.postDetail h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.postDetail h2 {
+  font-size: 1rem;
+}
+
+.postDetail h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+.postDetail ul {
+  margin-top: 0.5rem;
+  line-height: 1.25;
+  width: 80%;
+  font-size: 0.8rem;
+}
+
+.listContainer {
+  padding: 0 0 0 1rem;
+}
+
+.postDetail h6 {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 40em) {
+  .header .postContent {
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .postContact {
+    text-align: center;
+  }
+}

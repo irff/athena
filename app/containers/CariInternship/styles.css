@@ -1,0 +1,16 @@
+.cariInternship {
+  min-height: calc(100vh - 3rem);
+  padding: 8rem 1rem 1rem;
+}
+
+.sortBySelect {
+  margin-top: 0.5rem;
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #4A4A4A;
+  margin-bottom: 1rem;
+}

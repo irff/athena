@@ -1,22 +1,18 @@
 /**
- *
- * Button.react.js
- *
- * A common button, if you pass it a prop "route" it'll render a link to a react-router route
- * otherwise it'll render a link with an onclick
- */
+*
+* Button
+*
+*/
 
-import React, { PropTypes, Children } from 'react';
-
-import styles from './styles.css';
+import React from 'react';
 
 function Button(props) {
-  const className = props.className ? props.className : styles.button;
+  const className = props.className;
 
   // Render an anchor tag
   let button = (
     <a className={className} href={props.href} onClick={props.onClick}>
-      {Children.toArray(props.children)}
+      {React.Children.toArray(props.children)}
     </a>
   );
 
@@ -24,24 +20,25 @@ function Button(props) {
   if (props.handleRoute) {
     button = (
       <button className={className} onClick={props.handleRoute}>
-        {Children.toArray(props.children)}
+        {React.Children.toArray(props.children)}
       </button>
     );
   }
 
   return (
-    <div className={styles.buttonWrapper}>
+    <div className={props.containerClassName}>
       {button}
     </div>
   );
 }
 
 Button.propTypes = {
-  className: PropTypes.string,
-  handleRoute: PropTypes.func,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
+  className: React.PropTypes.string,
+  handleRoute: React.PropTypes.func,
+  href: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  children: React.PropTypes.node.isRequired,
+  containerClassName: React.PropTypes.string,
 };
 
 export default Button;

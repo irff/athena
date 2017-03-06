@@ -1,0 +1,29 @@
+.navbar { /* stylelint-disable */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
+  height: 3rem;
+  background: #3D3D3D;
+  color: #FFF;
+  padding: 0 1rem;
+}
+
+.logo {
+  float: left;
+  margin: 0.8rem 1rem 0 0.5rem;
+}
+
+.logoImg {
+  height: 1.5rem;
+  width: auto;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 64em) {
+  .logo {
+    margin-right: 0.25rem;
+  }
+}

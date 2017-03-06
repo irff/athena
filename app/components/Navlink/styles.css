@@ -1,0 +1,53 @@
+.leftlink,
+.rightlink,
+.placeholder {
+  font-size: 1rem;
+  line-height: 1;
+  color: #FFF;
+  text-decoration: none;
+  padding: 1rem;
+}
+
+.placeholder {
+  border-right: 1px solid #FFF;
+  height: 1.5rem;
+  padding-top: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.leftlink:hover,
+.leftlink:focus,
+.rightlink:hover,
+.rightlink:focus,
+.placeholder:hover,
+.placeholder:focus {
+  height: 3rem;
+  color: #3D3D3D;
+  background: #E5D224;
+  outline: none;
+  box-shadow: none;
+}
+
+.placeholder:hover,
+.placeholder:focus {
+  padding-top: 1rem;
+  margin-top: 0;
+}
+
+.leftlink {
+  float: left;
+}
+
+.rightlink,
+.placeholder {
+  float: right;
+}
+
+@media screen and (max-width: 40em) {
+  .leftlink,
+  .rightlink {
+    font-weight: bold;
+    font-size: 1.25rem;
+    padding: 0.85rem 0.5rem;
+  }
+}

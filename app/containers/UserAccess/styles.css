@@ -1,0 +1,288 @@
+/* stylelint-disable */
+.userAccessStudent {
+  width: 100%;
+  min-height: 100vh;
+  background: 
+    linear-gradient(331deg, rgba(234, 199, 8, 0.77), rgba(221, 191, 27, 0.81) 52%, rgba(255, 220, 32, 0.95)),
+    url(containers/UserAccess/student.png);
+}
+
+.userAccessCompany {
+  width: 100%;
+  min-height: 100vh;
+  background: 
+    linear-gradient(331deg, rgba(38, 128, 241, 0.77), rgba(28, 142, 203, 0.81) 52%, rgba(32, 204, 255, 0.95)),
+    url(containers/UserAccess/company.png);
+}
+
+.hero {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  position: relative;
+  padding: 2rem;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background: linear-gradient(211deg, #40403c, #090908);
+  position: relative;
+  overflow: auto;
+}
+
+.content h4 {
+  margin: 0;
+  margin-bottom: 0.25rem;
+  line-height: 1;
+  color: #FFF;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.content h4.failCall {
+  text-align: center;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FFF;
+}
+
+.hero a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #FFF;
+  text-decoration: underline;
+  position: absolute;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+.headerImage {
+  width: 100%;
+  height: auto;
+  margin-top: 3.5rem;
+}
+
+.contentContainer {
+  width: 60%;
+  max-width: 20rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  padding: 2rem 0;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-bottom: 0.1rem solid #FFF;
+  background: none;
+  color: #FFF;
+  text-align: left;
+  margin-bottom: 0.25rem;
+}
+
+.input::-webkit-input-placeholder {
+  color: #888;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1rem 0 0;
+  line-height: 1;
+  color: #FFF;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+}
+
+.switchMenu {
+  margin-top: 2rem;
+}
+.switchDivider {
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1;
+  margin: 0;
+  opacity: 0.5;
+}
+
+.switchContainer {
+  display: inline-block;
+}
+
+.switchActive,
+.switch {
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1;
+  margin: 0;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.switchActive,
+.switch:hover,
+.switch:focus,
+.switchActive:hover,
+.switchActive:focus {
+  opacity: 1;
+  color: #FFF;
+}
+
+.switch {
+  opacity: 0.5;
+}
+
+.submitButton, .linkedInButton {
+  width: 80%;
+  padding: 0.5rem 0;
+  text-align: center;
+  color: #3D3D3D;
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 2rem;
+  border-radius: 4rem;
+}
+
+.submitButton {
+  background: linear-gradient(263deg, #e0d022, #fada2c);
+}
+
+.linkedInButton {
+  background: #FFF;
+  margin-top: 1rem;
+}
+
+.submitButton:hover,
+.submitButton:focus,
+.linkedInButton:hover,
+.linkedInButton:focus {
+  color: #3D3D3D;
+  text-decoration: none;
+}
+
+.submitButton:hover,
+.submitButton:focus {
+  background: #C7A700;
+}
+
+.linkedInButton:hover,
+.linkedInButton:focus {
+  background: #CCC;
+}
+
+.buttonDivider {
+  width: 100%;
+  height: 0.5rem;
+  border-bottom: 1px solid #FFF;
+  margin-top: 1rem;
+}
+
+.buttonDividerText {
+  font-size: 0.8rem;
+  line-height: 1;
+  margin: 0;
+  color: #FFF;
+  margin-top: 1rem;
+}
+
+.linkedInLogo {
+  height: 1rem;
+  width: auto;
+  margin: -0.1rem 0 0;
+}
+
+.checkBox {
+  margin: 0 0.5rem 0 -4rem;
+}
+
+.checkBoxLabel {
+  color: #FFF;
+  font-size: 0.75rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.forgetPassword {
+  color: #FFF;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.forgetPassword:hover {
+  color: #CCC;
+}
+
+.scrollDownNotice {
+  color: #FFF;
+  position: absolute;
+  bottom: 5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1rem;
+}
+
+@media screen and (max-width: 40em) {
+  .hero h1 {
+    font-size: 3.25rem;
+  }
+
+  .content {
+    height: auto;
+    overflow: none;
+    min-height: none;
+  }
+
+  .contentContainer {
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    display: inline-block;
+    padding: 4rem 2rem;
+  }
+
+  .switchDivider {
+    color: #FFF;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 0;
+    opacity: 0.5;
+  }
+
+  .switchContainer {
+    display: inline-block;
+  }
+
+  .switchActive,
+  .switch {
+    font-size: 1.5rem;
+  }
+
+  .checkBox {
+    margin: 0 0.25rem 0 -3.25rem;
+  }
+}

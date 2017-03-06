@@ -1,14 +1,15 @@
 /*
- * AppConstants
- * Each action has a corresponding type, which the reducer knows and picks up on.
- * To avoid weird typos between the reducer and the actions, we save them as
- * constants here. We prefix them with 'yourproject/YourComponent' so we avoid
- * reducers accidentally picking up actions they shouldn't.
  *
- * Follow this format:
- * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
+ * App constants
+ *
  */
 
-export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
+export const LOG_IN = 'app/App/LOG_IN';
+export const LOG_IN_SUCCESS = 'app/App/LOG_IN_SUCCESS';
+export const LOG_IN_FAIL = 'app/App/LOG_IN_FAIL';
+export const LOG_OUT = 'app/App/LOG_OUT';
+export const ADD_TOKEN = 'app/App/ADD_TOKEN';
+export const VALIDATE_TOKEN = 'app/App/VALIDATE_TOKEN';
+export const EDIT_PROFILE = 'app/App/EDIT_PROFILE';
+export const LOADING = 'app/App/LOADING';
+export const LOADING_DONE = 'app/App/LOADING_DONE';
