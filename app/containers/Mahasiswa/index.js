@@ -239,10 +239,8 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
       if (nextProps.global.currentToken !== '' && nextProps.global.id !== '') {
         this.props.initialFetch();
       }
-    } else {
-      if (isEmpty(nextProps.children)) {
-        this.props.initialFetch();
-      }
+    } else if (isEmpty(nextProps.children)) {
+      this.props.initialFetch();
     }
   }
 
