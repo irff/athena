@@ -1,50 +1,27 @@
 import { push, LOCATION_CHANGE } from 'react-router-redux';
-import { SAVE, LOAD } from './constants';
-import { loadSuccess, loadFail, saveSuccess, saveFail, updateErrors } from './actions';
-import { fromJS } from 'immutable';
+import { SAVE } from './constants';
+import { loadSuccess, saveSuccess, saveFail, updateErrors } from './actions';
 import { isEmpty } from 'lodash';
 import { take, call, select, put, fork, cancel } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import request from 'utils/request';
 import selectCompanyProfileEdit from './selectors';
+import { API_COMPANIES } from 'containers/App/api';
 import { selectGlobal } from 'containers/App/selectors';
+import { LOG_IN_SUCCESS_COMPANY } from 'containers/App/constants';
 import validate from 'validate.js';
 
+import { userAccessSaga } from 'containers/UserAccess/sagas';
 // Worker Saga
 
-export function* load() {
-  const globalState = yield select(selectGlobal());
-  const currentToken = globalState.get('currentToken');
-  const id = globalState.get('id');
-  const requestURL = null; // @TODO
-  const auth = `Bearer ${currentToken}`;
-
-  if (!id) {
-    const data = fromJS({ isNew: true });
-    yield put(loadSuccess(data));
-  } else {
-    const result = yield call(request, requestURL, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: auth,
-      },
-    });
-
-    if (!result.err) {
-      const data = fromJS(result.data);
-      data.set('isNew', isEmpty(data.get('name')));
-      yield put(loadSuccess(data));
-    } else {
-      yield put(loadFail(result.err));
-    }
-  }
+export function* load(action) {
+  yield put(loadSuccess(action.payload));
 }
 
 export function* save() {
   const globalState = yield select(selectGlobal());
-  const currentToken = globalState.get('currentToken');
+  const currentToken = globalState.currentToken;
+  const id = globalState.id;
   const state = yield select(selectCompanyProfileEdit());
   const isNew = state.isNew;
   const data = state;
@@ -52,8 +29,13 @@ export function* save() {
   delete data.isLoading;
   delete data.isSaving;
   delete data.error;
-  delete data.validation_errors;
-  const requestURL = 'http://requestb.in/1c84t7h1'; // @TODO
+  delete data.validationErrors;
+  delete data.location;
+
+  // @TODO MAKE PROPER IMAGE UPLOAD, NOW USE PLACEHOLDER TO TEST API
+  data.header = 'http://bukalapak.com/';
+  data.logo = 'http://bukalapak.com/';
+  const requestURL = `${API_COMPANIES}/${id}`;
   const auth = `Bearer ${currentToken}`;
 
   const constraints = {
@@ -88,6 +70,11 @@ export function* save() {
     return;
   }
 
+  delete data.header;
+  delete data.logo;
+  data.website = data.site;
+  delete data.site;
+
   const result = yield call(request, requestURL, {
     method: isNew ? 'POST' : 'PUT',
     headers: {
@@ -109,7 +96,7 @@ export function* save() {
 // Watcher Saga
 
 export function* loadWatcher() {
-  yield takeLatest(LOAD, load);
+  yield takeLatest(LOG_IN_SUCCESS_COMPANY, load);
 }
 
 export function* saveWatcher() {
@@ -126,7 +113,16 @@ export function* companyProfileEditSaga() {
   yield cancel(saveSaga);
 }
 
-// All sagas to be loaded
+
+// Container saga
+export function* companyProfileEditSagaContainer() {
+  yield [
+    fork(companyProfileEditSaga),
+    fork(userAccessSaga),
+  ];
+}
+
+// Bootstrap sagas
 export default [
-  companyProfileEditSaga,
+  companyProfileEditSagaContainer,
 ];

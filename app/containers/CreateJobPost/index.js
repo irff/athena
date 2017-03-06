@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import selectCreateJobPost from './selectors';
@@ -18,31 +19,54 @@ import Modal from 'components/Modal';
 import Cleave from 'cleave.js/react';
 import { has, xor } from 'lodash';
 import { submit, review, cancelReview, inputChange } from './actions';
+import { loading } from 'containers/App/actions';
+import { selectGlobal } from 'containers/App/selectors';
+import { fetchUserData } from 'containers/UserAccess/actions';
 
 export class CreateJobPost extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    role: React.PropTypes.string,
-    salary: React.PropTypes.object,
-    location: React.PropTypes.string,
-    category: React.PropTypes.string,
-    job_schedule: React.PropTypes.object,
-    technical_requirements: React.PropTypes.array,
-    tasks: React.PropTypes.array,
-    experiences_gained: React.PropTypes.array,
-    validationErrors: React.PropTypes.object,
-    status: React.PropTypes.array,
+    local: React.PropTypes.object,
+    global: React.PropTypes.object,
     inputChange: React.PropTypes.func,
     review: React.PropTypes.func,
     cancelReview: React.PropTypes.func,
     submit: React.PropTypes.func,
     push: React.PropTypes.func,
-    isReviewing: React.PropTypes.bool,
-    isSubmitting: React.PropTypes.bool,
-    isSubmitted: React.PropTypes.bool,
+    loading: React.PropTypes.func,
+    fetchUserData: React.PropTypes.func,
   };
 
+  componentDidMount() {
+    const token = this.getCookie('token');
+    const companyId = this.getCookie('company_id');
+
+    if (this.props.global.token === '' || this.props.global.id === '') {
+      this.props.loading();
+      if (token !== '' && companyId !== '') {
+        this.props.fetchUserData({ token, id: companyId, isCompany: true });
+      } else {
+        this.props.push('/perusahaan/login');
+      }
+    }
+  }
+
+  getCookie(cname) {
+    const name = `${cname}=`;
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
   renderErrorMessage = (field, label) => {
-    const { validationErrors } = this.props;
+    const { validationErrors } = this.props.local;
     if (has(validationErrors, field)) {
       return <ErrorMessage>{`${label} ${validationErrors[field][0]}`}</ErrorMessage>;
     }
@@ -51,7 +75,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   }
 
   renderEditing() {
-    const { role, salary, location, technical_requirements, tasks, experiences_gained, status, job_schedule, category } = this.props;
+    const { role, salary, location, technical_requirements, tasks, experiences_gained, status, job_schedule, category } = this.props.local;
 
     const categoryMap = {
       DESIGN: 'Design',
@@ -280,7 +304,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   }
 
   renderReviewing() {
-    const { role, salary, location, technical_requirements, tasks, experiences_gained, isSubmitting, isSubmitted } = this.props;
+    const { role, salary, location, technical_requirements, tasks, experiences_gained, isSubmitting, isSubmitted } = this.props.local;
 
     return (
       <ReviewContainer>
@@ -345,7 +369,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   }
 
   render() {
-    const { isReviewing } = this.props;
+    const { isReviewing } = this.props.local;
     return (
       <div>
         <Helmet
@@ -566,7 +590,10 @@ const Select = styled.select`
   }
 `;
 
-const mapStateToProps = selectCreateJobPost();
+const mapStateToProps = createStructuredSelector({
+  global: selectGlobal(),
+  local: selectCreateJobPost(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -576,6 +603,8 @@ function mapDispatchToProps(dispatch) {
     cancelReview: () => dispatch(cancelReview()),
     submit: () => dispatch(submit()),
     push: (url) => dispatch(push(url)),
+    loading: () => dispatch(loading()),
+    fetchUserData: (data) => dispatch(fetchUserData(data)),
   };
 }
 

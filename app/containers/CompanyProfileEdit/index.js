@@ -6,6 +6,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import selectCompanyProfileEdit from './selectors';
@@ -15,28 +17,49 @@ import CompanyHeader from 'components/CompanyHeader';
 import Dropzone from 'react-dropzone';
 import { has } from 'lodash';
 
-import { inputChange, save } from './actions';
+import { inputChange, save, loadSuccess } from './actions';
 
 import placeholderIcon from './placeholder.svg';
 
+import { loading, loadingDone } from 'containers/App/actions';
+import { selectGlobal } from 'containers/App/selectors';
+import { fetchUserData } from 'containers/UserAccess/actions';
+
 export class CompanyProfileEdit extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
-    name: React.PropTypes.string,
-    category: React.PropTypes.string,
+    local: React.PropTypes.object,
+    global: React.PropTypes.object,
     logo: React.PropTypes.string,
     header: React.PropTypes.string,
-    site: React.PropTypes.string,
-    description: React.PropTypes.string,
-    isSaving: React.PropTypes.bool,
-    validationErrors: React.PropTypes.array,
     inputChange: React.PropTypes.func,
     save: React.PropTypes.func,
+    loading: React.PropTypes.func,
+    loadingDone: React.PropTypes.func,
+    fetchUserData: React.PropTypes.func,
+    loadSuccess: React.PropTypes.func,
+    push: React.PropTypes.func,
   }
 
   state = {
     logo: null,
     header: null,
   };
+
+  componentDidMount() {
+    const token = this.getCookie('token');
+    const companyId = this.getCookie('company_id');
+
+    if (this.props.global.token === '' || this.props.global.id === '') {
+      this.props.loading();
+      if (token !== '' && companyId !== '') {
+        this.props.fetchUserData({ token, id: companyId, isCompany: true });
+      } else {
+        this.props.push('/perusahaan/login');
+      }
+    } else {
+      this.props.loadSuccess(this.props.global.userData);
+    }
+  }
 
   onLogoDrop = (files) => {
     this.setState({ logo: files[0] });
@@ -54,8 +77,23 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
     this.headerDropzone.open();
   }
 
+  getCookie(cname) {
+    const name = `${cname}=`;
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
   renderErrorMessage = (field, label) => {
-    const { validationErrors } = this.props;
+    const { validationErrors } = this.props.local;
     if (has(validationErrors, field)) {
       return <ErrorMessage>{`${label} ${validationErrors[field][0]}`}</ErrorMessage>;
     }
@@ -64,7 +102,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
   }
 
   render() {
-    const { name, isSaving, site, description } = this.props;
+    const { name, isSaving, site, description } = this.props.local;
 
     return (
       <div>
@@ -367,12 +405,20 @@ const Select = styled.select`
 `;
 
 
-const mapStateToProps = selectCompanyProfileEdit();
+const mapStateToProps = createStructuredSelector({
+  global: selectGlobal(),
+  local: selectCompanyProfileEdit(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    loading: () => dispatch(loading()),
+    loadingDone: () => dispatch(loadingDone()),
+    loadSuccess: (payload) => dispatch(loadSuccess(payload)),
     inputChange: (label, value) => dispatch(inputChange(label, value)),
+    fetchUserData: (data) => dispatch(fetchUserData(data)),
+    push: (url) => dispatch(push(url)),
     save: () => dispatch(save()),
   };
 }
