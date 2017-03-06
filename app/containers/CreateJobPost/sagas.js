@@ -2,7 +2,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import validate from 'validate.js';
-import isEmpty from 'lodash/lang/isEmpty';
+import { isEmpty } from 'lodash';
 
 import request from 'utils/request';
 import { selectGlobal } from 'containers/App/selectors';

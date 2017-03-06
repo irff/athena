@@ -2,7 +2,7 @@ import { push, LOCATION_CHANGE } from 'react-router-redux';
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { SUBMIT } from './constants';
-import { LOG_IN_SUCCESS } from 'containers/App/constants';
+import { LOG_IN_SUCCESS_STUDENT } from 'containers/App/constants';
 import { editProfile } from 'containers/App/actions';
 import { fromJS } from 'immutable';
 import { isEmpty } from 'lodash';
@@ -125,7 +125,7 @@ export function* dataFetchSaga(action) {
  * Watches for LOAD_REPOS action and calls handler
  */
 export function* dataFetchWatcher() {
-  yield takeLatest(LOG_IN_SUCCESS, dataFetchSaga);
+  yield takeLatest(LOG_IN_SUCCESS_STUDENT, dataFetchSaga);
 }
 
 /**

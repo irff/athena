@@ -18,20 +18,12 @@
 .leftlink:hover,
 .leftlink:focus,
 .rightlink:hover,
-.rightlink:focus,
-.placeholder:hover,
-.placeholder:focus {
+.rightlink:focus {
   height: 3rem;
   color: #3D3D3D;
   background: #E5D224;
   outline: none;
   box-shadow: none;
-}
-
-.placeholder:hover,
-.placeholder:focus {
-  padding-top: 1rem;
-  margin-top: 0;
 }
 
 .leftlink {

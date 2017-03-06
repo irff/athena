@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectGlobal } from 'containers/App/selectors';
-import isEmpty from 'lodash/lang/isEmpty';
+import { isEmpty } from 'lodash';
 
 export class Perusahaan extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

@@ -23,6 +23,7 @@ import SectionTitle from 'components/SectionTitle';
 import List from 'components/List';
 
 import InternshipPostCard from 'containers/InternshipPostCard';
+import AssetEmpty from 'containers/CariInternship/asset-empty.svg';
 
 import styled from 'styled-components';
 
@@ -55,6 +56,10 @@ const ProfileModule = styled.div`
       font-size: 1rem;
       line-height: 1;
       margin: 0;
+    }
+
+    button {
+      text-decoration: underline;
     }
   }
 
@@ -183,10 +188,17 @@ const EntriesModule = styled.div`
     text-align: center;
     padding: 5rem 1rem;
 
+    img {
+      width: 100%;
+      max-width: 15rem;
+      margin: 0 auto 3rem;
+      display: block;
+    }
+
     p {
       color: ${props => props.theme.black};
       margin: 0;
-      line-height: 1;
+      line-height: 1.25;
       font-size: 1.1rem;
 
       button {
@@ -227,7 +239,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
     if (this.props.global.token === '' || this.props.global.id === '') {
       this.props.loading();
       if (token !== '' && studentId !== '') {
-        this.props.fetchUserData({ token, student_id: studentId });
+        this.props.fetchUserData({ token, id: studentId });
       } else {
         this.props.push('/mahasiswa/login');
       }
@@ -268,6 +280,10 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
 
     const { userData } = this.props.global;
 
+    const emptyHeadline = (
+      <span>Headline kamu masih kosong, silahkan <button onClick={() => this.props.push('/mahasiswa/ubah-profil')}>ubah profil</button> kamu.</span>
+    );
+
     let mainContent = (
       <div>
         <Helmet
@@ -290,7 +306,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
                   <div className="small-12 columns">
                     <div className="topModule">
                       <h1>{userData.first_name} {userData.last_name}</h1>
-                      <h2>{userData.headline}</h2>
+                      <h2>{isEmpty(userData.headline) || userData.headline === 'iniDefaultEntryQuint'  ? emptyHeadline : userData.headline}</h2>
                     </div>
                   </div>
                   <div className="small-12 columns">
@@ -326,6 +342,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
                   {jobList}
                 </div>
                 <div className="isEmpty">
+                  <img className="asset" src={AssetEmpty} alt="asset" />
                   <p>
                     Belum ada internship terdaftar.
                     <br />
