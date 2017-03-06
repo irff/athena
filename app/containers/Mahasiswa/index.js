@@ -61,17 +61,23 @@ const ProfileModule = styled.div`
   .bottomModule {
     background: ${props => props.theme.lightBlack};
     padding: 1.25rem 2.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
 
     .counterContainer {
       width: auto;
-      display: inline-block;
-      float: left;
 
       &.withDivider {
         border-right: 1px solid ${props => props.theme.gray};
         padding-right: 2.5rem;
         margin-right: 2.5rem;
       }
+    }
+
+    .ubahProfilButton {
+      flex: 1;
     }
 
     h1,
@@ -95,15 +101,51 @@ const ProfileModule = styled.div`
     }
 
     button {
+      float: right;
       background: ${props => props.theme.yellow};
       color: ${props => props.theme.lightBlack};
       border-radius: 0.2rem;
       padding: 0.5rem 3.5rem;
       font-size: 1rem;
       font-weight: 700;
-      display: inline-block;
-      float: right;
       margin-top: 1rem;
+    }
+
+    @media screen and (max-width: 64em) {
+      .counterContainer {
+        width: 25%;
+
+        &.withDivider {
+          padding: 0 1rem;
+          margin-right: 0;
+        }
+      }
+
+      .ubahProfilButton {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+      }
+
+      button {
+        width: 100%;
+        float: none;
+      }
+    }
+
+    @media screen and (max-width: 40em) {
+      .counterContainer {
+        width: 50%;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid ${props => props.theme.gray};
+        
+        &.withDivider {
+          border-right: none;
+          padding: 0 0 1rem;
+          margin-right: 0;
+        }      
+      }
     }
   }
 `;
@@ -197,6 +239,10 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
       if (nextProps.global.currentToken !== '' && nextProps.global.id !== '') {
         this.props.initialFetch();
       }
+    } else {
+      if (isEmpty(nextProps.children)) {
+        this.props.initialFetch();
+      }
     }
   }
 
@@ -251,26 +297,24 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
                   </div>
                   <div className="small-12 columns">
                     <div className="bottomModule">
-                      <div className="row expanded">
-                        <div className="small-12 columns">
-                          <div className="counterContainer withDivider">
-                            <h1>{this.props.mahasiswa.registered_num}</h1>
-                            <h2>didaftarkan</h2>
-                          </div>
-                          <div className="counterContainer withDivider">
-                            <h1>{this.props.mahasiswa.processed_num}</h1>
-                            <h2>dalam proses</h2>
-                          </div>
-                          <div className="counterContainer withDivider">
-                            <h1>{this.props.mahasiswa.accepted_num}</h1>
-                            <h2>diterima</h2>
-                          </div>
-                          <div className="counterContainer">
-                            <h1>{this.props.mahasiswa.rejected_num}</h1>
-                            <h2>ditolak</h2>
-                          </div>
-                          <button>Ubah Profil</button>
-                        </div>
+                      <div className="counterContainer withDivider">
+                        <h1>{this.props.mahasiswa.registered_num}</h1>
+                        <h2>didaftarkan</h2>
+                      </div>
+                      <div className="counterContainer withDivider">
+                        <h1>{this.props.mahasiswa.processed_num}</h1>
+                        <h2>dalam proses</h2>
+                      </div>
+                      <div className="counterContainer withDivider">
+                        <h1>{this.props.mahasiswa.accepted_num}</h1>
+                        <h2>diterima</h2>
+                      </div>
+                      <div className="counterContainer">
+                        <h1>{this.props.mahasiswa.rejected_num}</h1>
+                        <h2>ditolak</h2>
+                      </div>
+                      <div className="ubahProfilButton">
+                        <button onClick={() => this.props.push('/mahasiswa/ubah-profil')}>Ubah Profil</button>
                       </div>
                     </div>
                   </div>

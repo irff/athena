@@ -63,15 +63,15 @@ export class Navbar extends React.Component { // eslint-disable-line react/prefe
           <div className="small-12 columns">
             <button className={styles.logo} onClick={() => this.navOnClick('/mahasiswa/cari-internship')} ><Logo className={styles.logoImg} /></button>
             <div className="show-for-large">
-              <Navlink isCurrentElement={window.location.pathname === '/mahasiswa' || window.location.pathname === '/mahasiswa/'} handleRoute={() => this.navOnClick('/mahasiswa')}>Dashboard</Navlink>
               <Navlink isCurrentElement={window.location.pathname.startsWith('/mahasiswa/cari-internship')} handleRoute={() => this.navOnClick('/mahasiswa/cari-internship')}>Cari Internship</Navlink>
               <Navlink isRightElement handleRoute={this.logOut}>Keluar</Navlink>
-              <Navlink isPlaceholder>Hi <strong>{firstName}!</strong></Navlink>
+              <Navlink isCurrentElement={window.location.pathname === '/mahasiswa' || window.location.pathname === '/mahasiswa/'} handleRoute={() => this.navOnClick('/mahasiswa')} isPlaceholder>Hi <strong>{firstName}!</strong></Navlink>
               <Navlink isCurrentElement={window.location.pathname.startsWith('/mahasiswa/ubah-profil')} handleRoute={() => this.navOnClick('/mahasiswa/ubah-profil')} isRightElement>Ubah Profil</Navlink>
             </div>
             <div className="show-for-small hide-for-large">
               <Navlink isCurrentElement={window.location.pathname === '/mahasiswa/cari-internship'} handleRoute={() => this.navOnClick('/mahasiswa/cari-internship')}><span className={globalStyles.iconsearch} /></Navlink>
               <Navlink isRightElement handleRoute={this.logOut}><span className={globalStyles.iconlogout} /></Navlink>
+              <Navlink isCurrentElement={window.location.pathname === '/mahasiswa' || window.location.pathname === '/mahasiswa/'} handleRoute={() => this.navOnClick('/mahasiswa')} isPlaceholder><span className={globalStyles.icondashboard} /></Navlink>
               <Navlink isCurrentElement={window.location.pathname === '/mahasiswa/ubah-profil'} handleRoute={() => this.navOnClick('/mahasiswa/ubah-profil')} isRightElement><span className={globalStyles.iconedit} /></Navlink>
             </div>
           </div>

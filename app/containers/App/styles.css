@@ -119,6 +119,7 @@ body {
   }
 }
 
+.icondashboard,
 .iconlink,
 .icondownarrow,
 .iconuparrow,
@@ -133,8 +134,8 @@ body {
   font-style: normal;
 }
 
-.iconlink:before { content: "\f100"; }
-.iconleftarrow:before { content: "\f101"; }
+.icondashboard:before { content: "\f100"; }
+.iconlink:before { content: "\f101"; }
 .iconuparrow:before { content: "\f102"; }
 .icondownarrow:before { content: "\f103"; }
 .iconrightarrow:before { content: "\f104"; }
@@ -143,3 +144,4 @@ body {
 .iconline:before { content: "\f107"; }
 .iconsearch:before { content: "\f108"; }
 .iconfacebook:before { content: "\f109"; }
+.iconleftarrow:before { content: "\f10a"; }
