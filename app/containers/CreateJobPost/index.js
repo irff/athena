@@ -230,8 +230,8 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
             {this.renderErrorMessage('tasks', 'Tanggung Jawab')}
 
             <div className="input multiline">
-              <span>Pengalaman yang Didapat</span>
-              <span className="subhead">Tuliskan pengalaman yang didapat setelah intern di posisi ini. Pisahkan dengan enter / baris baru.</span>
+              <span>Kemampuan/Pengalaman yang Didapat</span>
+              <span className="subhead">Tuliskan kemampuan atau pengalaman yang didapat setelah intern di posisi ini. Pisahkan dengan enter / baris baru.</span>
               <textarea
                 placeholder="Tuliskan per-poin disini"
                 value={experiences_gained.join('\n')}
