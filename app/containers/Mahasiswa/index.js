@@ -306,7 +306,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
                   <div className="small-12 columns">
                     <div className="topModule">
                       <h1>{userData.first_name} {userData.last_name}</h1>
-                      <h2>{isEmpty(userData.headline) || userData.headline === 'iniDefaultEntryQuint'  ? emptyHeadline : userData.headline}</h2>
+                      <h2>{isEmpty(userData.headline) || userData.headline === 'iniDefaultEntryQuint' ? emptyHeadline : userData.headline}</h2>
                     </div>
                   </div>
                   <div className="small-12 columns">

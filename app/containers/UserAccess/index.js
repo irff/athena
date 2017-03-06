@@ -11,7 +11,6 @@ import Helmet from 'react-helmet';
 import selectUserAccess from './selectors';
 import { loading, loadingDone, logInStudent, logInCompany } from 'containers/App/actions';
 import styles from './styles.css';
-import globalStyles from 'containers/App/styles.css';
 import { changeInput, signUp, fetchUserData } from './actions';
 
 import Button from 'components/Button';
@@ -32,7 +31,6 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
 
   componentWillMount() {
     this.props.loadingDone();
-    console.log('pleb');
 
     const token = this.getCookie('token');
     let id = '';
@@ -47,7 +45,6 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
       id = this.getCookie('student_id');
       if (token !== '' && id !== '') {
         this.props.loading();
-        console.log('plob');
         this.props.fetchUserData({ token, id });
       }
     }
@@ -60,14 +57,6 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
   componentWillUnmount() {
     this.props.loading();
     document.removeEventListener('keyup', this.onEnter);
-  }
-
-  logIn() {
-    if (window.location.pathname.indexOf('/mahasiswa') === 0) {
-      this.props.logInStudent();
-    } else if (window.location.pathname.indexOf('/perusahaan') === 0) {
-      this.props.logInCompany();
-    }
   }
 
   onEnter(event) {
@@ -94,6 +83,15 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
     }
     return '';
   }
+
+  logIn() {
+    if (window.location.pathname.indexOf('/mahasiswa') === 0) {
+      this.props.logInStudent();
+    } else if (window.location.pathname.indexOf('/perusahaan') === 0) {
+      this.props.logInCompany();
+    }
+  }
+
 
   openRoute(route) {
     this.props.changeRoute(route);

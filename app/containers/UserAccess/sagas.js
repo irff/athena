@@ -264,8 +264,6 @@ export function* autoLogInAfterCreated() {
 }
 
 export function* fetchUserDataSaga(data) {
-  console.log('plab');
-  console.log(data);
   const requestURL = `${data.isCompany ? API_COMPANIES : API_STUDENTS}/${data.id}`;
   const auth = `Bearer ${data.token}`;
 
@@ -283,7 +281,6 @@ export function* fetchUserDataSaga(data) {
   const expires = `expires=${d.toUTCString()}`;
 
   if (!fetchDataCall.err) {
-    console.log('plib');
     yield put(loadingDone());
 
     /* set cookies */
