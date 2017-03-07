@@ -24,7 +24,7 @@ import { fromJS } from 'immutable';
 const initialState = fromJS({
   loading: false,
   error: false,
-  loggedIn: true,
+  loggedIn: false,
   currentToken: '',
   id: '',
   userData: fromJS({}),

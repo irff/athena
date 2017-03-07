@@ -4,24 +4,39 @@
 *
 */
 
+/* eslint-disable camelcase */
+
 import React from 'react';
 import styled from 'styled-components';
 
-const CompanyInfoCard = ({ onAddJob, onEditProfile }) => (
+const CompanyInfoCard = ({
+    onAddJob,
+    onEditProfile,
+    name,
+    category,
+    website,
+    description,
+    logo_url,
+    accepted_num,
+    applicant_num,
+    in_progress_num,
+    job_num,
+    rejected_num,
+  }) => (
   <CompanyInfoCardWrapper>
     <div className="row expanded">
       <div className="small-12 columns">
         <div className="topModule">
           <div className="row">
             <div className="medium-1 columns">
-              <img src="http://2.bp.blogspot.com/-qY4-nRo26Mg/VkyNFIdWR2I/AAAAAAAAJFM/shFlwYW3gG0/s1600/bukalapak%2Bmarketplace%2Bjual%2Bbeli%2Bonline.png" alt="logo" />
+              <img src={logo_url} alt="logo" />
             </div>
             <div className="medium-6 columns">
-              <h1>Bukalapak <small>&middot; &nbsp; E-commerce Company</small></h1>
+              <h1>{name} <small>&middot; &nbsp; {category}</small></h1>
               <div className="companyLinks">
-                <a href="https://bukalapak.com/">www.bukalapak.com</a>
+                <a href={website}>{website}</a>
               </div>
-              <p>Bukalapak adalah company terkeren sedunia. Dengan intern di Bukalapak, kamu bisa dapat gaji yang besar, makan gratis, fasilitas gratis, dan kehidupan yang amat sangat layak. Ada gym-nya pula. Yuk, intern di Bukalapak!</p>
+              <p>{description}</p>
             </div>
             <div className="medium-3 medium-offset-2 columns contactPerson">
             </div>
@@ -33,23 +48,23 @@ const CompanyInfoCard = ({ onAddJob, onEditProfile }) => (
           <div className="row expanded">
             <div className="small-12 columns">
               <div className="counterContainer first">
-                <h1>88</h1>
+                <h1>{job_num}</h1>
                 <h2>posisi intern</h2>
               </div>
               <div className="counterContainer">
-                <h1>88</h1>
+                <h1>{applicant_num}</h1>
                 <h2>pendaftar</h2>
               </div>
               <div className="counterContainer">
-                <h1>88</h1>
+                <h1>{accepted_num}</h1>
                 <h2>diterima</h2>
               </div>
               <div className="counterContainer">
-                <h1>88</h1>
+                <h1>{in_progress_num}</h1>
                 <h2>dalam proses</h2>
               </div>
               <div className="counterContainer">
-                <h1>88</h1>
+                <h1>{rejected_num}</h1>
                 <h2>ditolak</h2>
               </div>
               <button onClick={onEditProfile}>Ubah Profil Perusahaan</button>
@@ -65,6 +80,16 @@ const CompanyInfoCard = ({ onAddJob, onEditProfile }) => (
 );
 
 CompanyInfoCard.propTypes = {
+  name: React.PropTypes.string,
+  category: React.PropTypes.string,
+  website: React.PropTypes.string,
+  description: React.PropTypes.string,
+  logo_url: React.PropTypes.string,
+  accepted_num: React.PropTypes.number,
+  applicant_num: React.PropTypes.number,
+  in_progress_num: React.PropTypes.number,
+  job_num: React.PropTypes.number,
+  rejected_num: React.PropTypes.number,
   onAddJob: React.PropTypes.func,
   onEditProfile: React.PropTypes.func,
 };

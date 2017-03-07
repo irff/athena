@@ -7,45 +7,68 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ApplicantCard() {
+function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicked, onResumeClicked, onStatusChange }) {
+  const onLinkedin = () => {
+    if (onLinkedinClicked) onLinkedinClicked();
+    window.open(student.linkedin_url, '_blank');
+  };
+
+  const onResume = () => {
+    if (onResumeClicked) onResumeClicked();
+    window.open(student.resume_url, '_blank');
+  };
+
   return (
     <Card>
       <div className="wrapper">
         <div className="profile">
           <div className="head">
-            <h1>Uvuvwevwe Onyetenyevwe Ugwemubwem Ossas</h1>
+            <h1>{student.first_name} {student.last_name}</h1>
             <div className="links">
-              <a className="linkedin" href="https://linkedin.com/">LinkedIn</a>
-              <a className="resume" href="https://drive.google.com/">Resume</a>
+              <button onClick={onLinkedin} className="linkedin">LinkedIn</button>
+              <button onClick={onResume} className="resume">Resume</button>
             </div>
           </div>
-          <p>Former Product Designer at Google</p>
-          <a className="email" href="mailto:uvuvwevwe@gmail.com">uvuvwevwe@gmail.com</a>
+          <p>{student.headline}</p>
+          <a className="email" href={`mailto:${email}`}>{email}</a>
         </div>
         <div className="counter">
-          <h1>88</h1>
+          <h1>{student.experiences.achievement_num}</h1>
           <h2>penghargaan</h2>
         </div>
         <div className="counter">
-          <h1>88</h1>
+          <h1>{student.experiences.work_num}</h1>
           <h2>pengalaman</h2>
         </div>
         <div className="counter">
-          <h1>88</h1>
+          <h1>{student.experiences.project_num}</h1>
           <h2>proyek</h2>
         </div>
         <div className="status">
           <h2>Update status</h2>
-          <SelectStatus>
-            <option selected value="">Pilih status</option>
-            <option value="review">Review Resume</option>
-            <option value="interview">Phone Interview</option>
+          <SelectStatus
+            value={status === 'RESUME_REVIEWED' ? 'WAIT_FOR_REVIEW' : status}
+            onChange={e => onStatusChange(e.target.value)}
+          >
+            {statusOptions.map((item, key) =>
+              <option key={key} value={item.value} disabled={item.value === 'WAIT_FOR_REVIEW'}>{item.text}</option>
+            )}
           </SelectStatus>
         </div>
       </div>
     </Card>
   );
 }
+
+ApplicantCard.propTypes = {
+  student: React.PropTypes.object,
+  status: React.PropTypes.string.isRequired,
+  statusOptions: React.PropTypes.array.isRequired,
+  email: React.PropTypes.string.isRequired,
+  onLinkedinClicked: React.PropTypes.func,
+  onResumeClicked: React.PropTypes.func,
+  onStatusChange: React.PropTypes.func,
+};
 
 const Card = styled.div`
   background: ${props => props.theme.white};
@@ -78,6 +101,7 @@ const Card = styled.div`
       h1 {
         font-size: 1.25rem;
         margin-bottom: .875rem;
+        flex: 1;
       }
 
       p {
@@ -114,7 +138,7 @@ const Card = styled.div`
           text-overflow: ellipsis;
         }
 
-        .links a {
+        .links button {
           color: ${props => props.theme.white};
           font-size: .875rem;
           font-weight: 700;
