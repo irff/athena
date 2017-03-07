@@ -9,6 +9,7 @@ import {
   INITIAL_FETCH_SUCCESS,
   INITIAL_FETCH_FAIL,
   CHANGE_STATUS,
+  RESUME_READ,
 } from './constants';
 
 const initialState = fromJS({
@@ -20,8 +21,34 @@ const initialState = fromJS({
 
 function companyDashboardReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_STATUS:
-      return state;
+    case CHANGE_STATUS: {
+      const applications = state
+        .get('applications')
+        .map(item => {
+          const ret = item;
+          if (item.id === action.payload.id) {
+            ret.status = action.payload.value;
+          }
+
+          return ret;
+        });
+
+      return state.set('applications', applications);
+    }
+    case RESUME_READ: {
+      const applications = state
+        .get('applications')
+        .map(item => {
+          const ret = item;
+          if (item.id === action.payload) {
+            ret.status = 'RESUME_REVIEWED';
+          }
+
+          return ret;
+        });
+
+      return state.set('applications', applications);
+    }
     case INITIAL_FETCH_SUCCESS:
       return state.merge(fromJS(action.payload));
     case INITIAL_FETCH_FAIL:

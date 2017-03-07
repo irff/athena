@@ -131,6 +131,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
             <div className="small-12 columns">
               <SectionTitle>Dashboard</SectionTitle>
             </div>
+            {JSON.stringify(this.props.global)}
             <div className="small-12 columns">
               <CompanyInfoCard
                 {...this.props.global.userData}

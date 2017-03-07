@@ -106,7 +106,7 @@ export function* submit() {
       'Content-Type': 'application/json',
       Authorization: auth,
     },
-    body: data,
+    body: JSON.stringify(data),
   });
 
   if (!result.err) {

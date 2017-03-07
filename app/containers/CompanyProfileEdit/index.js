@@ -102,7 +102,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
   }
 
   render() {
-    const { name, isSaving, site, description } = this.props.local;
+    const { name, isSaving, website, description } = this.props.local;
 
     return (
       <div>
@@ -195,11 +195,11 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                 <Input
                   width="23rem"
                   placeholder="http://"
-                  value={site}
-                  onChange={e => this.props.inputChange('site', e.target.value)}
+                  value={website}
+                  onChange={e => this.props.inputChange('website', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('site', 'Situs Perusahaan')}
+              {this.renderErrorMessage('website', 'Situs Perusahaan')}
             </div>
           </div>
 

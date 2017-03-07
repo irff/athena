@@ -51,7 +51,7 @@ export function* save() {
     header: {
       presence: true,
     },
-    site: {
+    website: {
       presence: true,
       url: true,
     },
@@ -82,7 +82,7 @@ export function* save() {
       'Content-Type': 'application/json',
       Authorization: auth,
     },
-    body: data,
+    body: JSON.stringify(data),
   });
 
   if (!result.err) {

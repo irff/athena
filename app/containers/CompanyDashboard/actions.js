@@ -9,6 +9,7 @@ import {
   INITIAL_FETCH_FAIL,
   INITIAL_FETCH_SUCCESS,
   CHANGE_STATUS,
+  RESUME_READ,
 } from './constants';
 
 export function initialFetch() {
@@ -41,23 +42,16 @@ export function changeStatus(id, value) {
   };
 }
 
-
 export function openLinkedIn(id) {
   return {
-    type: CHANGE_STATUS,
-    payload: {
-      id,
-      value: 'RESUME_REVIEWED',
-    },
+    type: RESUME_READ,
+    payload: id,
   };
 }
 
 export function openResume(id) {
   return {
-    type: CHANGE_STATUS,
-    payload: {
-      id,
-      value: 'RESUME_REVIEWED',
-    },
+    type: RESUME_READ,
+    payload: id,
   };
 }

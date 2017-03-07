@@ -88,6 +88,42 @@ export function* fetchStatistics() {
   }
 }
 
+export function* resumeReviewed(applicationId) {
+  const globalState = yield select(selectGlobal());
+  const currentToken = globalState.currentToken;
+  const currentId = globalState.id;
+  const requestURL = `${API_COMPANIES}/${currentId}/applications/${applicationId}/resume-read`;
+  const auth = `Bearer ${currentToken}`;
+
+  yield call(request, requestURL, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: auth,
+    },
+  });
+}
+
+export function* statusChanged(applicationId, status) {
+  const globalState = yield select(selectGlobal());
+  const currentToken = globalState.currentToken;
+  const currentId = globalState.id;
+  const requestURL = `${API_COMPANIES}/${currentId}/applications/${applicationId}/status`;
+  const auth = `Bearer ${currentToken}`;
+
+  yield call(request, requestURL, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: auth,
+    },
+    body: {
+      status,
+    },
+  });
+}
 
 export function* fetchWatcher() {
   while (yield take(INITIAL_FETCH)) {
