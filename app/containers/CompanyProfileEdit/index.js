@@ -14,12 +14,12 @@ import selectCompanyProfileEdit from './selectors';
 import Navbar from 'containers/Navbar';
 import Footer from 'components/Footer';
 import CompanyHeader from 'components/CompanyHeader';
-import Dropzone from 'react-dropzone';
+// import Dropzone from 'react-dropzone';
 import { has } from 'lodash';
 
 import { inputChange, save, loadSuccess } from './actions';
 
-import placeholderIcon from './placeholder.svg';
+// import placeholderIcon from './placeholder.svg';
 
 import { loading, loadingDone } from 'containers/App/actions';
 import { selectGlobal } from 'containers/App/selectors';
@@ -145,7 +145,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
           </div>
 
           <Line />
-
+          {/*
           <div className="row">
             <div className="small-12 columns">
               <div className="input">
@@ -183,6 +183,32 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                 </UploadContainer>
               </div>
               {this.renderErrorMessage('header', 'Foto Header Perusahaan')}
+            </div>
+          </div>
+          */}
+          <div className="row">
+            <div className="small-12 columns">
+              <div className="input">
+                <span>Link Logo Perusahaan (256px256p)</span>
+                <Input
+                  width="23rem"
+                  placeholder="http://"
+                  value={this.props.local.logo_url}
+                  onChange={e => this.props.inputChange('logo_url', e.target.value)}
+                />
+              </div>
+              {this.renderErrorMessage('logo', 'Logo Perusahaan')}
+
+              <div className="input">
+                <span>Link Foto Header (256px256p)</span>
+                <Input
+                  width="23rem"
+                  placeholder="http://"
+                  value={this.props.local.header_img_url}
+                  onChange={e => this.props.inputChange('header_img_url', e.target.value)}
+                />
+              </div>
+              {this.renderErrorMessage('header_img_url', 'Foto Header Perusahaan')}
             </div>
           </div>
 
@@ -243,34 +269,34 @@ const ErrorMessage = styled.span`
   color: ${props => props.theme.red};
 `;
 
-const UploadContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+// const UploadContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-direction: column;
 
-  &>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+//   &>div {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
 
-    span {
-      text-align: center;
-      margin-top: 0.875rem;
-      color: ${props => props.theme.gray};
-      font-size: 0.875rem;
-    }
+//     span {
+//       text-align: center;
+//       margin-top: 0.875rem;
+//       color: ${props => props.theme.gray};
+//       font-size: 0.875rem;
+//     }
 
-  }
+//   }
 
-  @media screen and (min-width: 40rem) {
-    flex-direction: row;
-    span {
-      margin-left: 1.875rem;
-    }
-  }
-`;
+//   @media screen and (min-width: 40rem) {
+//     flex-direction: row;
+//     span {
+//       margin-left: 1.875rem;
+//     }
+//   }
+// `;
 
 
 const SubmitButton = styled.button`
@@ -283,50 +309,50 @@ const SubmitButton = styled.button`
   float: right;
 `;
 
-const UploadButton = styled.button`
-  background: ${props => props.theme.altGray};
-  color: ${props => props.theme.black};
-  padding: 0.75rem 2.25rem;
-  border-radius: 3.5rem;
-  float: right;
-  margin-top: 1rem;
+// const UploadButton = styled.button`
+//   background: ${props => props.theme.altGray};
+//   color: ${props => props.theme.black};
+//   padding: 0.75rem 2.25rem;
+//   border-radius: 3.5rem;
+//   float: right;
+//   margin-top: 1rem;
 
-  @media screen and (min-width: 40rem) {
-    margin-left: 1.1875rem;
-  }
-`;
+//   @media screen and (min-width: 40rem) {
+//     margin-left: 1.1875rem;
+//   }
+// `;
 
-const DeleteButton = styled.button`
-  font-size: 0.875rem;
-  color: ${props => props.theme.black};
-  text-decoration: underline;
-  margin-top: 1rem;
+// const DeleteButton = styled.button`
+//   font-size: 0.875rem;
+//   color: ${props => props.theme.black};
+//   text-decoration: underline;
+//   margin-top: 1rem;
 
-  @media screen and (min-width: 40rem) {
-    margin-left: 1.875rem;
-  }
-`;
+//   @media screen and (min-width: 40rem) {
+//     margin-left: 1.875rem;
+//   }
+// `;
 
-const BaseDropZone = styled(Dropzone)`
-  max-width: 100%;
-  margin-top: 1rem;
-  background-color: ${props => props.theme.lightGray};
-  background-size: contain;
-  background-position: center;
-  ${props => props.imageSrc &&
-    `background-image: url(${props.imageSrc});`
-  }
-`;
+// const BaseDropZone = styled(Dropzone)`
+//   max-width: 100%;
+//   margin-top: 1rem;
+//   background-color: ${props => props.theme.lightGray};
+//   background-size: contain;
+//   background-position: center;
+//   ${props => props.imageSrc &&
+//     `background-image: url(${props.imageSrc});`
+//   }
+// `;
 
-const HeaderDropZone = styled(BaseDropZone)`
-  width: 27rem;
-  height: 4.6875rem;
-`;
+// const HeaderDropZone = styled(BaseDropZone)`
+//   width: 27rem;
+//   height: 4.6875rem;
+// `;
 
-const LogoDropZone = styled(BaseDropZone)`
-  width: 4.25rem;
-  height: 4.25rem;
-`;
+// const LogoDropZone = styled(BaseDropZone)`
+//   width: 4.25rem;
+//   height: 4.25rem;
+// `;
 
 const ContentWrapper = styled.div`
   padding: 4.25rem;

@@ -46,12 +46,13 @@ export function changeInput(label, value) {
   };
 }
 
-export function changeStatus(application, status) {
+export function changeStatus(application, status, role) {
   return {
     type: CHANGE_STATUS,
     payload: {
       application,
       status,
+      role,
     },
   };
 }

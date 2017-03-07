@@ -32,9 +32,6 @@ export function* save() {
   delete data.validationErrors;
   delete data.location;
 
-  // @TODO MAKE PROPER IMAGE UPLOAD, NOW USE PLACEHOLDER TO TEST API
-  data.header = 'http://bukalapak.com/';
-  data.logo = 'http://bukalapak.com/';
   const requestURL = `${API_COMPANIES}/${id}`;
   const auth = `Bearer ${currentToken}`;
 
@@ -45,11 +42,13 @@ export function* save() {
     category: {
       presence: true,
     },
-    logo: {
+    logo_url: {
       presence: true,
+      url: true,
     },
-    header: {
+    header_img_url: {
       presence: true,
+      url: true,
     },
     website: {
       presence: true,
@@ -69,11 +68,6 @@ export function* save() {
     yield put(saveFail('Validation error.'));
     return;
   }
-
-  delete data.header;
-  delete data.logo;
-  data.website = data.site;
-  delete data.site;
 
   const result = yield call(request, requestURL, {
     method: isNew ? 'POST' : 'PUT',

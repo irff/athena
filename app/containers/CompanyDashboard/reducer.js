@@ -18,6 +18,7 @@ const initialState = fromJS({
   new_applications: [],
   applications: [],
   statistics: [],
+  selectedRole: '',
   selectedApplication: {},
   inputs: {
     emailSubject: '',
@@ -40,12 +41,14 @@ function companyDashboardReducer(state = initialState, action) {
         return state
           .set('isRejecting', true)
           .set('selectedApplication', action.payload.application)
-          .set('selectedStatus', action.payload.status);
+          .set('selectedStatus', action.payload.status)
+          .set('selectedRole', action.payload.role);
       }
 
       return state
         .set('isChangingStatus', true)
         .set('selectedStatus', action.payload.status)
+        .set('selectedRole', action.payload.role)
         .set('selectedApplication', action.payload.application);
 
     case CHANGE_STATUS_CANCEL:
@@ -53,7 +56,9 @@ function companyDashboardReducer(state = initialState, action) {
         .set('isChangingStatus', false)
         .set('isRejecting', false)
         .set('selectedStatus', '')
-        .set('selectedApplication', {});
+        .set('selectedApplication', {})
+        .setIn(['inputs', 'emailSubject'], '')
+        .setIn(['inputs', 'emailContent'], '');
 
     case CHANGE_STATUS_DONE: {
       const applicationId = state.get('selectedApplication').application_id;
@@ -89,7 +94,9 @@ function companyDashboardReducer(state = initialState, action) {
         .set('isChangingStatus', false)
         .set('isRejecting', false)
         .set('selectedStatus', '')
-        .set('selectedApplication', {});
+        .set('selectedApplication', {})
+        .setIn(['inputs', 'emailSubject'], '')
+        .setIn(['inputs', 'emailContent'], '');
     }
 
     case INITIAL_FETCH_SUCCESS:

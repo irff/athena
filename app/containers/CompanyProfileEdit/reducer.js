@@ -19,9 +19,9 @@ import {
 const initialState = fromJS({
   name: '',
   category: '',
-  logo: '',
-  header: '',
-  site: '',
+  logo_url: '',
+  header_img_url: '',
+  website: '',
   description: '',
   isSaving: false,
   isLoading: false,

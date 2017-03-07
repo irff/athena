@@ -6,8 +6,8 @@ import { API_COMPANIES } from 'containers/App/api';
 import { loading, loadingDone } from 'containers/App/actions';
 import { selectGlobal } from 'containers/App/selectors';
 import selectCompanyDashboard from './selectors';
-import { initialFetchSuccess, initialFetchFail, changeStatusDone } from './actions';
-import { INITIAL_FETCH, RESUME_READ, CHANGE_STATUS_CONFIRM } from './constants';
+import { initialFetchSuccess, initialFetchFail, changeStatusDone, changeInput } from './actions';
+import { INITIAL_FETCH, RESUME_READ, CHANGE_STATUS, CHANGE_STATUS_CONFIRM } from './constants';
 
 export function* fetchNewApplications() {
   yield put(loading());
@@ -149,6 +149,91 @@ export function* statusChanged() {
   yield put(changeStatusDone());
 }
 
+export function* prefillContent() {
+  const globalState = yield select(selectGlobal());
+  const userData = globalState.userData;
+  const currentState = yield select(selectCompanyDashboard());
+  const application = currentState.selectedApplication;
+  const student = application.student;
+  const role = currentState.selectedRole;
+  /* eslint-disable quotes */
+  /* eslint-disable quote-props */
+  /* eslint-disable comma-dangle */
+  const status = [
+    {
+      "text": "pilih status",
+      "value": "WAIT_FOR_REVIEW"
+    },
+    {
+      "text": "pilih status",
+      "value": "RESUME_REVIEWED"
+    },
+    {
+      "text": "tolak",
+      "value": "REJECTED"
+    },
+    {
+      "text": "terima",
+      "value": "ACCEPTED"
+    },
+    {
+      "text": "phone interview",
+      "value": "WAIT_FOR_PHONE"
+    },
+    {
+      "text": "review phone interview",
+      "value": "PHONE_REVIEWED"
+    },
+    {
+      "text": "online test",
+      "value": "WAIT_FOR_ONLINE_TEST"
+    },
+    {
+      "text": "review online test",
+      "value": "ONLINE_TEST_REVIEWED"
+    },
+    {
+      "text": "task submission",
+      "value": "WAIT_FOR_SUBMISSION"
+    },
+    {
+      "text": "review task submission",
+      "value": "SUBMISSION_REVIEWED"
+    },
+    {
+      "text": "on-site interview",
+      "value": "WAIT_FOR_ONSITE_TEST"
+    },
+    {
+      "text": "review on-site interview",
+      "value": "ONSITE_TEST_REVIEWED"
+    }
+  ];
+  /* eslint-enable quotes */
+  /* eslint-enable quote-props */
+  /* eslint-enable comma-dangle */
+  let statusText = status.find(e => e.value === application.status).text;
+  if (statusText === 'pilih status') statusText = 'review';
+  const template = `Dear ${student.first_name} ${student.last_name},
+
+Setelah melewati proses ${statusText}, kami memutuskan untuk tidak melanjutkan kamu ke tahap berikutnya karena pengalaman dan kemampuan yang kamu miliki belum memenuhi kriteria kami.
+
+Adapun beberapa saran dari kami antara lain:
+
+kenali lebih dalam tentang ${userData.name}
+pelajari studi kasus yang mungkin akan ditanyakan sebagai ${role}
+perdalam pengalaman kamu untuk mendaftar sebagai ${role}
+Silakan pantau terus posisi yang kami buka yang mungkin saja kamu minati. Semoga sukses pada pencarian kerja selanjutnya.
+
+Terima kasih.
+
+Salam,
+Tim Recruiter ${userData.name}
+`;
+
+  yield put(changeInput('emailContent', template));
+}
+
 export function* fetchWatcher() {
   while (yield take(INITIAL_FETCH)) {
     yield call(fetchNewApplications);
@@ -170,6 +255,15 @@ export function* statusWatcher() {
   }
 }
 
+export function* prefillWatcher() {
+  let action;
+  while (action = yield take(CHANGE_STATUS)) { // eslint-disable-line no-cond-assign
+    if (action.payload.status === 'REJECTED') {
+      yield call(prefillContent);
+    }
+  }
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -178,11 +272,13 @@ export function* companySaga() {
   const fetchSaga = yield fork(fetchWatcher);
   const resumeSaga = yield fork(resumeWatcher);
   const statusSaga = yield fork(statusWatcher);
+  const prefillSaga = yield fork(prefillWatcher);
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
   yield cancel(fetchSaga);
   yield cancel(resumeSaga);
   yield cancel(statusSaga);
+  yield cancel(prefillSaga);
 }
 
 export function* companySagaContainer() {

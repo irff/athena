@@ -217,7 +217,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                             {...applicant}
                             key={idx}
                             statusOptions={this.formatStatusOptions(item.status)}
-                            onStatusChange={status => this.props.changeStatus(applicant, status)}
+                            onStatusChange={status => this.props.changeStatus(applicant, status, item.role)}
                             onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}
                             onResumeClicked={() => this.props.openResume(applicant.application_id)}
                           />
@@ -240,7 +240,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                         {...applicant}
                         key={k2}
                         statusOptions={this.formatStatusOptions(application.status)}
-                        onStatusChange={status => this.props.changeStatus(applicant, status)}
+                        onStatusChange={status => this.props.changeStatus(applicant, status, application.role)}
                         onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}
                         onResumeClicked={() => this.props.openResume(applicant.application_id)}
                       />
@@ -329,7 +329,7 @@ function mapDispatchToProps(dispatch) {
     loading: () => dispatch(loading()),
     fetchUserData: (val) => dispatch(fetchUserData(val)),
     initialFetch: () => dispatch(initialFetch()),
-    changeStatus: (applicant, status) => dispatch(changeStatus(applicant, status)),
+    changeStatus: (applicant, status, role) => dispatch(changeStatus(applicant, status, role)),
     changeStatusConfirm: () => dispatch(changeStatusConfirm()),
     changeStatusCancel: () => dispatch(changeStatusCancel()),
     changeInput: (k, v) => dispatch(changeInput(k, v)),
