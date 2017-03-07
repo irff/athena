@@ -284,17 +284,18 @@ export function* fetchUserDataSaga(data) {
     yield put(loadingDone());
 
     /* set cookies */
-    document.cookie = `token=${data.token};expires=${expires};path=/`;
 
     if (data.isCompany) {
       yield put(logInSuccessCompany(data.token, data.id, fetchDataCall.data.company));
 
       /* set cookies */
+      document.cookie = `company_token=${data.token};expires=${expires};path=/`;
       document.cookie = `company_id=${data.id};expires=${expires};path=/`;
     } else {
       yield put(logInSuccessStudent(data.token, data.id, fetchDataCall.data));
 
       /* set cookies */
+      document.cookie = `student_token=${data.token};expires=${expires};path=/`;
       document.cookie = `student_id=${data.id};expires=${expires};path=/`;
     }
 
