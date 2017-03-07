@@ -32,16 +32,18 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
   componentWillMount() {
     this.props.loadingDone();
 
-    const token = this.getCookie('token');
+    let token = '';
     let id = '';
 
     if (this.isCompanyPage()) {
+      token = this.getCookie('company_token');
       id = this.getCookie('company_id');
       if (token !== '' && id !== '') {
         this.props.loading();
         this.props.fetchUserData({ token, id, isCompany: true });
       }
     } else {
+      token = this.getCookie('student_token');
       id = this.getCookie('student_id');
       if (token !== '' && id !== '') {
         this.props.loading();

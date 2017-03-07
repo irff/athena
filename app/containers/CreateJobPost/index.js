@@ -37,7 +37,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   };
 
   componentDidMount() {
-    const token = this.getCookie('token');
+    const token = this.getCookie('company_token');
     const companyId = this.getCookie('company_id');
 
     if (this.props.global.token === '' || this.props.global.id === '') {

@@ -30,8 +30,13 @@ export class Navbar extends React.Component { // eslint-disable-line react/prefe
   }
 
   logOut() {
-    document.cookie = 'token=;expires=Thu, 01-Jan-70 00:00:01 GMT;path=/';
-    document.cookie = 'student_id=;expires=Thu, 01-Jan-70 00:00:01 GMT;path=/';
+    if (this.isCompanyPage()) {
+      document.cookie = 'company_token=;expires=Thu, 01-Jan-70 00:00:01 GMT;path=/';
+      document.cookie = 'company_id=;expires=Thu, 01-Jan-70 00:00:01 GMT;path=/';
+    } else {
+      document.cookie = 'student_token=;expires=Thu, 01-Jan-70 00:00:01 GMT;path=/';
+      document.cookie = 'student_id=;expires=Thu, 01-Jan-70 00:00:01 GMT;path=/';
+    }
     this.props.logOut();
     this.props.push('/');
   }

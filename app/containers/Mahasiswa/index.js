@@ -233,7 +233,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
   }
 
   componentDidMount() {
-    const token = this.getCookie('token');
+    const token = this.getCookie('student_token');
     const studentId = this.getCookie('student_id');
 
     if (this.props.global.token === '' || this.props.global.id === '') {

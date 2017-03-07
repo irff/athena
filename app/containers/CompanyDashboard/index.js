@@ -39,7 +39,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
   };
 
   componentDidMount() {
-    const token = this.getCookie('token');
+    const token = this.getCookie('company_token');
     const companyId = this.getCookie('company_id');
 
     if (this.props.global.token === '' || this.props.global.id === '') {
