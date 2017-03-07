@@ -9,12 +9,12 @@ import styled from 'styled-components';
 
 function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicked, onResumeClicked, onStatusChange }) {
   const onLinkedin = () => {
-    if (onLinkedinClicked) onLinkedinClicked();
+    if (typeof onLinkedinClicked === 'function') onLinkedinClicked();
     window.open(student.linkedin_url, '_blank');
   };
 
   const onResume = () => {
-    if (onResumeClicked) onResumeClicked();
+    if (typeof onResumeClicked === 'function') onResumeClicked();
     window.open(student.resume_url, '_blank');
   };
 

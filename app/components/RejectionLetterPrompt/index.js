@@ -6,8 +6,9 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { isEmpty } from 'lodash';
 
-function RejectionLetterPrompt({ to, onCancel, onSend }) {
+function RejectionLetterPrompt({ student, onCancel, onSend, subject, content, onSubjectChange, onContentChange }) {
   return (
     <Wrapper>
       <Header>
@@ -17,14 +18,14 @@ function RejectionLetterPrompt({ to, onCancel, onSend }) {
         <div>
           <span className="label">Kepada</span>
           <span>:</span>
-          <span className="bold">{to}</span>
+          <span className="bold">{isEmpty(student) ? '' : `${student.first_name} ${student.last_name}`}</span>
         </div>
         <div>
           <span className="label">Subjek Pesan</span>
           <span>:</span>
-          <input placeholder="Tuliskan subjek pesan" />
+          <input placeholder="Tuliskan subjek pesan" value={subject} onChange={onSubjectChange} />
         </div>
-        <textarea placeholder="Tuliskan Pesan mu disini" />
+        <textarea placeholder="Tuliskan Pesan mu disini" value={content} onChange={onContentChange} />
       </Content>
       <Footer>
         <Button secondary onClick={onCancel} >
@@ -39,9 +40,13 @@ function RejectionLetterPrompt({ to, onCancel, onSend }) {
 }
 
 RejectionLetterPrompt.propTypes = {
-  to: React.PropTypes.string,
+  student: React.PropTypes.object,
   onCancel: React.PropTypes.func,
   onSend: React.PropTypes.func,
+  subject: React.PropTypes.string,
+  content: React.PropTypes.string,
+  onSubjectChange: React.PropTypes.func,
+  onContentChange: React.PropTypes.func,
 };
 
 const Wrapper = styled.div`

@@ -19,12 +19,13 @@ import SectionTitle from 'components/SectionTitle';
 import CompanyInfoCard from 'components/CompanyInfoCard';
 import { loading } from 'containers/App/actions';
 import { fetchUserData } from 'containers/UserAccess/actions';
-import { initialFetch } from './actions';
+import { initialFetch, changeStatus, changeStatusConfirm, changeStatusCancel, openLinkedin, openResume, changeInput } from './actions';
 import SubsectionTitle from 'components/SubsectionTitle';
 import ApplicantCard from 'components/ApplicantCard';
 import Modal from 'components/Modal';
 import { isEmpty } from 'lodash';
 import RejectionLetterPrompt from 'components/RejectionLetterPrompt';
+import AlertSuccess from 'components/AlertSuccess';
 
 import searchIcon from './search.svg';
 
@@ -36,6 +37,12 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
     loading: React.PropTypes.func,
     fetchUserData: React.PropTypes.func,
     initialFetch: React.PropTypes.func,
+    changeInput: React.PropTypes.func,
+    changeStatus: React.PropTypes.func,
+    changeStatusCancel: React.PropTypes.func,
+    changeStatusConfirm: React.PropTypes.func,
+    openLinkedin: React.PropTypes.func,
+    openResume: React.PropTypes.func,
   };
 
   componentDidMount() {
@@ -57,8 +64,6 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
       if (nextProps.global.currentToken !== '' && nextProps.global.id !== '') {
         this.props.initialFetch();
       }
-    } else if (isEmpty(nextProps.children)) {
-      this.props.initialFetch();
     }
   }
 
@@ -89,6 +94,67 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
     return status
       .filter(st => st.value !== 'RESUME_REVIEWED')
       .map(st => ({ ...st, text: this.titleCase(st.text) }));
+  }
+
+  findStatusText(value) {
+    /* eslint-disable quotes */
+    /* eslint-disable quote-props */
+    /* eslint-disable comma-dangle */
+    const status = [
+      {
+        "text": "pilih status",
+        "value": "WAIT_FOR_REVIEW"
+      },
+      {
+        "text": "pilih status",
+        "value": "RESUME_REVIEWED"
+      },
+      {
+        "text": "tolak",
+        "value": "REJECTED"
+      },
+      {
+        "text": "terima",
+        "value": "ACCEPTED"
+      },
+      {
+        "text": "phone interview",
+        "value": "WAIT_FOR_PHONE"
+      },
+      {
+        "text": "review phone interview",
+        "value": "PHONE_REVIEWED"
+      },
+      {
+        "text": "online test",
+        "value": "WAIT_FOR_ONLINE_TEST"
+      },
+      {
+        "text": "review online test",
+        "value": "ONLINE_TEST_REVIEWED"
+      },
+      {
+        "text": "task submission",
+        "value": "WAIT_FOR_SUBMISSION"
+      },
+      {
+        "text": "review task submission",
+        "value": "SUBMISSION_REVIEWED"
+      },
+      {
+        "text": "on-site interview",
+        "value": "WAIT_FOR_ONSITE_TEST"
+      },
+      {
+        "text": "review on-site interview",
+        "value": "ONSITE_TEST_REVIEWED"
+      }
+    ];
+    /* eslint-enable quotes */
+    /* eslint-enable quote-props */
+    /* eslint-enable comma-dangle */
+
+    return this.titleCase(status.filter(st => st.value === value)[0].text);
   }
 
   renderEmptyState() {
@@ -131,7 +197,6 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
             <div className="small-12 columns">
               <SectionTitle>Dashboard</SectionTitle>
             </div>
-            {JSON.stringify(this.props.global)}
             <div className="small-12 columns">
               <CompanyInfoCard
                 {...this.props.global.userData}
@@ -148,7 +213,14 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                       <div key={k}>
                         <SubsectionTitle>{item.role}</SubsectionTitle>
                         {item.applicants.map((applicant, idx) =>
-                          <ApplicantCard key={idx} {...applicant} statusOptions={this.formatStatusOptions(item.status)} />
+                          <ApplicantCard
+                            {...applicant}
+                            key={idx}
+                            statusOptions={this.formatStatusOptions(item.status)}
+                            onStatusChange={status => this.props.changeStatus(applicant, status)}
+                            onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}
+                            onResumeClicked={() => this.props.openResume(applicant.application_id)}
+                          />
                         )}
                       </div>
                     )}
@@ -164,7 +236,14 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                   <Accordion.Item key={k1} title={<span><strong>{application.role} &middot;</strong> {application.applicant_num} pendaftar</span>}>
                     {!application.applicant_num && this.renderEmptyApplicants()}
                     {application.applicants.map((applicant, k2) =>
-                      <ApplicantCard key={k2} {...applicant} statusOptions={this.formatStatusOptions(application.status)} />
+                      <ApplicantCard
+                        {...applicant}
+                        key={k2}
+                        statusOptions={this.formatStatusOptions(application.status)}
+                        onStatusChange={status => this.props.changeStatus(applicant, status)}
+                        onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}
+                        onResumeClicked={() => this.props.openResume(applicant.application_id)}
+                      />
                     )}
                   </Accordion.Item>
                 )}
@@ -173,8 +252,37 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
           </div>
         </ContentContainer>
 
-        <Modal>
-          <RejectionLetterPrompt to="John Maeda" />
+        <Modal opened={local.isRejecting}>
+          <RejectionLetterPrompt
+            student={local.selectedApplication.student}
+            onCancel={this.props.changeStatusCancel}
+            onSend={this.props.changeStatusConfirm}
+            subject={local.inputs.emailSubject}
+            content={local.inputs.emailContent}
+            onSubjectChange={(e) => this.props.changeInput('emailSubject', e.target.value)}
+            onContentChange={(e) => this.props.changeInput('emailContent', e.target.value)}
+          />
+        </Modal>
+
+        <Modal opened={local.isChangingStatus}>
+          <AlertSuccess.Confirmation
+            cancelText="Cancel"
+            confirmText="Confirm"
+            onCancel={this.props.changeStatusCancel}
+            onConfirm={this.props.changeStatusConfirm}
+          >
+            <span>Kamu yakin akan mengganti status
+              <strong> {
+                isEmpty(local.selectedApplication) ? '' :
+                local.selectedApplication.student.first_name
+              } </strong>
+              menjadi
+              <strong> {
+                isEmpty(local.selectedStatus) ? '' :
+                this.findStatusText(local.selectedStatus)
+              }</strong>?
+            </span>
+          </AlertSuccess.Confirmation>
         </Modal>
 
         <Footer hasMargin />
@@ -221,6 +329,12 @@ function mapDispatchToProps(dispatch) {
     loading: () => dispatch(loading()),
     fetchUserData: (val) => dispatch(fetchUserData(val)),
     initialFetch: () => dispatch(initialFetch()),
+    changeStatus: (applicant, status) => dispatch(changeStatus(applicant, status)),
+    changeStatusConfirm: () => dispatch(changeStatusConfirm()),
+    changeStatusCancel: () => dispatch(changeStatusCancel()),
+    changeInput: (k, v) => dispatch(changeInput(k, v)),
+    openLinkedin: (id) => dispatch(openLinkedin(id)),
+    openResume: (id) => dispatch(openResume(id)),
   };
 }
 

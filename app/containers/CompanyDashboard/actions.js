@@ -9,7 +9,11 @@ import {
   INITIAL_FETCH_FAIL,
   INITIAL_FETCH_SUCCESS,
   CHANGE_STATUS,
+  CHANGE_STATUS_CANCEL,
+  CHANGE_STATUS_CONFIRM,
+  CHANGE_STATUS_DONE,
   RESUME_READ,
+  CHANGE_INPUT,
 } from './constants';
 
 export function initialFetch() {
@@ -32,17 +36,45 @@ export function initialFetchSuccess(payload) {
   };
 }
 
-export function changeStatus(id, value) {
+export function changeInput(label, value) {
   return {
-    type: CHANGE_STATUS,
+    type: CHANGE_INPUT,
     payload: {
-      id,
+      label,
       value,
     },
   };
 }
 
-export function openLinkedIn(id) {
+export function changeStatus(application, status) {
+  return {
+    type: CHANGE_STATUS,
+    payload: {
+      application,
+      status,
+    },
+  };
+}
+
+export function changeStatusConfirm() {
+  return {
+    type: CHANGE_STATUS_CONFIRM,
+  };
+}
+
+export function changeStatusDone() {
+  return {
+    type: CHANGE_STATUS_DONE,
+  };
+}
+
+export function changeStatusCancel() {
+  return {
+    type: CHANGE_STATUS_CANCEL,
+  };
+}
+
+export function openLinkedin(id) {
   return {
     type: RESUME_READ,
     payload: id,
