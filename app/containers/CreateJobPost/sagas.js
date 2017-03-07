@@ -10,6 +10,9 @@ import { REVIEW_START, SUBMIT } from './constants';
 import { updateErrors, cancelReview, submitSuccess, submitFail } from './actions';
 import selectCreateJobPost from './selectors';
 
+import { API_COMPANIES } from 'containers/App/api';
+import { userAccessSaga } from 'containers/UserAccess/sagas';
+
 // Worker Saga
 export function* validation() {
   const salaryValidator = (value) => {
@@ -82,16 +85,19 @@ export function* validation() {
 
 export function* submit() {
   const globalState = yield select(selectGlobal());
-  const currentToken = globalState.get('currentToken');
-  const requestURL = null; // @TODO
+  const companyId = globalState.id;
+  const currentToken = globalState.currentToken;
+  const requestURL = `${API_COMPANIES}/${companyId}/jobs`; // @TODO
   const auth = `Bearer ${currentToken}`;
   const state = yield select(selectCreateJobPost());
   const data = state;
   delete data.isReviewing;
   delete data.isSubmitting;
   delete data.error;
-  delete data.validation_errors;
+  delete data.validationErrors;
   delete data.isSubmitted;
+  data.salary.is_published = !data.salary.isHidden;
+  delete data.salary.isHidden;
 
   const result = yield call(request, requestURL, {
     method: 'POST',
@@ -130,7 +136,15 @@ export function* createJobPostSaga() {
   yield cancel(submitSaga);
 }
 
-// All sagas to be loaded
+// Container saga
+export function* createJobPostSagaContainer() {
+  yield [
+    fork(createJobPostSaga),
+    fork(userAccessSaga),
+  ];
+}
+
+// Bootstrap sagas
 export default [
-  createJobPostSaga,
+  createJobPostSagaContainer,
 ];

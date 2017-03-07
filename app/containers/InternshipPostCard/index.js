@@ -444,7 +444,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
         validation = true;
       }
 
-      location = item.company.company_address.split(/[\s,]+/);
+      location = item.location.split(/[\s,]+/);
       city = location.pop();
       region = location.pop();
       street = location.pop();
@@ -534,7 +534,6 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
                       <h3>Pengalaman yang Didapat</h3>
                       <div className={styles.listContainer}>
                         <ul>
-                          {item.skills_gained.map((value, index) => (<li key={index}>{value}</li>))}
                           {item.experiences_gained.map((value, index) => (<li key={index}>{value}</li>))}
                         </ul>
                       </div>
