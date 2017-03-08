@@ -1,14 +1,14 @@
 import { push, LOCATION_CHANGE } from 'react-router-redux';
 import { take, call, put, select, fork, cancel, actionChannel } from 'redux-saga/effects';
-import { LOG_IN } from 'containers/App/constants';
+import { LOG_IN_STUDENT, LOG_IN_COMPANY } from 'containers/App/constants';
 import { SIGN_UP, CREATE_STUDENT, FETCH_USER_DATA } from './constants';
 import { changeErrorMessage, createStudent, fetchUserData } from './actions';
 import selectUserAccess from './selectors';
-import { loading, loadingDone, logInSuccess } from 'containers/App/actions';
+import { loading, loadingDone, logInSuccessStudent, logInSuccessCompany } from 'containers/App/actions';
 import request from 'utils/request';
-import { API_STUDENTS } from 'containers/App/api';
+import { API_STUDENTS, API_COMPANIES } from 'containers/App/api';
 
-export function* logIn() {
+export function* logInStudent() {
   const currentState = yield select(selectUserAccess());
   const requestURL = `${API_STUDENTS}/login`;
 
@@ -17,6 +17,7 @@ export function* logIn() {
     pass: '',
     error: '',
   };
+
   let errFlag = false;
 
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,7 +49,7 @@ export function* logIn() {
 
     if (!loginCall.err) {
       yield put(changeErrorMessage('lg', errMessage));
-      yield put(fetchUserData({ token: loginCall.data.token, student_id: loginCall.data.student_id }));
+      yield put(fetchUserData({ token: loginCall.data.token, id: loginCall.data.student_id }));
     } else {
       errMessage.error = 'Login gagal';
       yield put(changeErrorMessage('lg', errMessage));
@@ -59,9 +60,65 @@ export function* logIn() {
   }
 }
 
-export function* logInWatcher() {
-  while (yield take(LOG_IN)) {
-    yield call(logIn);
+export function* logInStudentWatcher() {
+  while (yield take(LOG_IN_STUDENT)) {
+    yield call(logInStudent);
+  }
+}
+
+export function* logInCompany() {
+  const currentState = yield select(selectUserAccess());
+  const requestURL = `${API_COMPANIES}/login`;
+
+  const errMessage = {
+    email: '',
+    pass: '',
+    error: '',
+  };
+  let errFlag = false;
+
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!currentState.lg.email || !re.test(currentState.lg.email)) {
+    errFlag = true;
+    errMessage.email = 'Email tidak valid.';
+  }
+
+  if (!currentState.lg.pass) {
+    errFlag = true;
+    errMessage.pass = 'Password tidak boleh kosong';
+  }
+
+  if (!errFlag) {
+    yield put(loading());
+    const loginCall = yield call(request, requestURL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: currentState.lg.email,
+        password: currentState.lg.pass,
+      }),
+    });
+
+    if (!loginCall.err) {
+      yield put(changeErrorMessage('lg', errMessage));
+      yield put(fetchUserData({ token: loginCall.data.token, id: loginCall.data.company_id, isCompany: true }));
+    } else {
+      errMessage.error = 'Login gagal';
+      yield put(changeErrorMessage('lg', errMessage));
+      yield put(loadingDone());
+    }
+  } else {
+    yield put(changeErrorMessage('lg', errMessage));
+  }
+}
+
+export function* logInCompanyWatcher() {
+  while (yield take(LOG_IN_COMPANY)) {
+    yield call(logInCompany);
   }
 }
 
@@ -198,7 +255,7 @@ export function* autoLogInAfterCreated() {
 
   if (!loginCall.err) {
     yield put(changeErrorMessage('su', errMessage));
-    yield put(fetchUserData({ token: loginCall.data.token, student_id: loginCall.data.student_id }));
+    yield put(fetchUserData({ token: loginCall.data.token, id: loginCall.data.student_id }));
   } else {
     errMessage.error = 'Signup gagal!';
     yield put(changeErrorMessage('su', errMessage));
@@ -207,7 +264,7 @@ export function* autoLogInAfterCreated() {
 }
 
 export function* fetchUserDataSaga(data) {
-  const requestURL = `${API_STUDENTS}/${data.student_id}`;
+  const requestURL = `${data.isCompany ? API_COMPANIES : API_STUDENTS}/${data.id}`;
   const auth = `Bearer ${data.token}`;
 
   const fetchDataCall = yield call(request, requestURL, {
@@ -224,14 +281,30 @@ export function* fetchUserDataSaga(data) {
   const expires = `expires=${d.toUTCString()}`;
 
   if (!fetchDataCall.err) {
-    yield put(logInSuccess(data.token, data.student_id, fetchDataCall.data));
     yield put(loadingDone());
 
     /* set cookies */
-    document.cookie = `token=${data.token};expires=${expires};path=/`;
-    document.cookie = `student_id=${data.student_id};expires=${expires};path=/`;
+
+    if (data.isCompany) {
+      yield put(logInSuccessCompany(data.token, data.id, fetchDataCall.data.company));
+
+      /* set cookies */
+      document.cookie = `company_token=${data.token};expires=${expires};path=/`;
+      document.cookie = `company_id=${data.id};expires=${expires};path=/`;
+    } else {
+      yield put(logInSuccessStudent(data.token, data.id, fetchDataCall.data));
+
+      /* set cookies */
+      document.cookie = `student_token=${data.token};expires=${expires};path=/`;
+      document.cookie = `student_id=${data.id};expires=${expires};path=/`;
+    }
+
     /* redirect */
-    if (window.location.pathname.endsWith('/login') || window.location.pathname.endsWith('/login/') || window.location.pathname.endsWith('/signup') || window.location.pathname.endsWith('/signup/')) {
+    if (data.isCompany) {
+      if (window.location.pathname.endsWith('/login') || window.location.pathname.endsWith('/login/')) {
+        yield put(push('/perusahaan/home'));
+      }
+    } else if (window.location.pathname.endsWith('/login') || window.location.pathname.endsWith('/login/') || window.location.pathname.endsWith('/signup') || window.location.pathname.endsWith('/signup/')) {
       yield put(push('/mahasiswa/cari-internship'));
     }
   } else {
@@ -267,14 +340,16 @@ export function* fetchUserDataWatcher() {
  */
 export function* userAccessSaga() {
   // Fork watcher so we can continue execution
-  const logInSaga = yield fork(logInWatcher);
+  const logInStudentSaga = yield fork(logInStudentWatcher);
+  const logInCompanySaga = yield fork(logInCompanyWatcher);
   const signUpSaga = yield fork(signUpWatcher);
   const createStudentSaga = yield fork(createStudentWatcher);
   const fetchUserDataSagaWatcher = yield fork(fetchUserDataWatcher);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
-  yield cancel(logInSaga);
+  yield cancel(logInStudentSaga);
+  yield cancel(logInCompanySaga);
   yield cancel(signUpSaga);
   yield cancel(createStudentSaga);
   yield cancel(fetchUserDataSagaWatcher);

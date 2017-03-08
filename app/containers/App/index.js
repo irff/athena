@@ -24,19 +24,7 @@ import MaskIcon from 'safari-pinned-tab.svg';
 import Favicon from 'static?!favicon.ico?output=favicon.ico';
 import Manifest from '!file?name=[name].[ext]!manifest.json';
 
-const theme = {
-  white: '#FFFFFF',
-  black: '#4A4A4A',
-  darkBlack: '#3D3D3D',
-  lightBlack: '#464646',
-  gray: '#979797',
-  lightGray: '#E4E4E4',
-  darkGray: '#AFAFAF',
-  yellow: '#E5D224',
-  blue: '#62B9F3',
-  green: '#9ADC56',
-  red: '#F0624E',
-};
+import theme from 'theme';
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {

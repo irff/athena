@@ -142,16 +142,12 @@ export default function createRoutes(store) {
       name: 'perusahaan',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('containers/Mahasiswa/reducer'),
-          System.import('containers/Mahasiswa/sagas'),
-          System.import('containers/Mahasiswa'),
+          System.import('containers/Perusahaan'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('mahasiswa', reducer.default);
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 
@@ -159,7 +155,7 @@ export default function createRoutes(store) {
       },
       childRoutes: [
         {
-          path: '/perusahaan/login',
+          path: 'login',
           name: 'loginPerusahaan',
           getComponent(nextState, cb) {
             const importModules = Promise.all([
@@ -180,19 +176,19 @@ export default function createRoutes(store) {
           },
         },
         {
-          path: '/perusahaan/signup',
-          name: 'signupPerusahaan',
+          path: 'home',
+          name: 'companyDashboard',
           getComponent(nextState, cb) {
             const importModules = Promise.all([
-              System.import('containers/UserAccess/reducer'),
-              System.import('containers/UserAccess/sagas'),
-              System.import('containers/UserAccess'),
+              System.import('containers/CompanyDashboard/reducer'),
+              System.import('containers/CompanyDashboard/sagas'),
+              System.import('containers/CompanyDashboard'),
             ]);
 
             const renderRoute = loadModule(cb);
 
             importModules.then(([reducer, sagas, component]) => {
-              injectReducer('userAccess', reducer.default);
+              injectReducer('companyDashboard', reducer.default);
               injectSagas(sagas.default);
               renderRoute(component);
             });
@@ -200,7 +196,68 @@ export default function createRoutes(store) {
             importModules.catch(errorLoading);
           },
         },
+        // {
+        //   path: '/perusahaan/signup',
+        //   name: 'signupPerusahaan',
+        //   getComponent(nextState, cb) {
+        //     const importModules = Promise.all([
+        //       System.import('containers/UserAccess/reducer'),
+        //       System.import('containers/UserAccess/sagas'),
+        //       System.import('containers/UserAccess'),
+        //     ]);
+
+        //     const renderRoute = loadModule(cb);
+
+        //     importModules.then(([reducer, sagas, component]) => {
+        //       injectReducer('userAccess', reducer.default);
+        //       injectSagas(sagas.default);
+        //       renderRoute(component);
+        //     });
+
+        //     importModules.catch(errorLoading);
+        //   },
+        // },
       ],
+    }, {
+      path: '/perusahaan/new-job',
+      name: 'createJobPost',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/CreateJobPost/reducer'),
+          System.import('containers/CreateJobPost/sagas'),
+          System.import('containers/CreateJobPost'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('createJobPost', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/perusahaan/edit-profil',
+      name: 'companyProfileEdit',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/CompanyProfileEdit/reducer'),
+          System.import('containers/CompanyProfileEdit/sagas'),
+          System.import('containers/CompanyProfileEdit'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('companyProfileEdit', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
     }, {
       path: '*',
       name: 'notfound',

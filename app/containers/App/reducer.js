@@ -11,7 +11,8 @@
  */
 
 import {
-  LOG_IN_SUCCESS,
+  LOG_IN_SUCCESS_STUDENT,
+  LOG_IN_SUCCESS_COMPANY,
   LOG_OUT,
   EDIT_PROFILE,
   LOADING,
@@ -23,7 +24,7 @@ import { fromJS } from 'immutable';
 const initialState = fromJS({
   loading: false,
   error: false,
-  loggedIn: true,
+  loggedIn: false,
   currentToken: '',
   id: '',
   userData: fromJS({}),
@@ -31,7 +32,14 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case LOG_IN_SUCCESS:
+    case LOG_IN_SUCCESS_STUDENT:
+      return state
+        .set('loggedIn', true)
+        .set('error', false)
+        .set('currentToken', action.token)
+        .set('id', action.id)
+        .set('userData', fromJS(action.payload));
+    case LOG_IN_SUCCESS_COMPANY:
       return state
         .set('loggedIn', true)
         .set('error', false)
