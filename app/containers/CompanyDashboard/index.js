@@ -299,6 +299,8 @@ const EmptyStateWrapper = styled.div`
 
   img {
     margin-bottom: 1.375rem;
+    width: 4.5rem;
+    max-width: 100%;
   }
 
   button {

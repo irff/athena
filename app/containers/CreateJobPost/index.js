@@ -16,7 +16,7 @@ import Footer from 'components/Footer';
 import CompanyHeader from 'components/CompanyHeader';
 import AlertSuccess from 'components/AlertSuccess';
 import Modal from 'components/Modal';
-import Cleave from 'cleave.js/react';
+import Cleave from 'cleave.js/dist/cleave-react';
 import { has, xor } from 'lodash';
 import { submit, review, cancelReview, inputChange } from './actions';
 import { loading } from 'containers/App/actions';
