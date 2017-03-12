@@ -101,6 +101,7 @@ export function* submit() {
 
   const result = yield call(request, requestURL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

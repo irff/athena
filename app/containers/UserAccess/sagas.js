@@ -36,6 +36,7 @@ export function* logInStudent() {
     yield put(loading());
     const loginCall = yield call(request, requestURL, {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -93,6 +94,7 @@ export function* logInCompany() {
     yield put(loading());
     const loginCall = yield call(request, requestURL, {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -167,6 +169,7 @@ export function* signUp() {
     yield put(loading());
     const signupCall = yield call(request, requestURL, {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -207,6 +210,7 @@ export function* crStudent(value) {
 
   const createStudentCall = yield call(request, requestURL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -242,6 +246,7 @@ export function* autoLogInAfterCreated() {
 
   const loginCall = yield call(request, requestURL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -269,6 +274,7 @@ export function* fetchUserDataSaga(data) {
 
   const fetchDataCall = yield call(request, requestURL, {
     method: 'GET',
+    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
