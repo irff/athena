@@ -22,9 +22,9 @@ module.exports = require('./webpack.base.babel')({
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
 
-  babelQuery: {
-    presets: ['es2015', 'react', 'stage-0'],
-  },
+  // babelQuery: {
+  //   presets: ['es2015', 'react', 'stage-0'],
+  // },
 
   // We use ExtractTextPlugin so we get a seperate CSS file instead
   // of the CSS being in the JS and injected as a style tag

@@ -175,27 +175,6 @@ export default function createRoutes(store) {
             importModules.catch(errorLoading);
           },
         },
-        {
-          path: 'home',
-          name: 'companyDashboard',
-          getComponent(nextState, cb) {
-            const importModules = Promise.all([
-              System.import('containers/CompanyDashboard/reducer'),
-              System.import('containers/CompanyDashboard/sagas'),
-              System.import('containers/CompanyDashboard'),
-            ]);
-
-            const renderRoute = loadModule(cb);
-
-            importModules.then(([reducer, sagas, component]) => {
-              injectReducer('companyDashboard', reducer.default);
-              injectSagas(sagas.default);
-              renderRoute(component);
-            });
-
-            importModules.catch(errorLoading);
-          },
-        },
         // {
         //   path: '/perusahaan/signup',
         //   name: 'signupPerusahaan',
@@ -218,6 +197,26 @@ export default function createRoutes(store) {
         //   },
         // },
       ],
+    }, {
+      path: '/perusahaan/home',
+      name: 'companyDashboard',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/CompanyDashboard/reducer'),
+          System.import('containers/CompanyDashboard/sagas'),
+          System.import('containers/CompanyDashboard'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('companyDashboard', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
     }, {
       path: '/perusahaan/new-job',
       name: 'createJobPost',
