@@ -22,7 +22,7 @@ export function* fetch() {
 
   const fetchCall = yield call(request, requestURL, {
     method: 'GET',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

@@ -71,7 +71,7 @@ export function* save() {
 
   const result = yield call(request, requestURL, {
     method: isNew ? 'POST' : 'PUT',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

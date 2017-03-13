@@ -53,7 +53,7 @@ export function* loadData() {
 
   const loadDataCall = yield call(request, requestURL, {
     method: 'GET',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export function* loadAppliedCall() {
 
   const validateDataCall = yield call(request, requestURLValidateData, {
     method: 'GET',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ export function* apply() {
 
   const applyCall = yield call(request, requestURL, {
     method: 'POST',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
