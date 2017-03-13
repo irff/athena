@@ -1,17 +1,25 @@
 {
+	"short_name": "Quint",
 	"name": "Quint",
 	"icons": [
 		{
-			"src": "\/android-chrome-192x192.png?v=quint11",
+			"src": "\/mobile-144x144.png?v=quint1.2",
+			"sizes": "144x144",
+			"type": "image\/png"
+		},
+		{
+			"src": "\/mobile-192x192.png?v=quint1.2",
 			"sizes": "192x192",
 			"type": "image\/png"
 		},
 		{
-			"src": "\/android-chrome-512x512.png?v=quint11",
+			"src": "\/mobile-512x512.png?v=quint1.2",
 			"sizes": "512x512",
 			"type": "image\/png"
 		}
 	],
-	"theme_color": "#ffffff",
+	"start_url": "/mahasiswa/login",
+	"theme_color": "#E5D224",
+	"background_color": "#333333",
 	"display": "standalone"
 }

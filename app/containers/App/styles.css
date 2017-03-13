@@ -95,12 +95,6 @@
   font-style: normal;
 }
 
-body {
-  font-family: 'Circular Std', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-}
-
 @font-face {
   font-family: "Flaticon";
   src: url("./Flaticon.eot");

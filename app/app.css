@@ -25,6 +25,11 @@ html {
 body {
   margin: 0; }
 
+
+body.fontLoaded {
+  font-family: 'Circular Std', Helvetica, Arial, sans-serif;
+}
+
 /* HTML5 display definitions
      ========================================================================== */
 /**

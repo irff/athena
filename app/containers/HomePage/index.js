@@ -36,9 +36,10 @@ import TokopediaImg from './tokopedia.png';
 import MidtransImg from './midtrans.png';
 import KudoImg from './kudo.png';
 import XenditImg from './xendit.png';
+import SircloImg from './sirclo.png';
 
 import ArunaHarsa from './aru.png';
-import MosesLo from './moses.png';
+import Frans from './frans.png';
 import RakhaKanz from './rakha.png';
 import VictorArdianto from './victor.png';
 
@@ -73,10 +74,10 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
           testimonyPicture: RakhaKanz,
         },
         {
-          testimonyText: '"I think we have a few from Quint that are going through the process. It\'s filled up the pipeline which I appreciate."',
-          testimonyName: 'Moses Lo',
+          testimonyText: '"We worked with Quint for our internship program, Quint brought in great talent with national and international achievements."',
+          testimonyName: 'Fransiskus Xaverius',
           testimonyPosition: 'Co-Founder, CEO of Xendit',
-          testimonyPicture: MosesLo,
+          testimonyPicture: Frans,
         },
         {
           testimonyText: '"Saya pernah menggunakan aplikasi internship match-making lain, namun karena alurnya tidak mudah, saya tidak lanjut menggunakan. Kemudian salah seorang teman saya merekomendasikan Quint. Setelah saya coba ternyata Quint lebih mudah dipakai, dan dalam waktu yang singkat saya langsung mendapatkan tempat internship yang saya inginkan."',
@@ -223,11 +224,14 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
                     <div className="small-6 medium-3 large-4 columns text-center">
                       <img src={DmsumImg} alt="dmsum.com" />
                     </div>
-                    <div className="small-6 medium-3 large-4 large-offset-2 columns text-center end">
+                    <div className="small-6 medium-3 large-4 columns text-center end">
                       <img src={XenditImg} alt="xendit.com" />
                     </div>
                     <div className="small-6 medium-3 large-4 columns text-center end">
                       <img src={KudoImg} alt="kudo.co.id" />
+                    </div>
+                    <div className="small-6 medium-3 large-4 columns text-center end">
+                      <img src={SircloImg} alt="sirclo.com" />
                     </div>
                   </div>
                 </div>

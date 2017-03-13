@@ -7,9 +7,17 @@
 import 'babel-polyfill';
 
 /* eslint-disable import/no-unresolved */
-// Load the manifest.json file and the .htaccess file
+// Load the manifest.json file, the .htaccess file and all icons
 import '!file?name=[name].[ext]!./manifest.json';
 import 'file?name=[name].[ext]!./.htaccess';
+import '!file?name=[name].[ext]!./mobile-144x144.png';
+import '!file?name=[name].[ext]!./mobile-192x192.png';
+import '!file?name=[name].[ext]!./mobile-512x512.png';
+import '!file?name=[name].[ext]!./apple-touch-icon.png';
+import '!file?name=[name].[ext]!./favicon-32x32.png';
+import '!file?name=[name].[ext]!./favicon-16x16.png';
+import '!file?name=[name].[ext]!./safari-pinned-tab.svg';
+import 'static?!favicon.ico?output=favicon.ico';
 /* eslint-enable import/no-unresolved */
 
 // Import all the third party stuff
@@ -21,6 +29,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import useScroll from 'react-router-scroll';
 import LanguageProvider from 'containers/LanguageProvider';
 import configureStore from './store';
+import FontFaceObserver from 'fontfaceobserver';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -28,6 +37,17 @@ import { translationMessages } from './i18n';
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
 import './app.css';
+
+// Observe loading of Circular Font
+const fontObserver = new FontFaceObserver('Circular Std', {});
+
+// When Circular is loaded, add a font-family using Circular to the body
+fontObserver.load().then(() => {
+  document.body.classList.add('fontLoaded');
+}, () => {
+  document.body.classList.remove('fontLoaded');
+});
+
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -52,14 +72,14 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-// import ReactGA from 'react-ga';
+import ReactGA from 'react-ga';
 
-// ReactGA.initialize('UA-87409670-1');
+ReactGA.initialize('UA-87409670-1');
 
 const logPageView = () => {
-  console.log('turn analytics on upon building, lul');
-  // ReactGA.set({ page: window.location.pathname });
-  // ReactGA.pageview(window.location.pathname);
+  // console.log('turn analytics on upon building, lul');
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
 };
 
 
