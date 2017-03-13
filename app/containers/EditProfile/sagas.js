@@ -91,7 +91,6 @@ export function* submitData(action) {
 
     yield call(request, requestURL, {
       method: 'PUT',
-      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',

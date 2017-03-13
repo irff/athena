@@ -19,7 +19,6 @@ export function* fetchNewApplications() {
 
   const fetchCall = yield call(request, requestURL, {
     method: 'GET',
-    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -46,7 +45,6 @@ export function* fetchOldApplications() {
 
   const fetchCall = yield call(request, requestURL, {
     method: 'GET',
-    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -74,7 +72,6 @@ export function* fetchStatistics() {
 
   const fetchCall = yield call(request, requestURL, {
     method: 'GET',
-    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -100,7 +97,6 @@ export function* resumeReviewed(applicationId) {
 
   yield call(request, requestURL, {
     method: 'POST',
-    mode: 'no-cors',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -123,7 +119,6 @@ export function* statusChanged() {
   if (status === 'REJECTED') {
     yield call(request, requestURL, {
       method: 'PUT',
-      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -138,7 +133,6 @@ export function* statusChanged() {
   } else {
     yield call(request, requestURL, {
       method: 'PUT',
-      mode: 'no-cors',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
