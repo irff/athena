@@ -146,27 +146,29 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
             {this.renderErrorMessage('location', 'Lokasi')}
             <div className="input">
               <span>Periode Internship</span>
-              <Select
-                width="14rem"
-                onChange={e => this.props.inputChange('job_schedule.start_at', e.target.value)}
-                value={job_schedule.start_at}
-              >
-                <option value="" disabled>Pilih Bulan Mulai</option>
-                {periods.map((p, idx) =>
-                  <option key={idx} value={p[0]}>{p[1]}</option>
-                )}
-              </Select>
-              <Between>-</Between>
-              <Select
-                width="14rem"
-                onChange={e => this.props.inputChange('job_schedule.end_at', e.target.value)}
-                value={job_schedule.end_at}
-              >
-                <option value="" disabled>Pilih Bulan Selesai</option>
-                {periods.map((p, idx) =>
-                  <option key={idx} value={p[0]}>{p[1]}</option>
-                )}
-              </Select>
+              <div>
+                <Select
+                  width="14rem"
+                  onChange={e => this.props.inputChange('job_schedule.start_at', e.target.value)}
+                  value={job_schedule.start_at}
+                >
+                  <option value="" disabled>Pilih Bulan Mulai</option>
+                  {periods.map((p, idx) =>
+                    <option key={idx} value={p[0]}>{p[1]}</option>
+                  )}
+                </Select>
+                <Between>-</Between>
+                <Select
+                  width="14rem"
+                  onChange={e => this.props.inputChange('job_schedule.end_at', e.target.value)}
+                  value={job_schedule.end_at}
+                >
+                  <option value="" disabled>Pilih Bulan Selesai</option>
+                  {periods.map((p, idx) =>
+                    <option key={idx} value={p[0]}>{p[1]}</option>
+                  )}
+                </Select>
+              </div>
             </div>
             {this.renderErrorMessage('job_schedule', 'Periode Internship')}
             <div className="input">
@@ -488,6 +490,7 @@ const ContentWrapper = styled.div`
 
         & > span {
           width: 15rem;
+          flex-shrink: 0;
         }
       }
     }
