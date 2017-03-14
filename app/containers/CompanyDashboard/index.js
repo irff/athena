@@ -230,7 +230,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
             }
             <div className="small-12 columns">
               <SectionTitle>Data Pendaftar</SectionTitle>
-              {!local.applications && this.renderEmptyState()}
+              {isEmpty(local.applications) && this.renderEmptyState()}
               <Accordion>
                 {local.applications.map((application, k1) =>
                   <Accordion.Item key={k1} title={<span><strong>{application.role} &middot;</strong> {application.applicant_num} pendaftar</span>}>
