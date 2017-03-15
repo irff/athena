@@ -12,6 +12,7 @@ import {
   SUBMIT_FAIL,
   SUBMIT_SUCCESS,
   UPDATE_ERRORS,
+  DONE,
 } from './constants';
 
 export function inputChange(label, value) {
@@ -59,5 +60,11 @@ export function updateErrors(payload) {
   return {
     type: UPDATE_ERRORS,
     payload,
+  };
+}
+
+export function done() {
+  return {
+    type: DONE,
   };
 }
