@@ -22,7 +22,7 @@ export function* loadData() {
   yield put(loading());
 
   if (currentToken === '') {
-    const name = 'token=';
+    const name = 'student_token=';
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
       let c = ca[i];

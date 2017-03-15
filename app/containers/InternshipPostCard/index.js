@@ -463,7 +463,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
                     <div className={styles.postContent}>
                       <h3>{item.role}</h3>
                       <h4>{item.company.name}</h4>
-                      <h5><a href={`https://www.google.com/maps/search/${item.company.company_address}`} target="_blank">{address}</a></h5>
+                      <h5><a href={`https://www.google.com/maps/search/${item.location}`} target="_blank">{address}</a></h5>
                       <h5>{salary}</h5>
                       <h6>{timestamp}</h6>
                     </div>
@@ -486,7 +486,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
           <div className="row expanded">
             <div className="small-12 columns">
               <div className={styles.container}>
-                <div className={styles.bgImg}><img src={item.company.background_img_url === 'iniDefaultEntryQuint' || item.company.background_img_url === '' ? JapanBackground : item.company.background_img_url} alt="cover background" /></div>
+                <div className={styles.bgImg}><img src={item.company.background_img_url === 'iniDefaultEntryQuint' || isEmpty(item.company.background_img_url) ? JapanBackground : item.company.background_img_url} alt="cover background" /></div>
                 <div className={styles.header}>
                   <div className="row expanded">
                     <div className="small-12 medium-1 columns">
@@ -496,7 +496,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
                       <div className={styles.postContent}>
                         <h3>{item.company.name}</h3>
                         <h4>{item.company.category} Company</h4>
-                        <h5><a href={`https://www.google.com/maps/search/${item.company.company_address}`} target="_blank">{address}</a></h5>
+                        <h5><a href={`https://www.google.com/maps/search/${item.location}`} target="_blank">{address}</a></h5>
                         <h5><a href={item.company.website.startsWith('http') ? item.company.website : `http://${item.company.website}`}>{item.company.website}</a></h5>
                         <p>{item.why_us}</p>
                       </div>

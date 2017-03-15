@@ -221,17 +221,6 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
     initialFetch: React.PropTypes.func,
   };
 
-  // disable this constructor redirect for development acceleration
-  constructor(props) {
-    super(props);
-
-    if (window.location.pathname === '/mahasiswa' || window.location.pathname === '/mahasiswa/') {
-      if (!this.props.global.loggedIn) {
-        this.props.push('/mahasiswa/login');
-      }
-    }
-  }
-
   componentDidMount() {
     const token = this.getCookie('student_token');
     const studentId = this.getCookie('student_id');
