@@ -13,6 +13,7 @@ import {
   SUBMIT_FAIL,
   SUBMIT_SUCCESS,
   UPDATE_ERRORS,
+  DONE,
 } from './constants';
 
 const initialState = fromJS({
@@ -59,6 +60,8 @@ function createJobPostReducer(state = initialState, action) {
       return state.set('isSubmitting', false).set('error', null).set('isSubmitted', true);
     case UPDATE_ERRORS:
       return state.set('validationErrors', action.payload);
+    case DONE:
+      return initialState;
     default:
       return state;
   }

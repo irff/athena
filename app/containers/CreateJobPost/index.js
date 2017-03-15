@@ -18,7 +18,7 @@ import AlertSuccess from 'components/AlertSuccess';
 import Modal from 'components/Modal';
 import Cleave from 'cleave.js/dist/cleave-react';
 import { has, xor } from 'lodash';
-import { submit, review, cancelReview, inputChange } from './actions';
+import { submit, review, cancelReview, inputChange, done } from './actions';
 import { loading } from 'containers/App/actions';
 import { selectGlobal } from 'containers/App/selectors';
 import { fetchUserData } from 'containers/UserAccess/actions';
@@ -34,6 +34,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
     push: React.PropTypes.func,
     loading: React.PropTypes.func,
     fetchUserData: React.PropTypes.func,
+    done: React.PropTypes.func,
   };
 
   componentDidMount() {
@@ -48,6 +49,11 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
         this.props.push('/perusahaan/login');
       }
     }
+  }
+
+  onDoneClick() {
+    this.props.done();
+    this.props.push('/perusahaan/home');
   }
 
   getCookie(cname) {
@@ -359,7 +365,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
         <Modal opened={isSubmitted}>
           <AlertSuccess
             doneText="Kembali ke Dashboard"
-            onDoneClick={() => this.props.push('/perusahaan/home')}
+            onDoneClick={this.onDoneClick}
           >
             <span>Lowongan internship untuk</span>
             <Role>{role}</Role>
@@ -608,6 +614,7 @@ function mapDispatchToProps(dispatch) {
     push: (url) => dispatch(push(url)),
     loading: () => dispatch(loading()),
     fetchUserData: (data) => dispatch(fetchUserData(data)),
+    done: () => dispatch(done()),
   };
 }
 
