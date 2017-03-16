@@ -13,6 +13,7 @@ import {
   SUBMIT_FAIL,
   SUBMIT_SUCCESS,
   UPDATE_ERRORS,
+  FETCH_CATEGORIES_SUCCESS,
   DONE,
 } from './constants';
 
@@ -24,6 +25,7 @@ const initialState = fromJS({
     start_at: '',
     end_at: '',
   },
+  categories: [],
   salary: {
     fee: {
       minimal: 0,
@@ -60,6 +62,8 @@ function createJobPostReducer(state = initialState, action) {
       return state.set('isSubmitting', false).set('error', null).set('isSubmitted', true);
     case UPDATE_ERRORS:
       return state.set('validationErrors', action.payload);
+    case FETCH_CATEGORIES_SUCCESS:
+      return state.set('categories', action.payload.categories);
     case DONE:
       return initialState;
     default:

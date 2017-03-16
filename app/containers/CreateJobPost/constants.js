@@ -11,4 +11,6 @@ export const SUBMIT = 'app/CreateJobPost/SUBMIT';
 export const SUBMIT_FAIL = 'app/CreateJobPost/SUBMIT_FAIL';
 export const SUBMIT_SUCCESS = 'app/CreateJobPost/SUBMIT_SUCCESS';
 export const UPDATE_ERRORS = 'app/CreateJobPost/UPDATE_ERRORS';
+export const FETCH = 'app/CreateJobPost/FETCH';
+export const FETCH_CATEGORIES_SUCCESS = 'app/CreateJobPost/FETCH_CATEGORIES_SUCCESS';
 export const DONE = 'app/CreateJobPost/DONE';

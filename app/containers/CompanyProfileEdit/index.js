@@ -126,9 +126,10 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   onChange={e => this.props.inputChange('name', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('name', 'Nama Perusahaan')}
+              {this.renderErrorMessage('name', 'Nama perusahaan')}
               <div className="input">
                 <span>Kategori Perusahaan</span>
+                { /*
                 <Select
                   width="16rem"
                   placeholder="Pilih kategori perusahaan"
@@ -139,8 +140,15 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   <option>Design</option>
                   <option>Design</option>
                 </Select>
+                */ }
+                <Input
+                  fullWidth
+                  placeholder="Ketik kategori perusahaan anda"
+                  value={name}
+                  onChange={e => this.props.inputChange('category', e.target.value)}
+                />
               </div>
-              {this.renderErrorMessage('category', 'Kategori Perusahaan')}
+              {this.renderErrorMessage('category', 'Kategori perusahaan')}
             </div>
           </div>
 
@@ -197,10 +205,10 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   onChange={e => this.props.inputChange('logo_url', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('logo', 'Logo Perusahaan')}
+              {this.renderErrorMessage('logo', 'Logo perusahaan')}
 
               <div className="input">
-                <span>Link Foto Header (256px256p)</span>
+                <span>Link Foto Header (1250px256p)</span>
                 <Input
                   width="23rem"
                   placeholder="http://"
@@ -208,7 +216,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   onChange={e => this.props.inputChange('header_img_url', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('header_img_url', 'Foto Header Perusahaan')}
+              {this.renderErrorMessage('header_img_url', 'Foto header perusahaan')}
             </div>
           </div>
 
@@ -225,7 +233,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   onChange={e => this.props.inputChange('website', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('website', 'Situs Perusahaan')}
+              {this.renderErrorMessage('website', 'Situs perusahaan')}
             </div>
           </div>
 
@@ -241,7 +249,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   onChange={e => this.props.inputChange('description', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('description', 'Deskripsi Perusahaan')}
+              {this.renderErrorMessage('description', 'Deskripsi perusahaan')}
             </div>
           </div>
 
@@ -421,14 +429,14 @@ const Input = styled.input`
   }
 `;
 
-const Select = styled.select`
-  flex: ${props => (props.fullWidth ? 1 : 0)};
-  ${props => props.width && `max-width: ${props.width};`}
+// const Select = styled.select`
+//   flex: ${props => (props.fullWidth ? 1 : 0)};
+//   ${props => props.width && `max-width: ${props.width};`}
 
-  @media screen and (min-width: 40rem) {
-    ${props => props.width && `min-width: ${props.width};`}
-  }
-`;
+//   @media screen and (min-width: 40rem) {
+//     ${props => props.width && `min-width: ${props.width};`}
+//   }
+// `;
 
 
 const mapStateToProps = createStructuredSelector({

@@ -161,19 +161,19 @@ export function* prefillContent() {
   /* eslint-disable comma-dangle */
   const status = [
     {
-      "text": "pilih status",
+      "text": "review",
       "value": "WAIT_FOR_REVIEW"
     },
     {
-      "text": "pilih status",
+      "text": "review resume",
       "value": "RESUME_REVIEWED"
     },
     {
-      "text": "tolak",
+      "text": "penolakan",
       "value": "REJECTED"
     },
     {
-      "text": "terima",
+      "text": "penerimaan",
       "value": "ACCEPTED"
     },
     {
@@ -214,24 +214,26 @@ export function* prefillContent() {
   /* eslint-enable comma-dangle */
   let statusText = status.find(e => e.value === application.status).text;
   if (statusText === 'pilih status') statusText = 'review';
-  const template = `Dear ${student.first_name} ${student.last_name},
+  const templateContent = `Dear ${student.first_name} ${student.last_name},
 
 Setelah melewati proses ${statusText}, kami memutuskan untuk tidak melanjutkan kamu ke tahap berikutnya karena pengalaman dan kemampuan yang kamu miliki belum memenuhi kriteria kami.
 
 Adapun beberapa saran dari kami antara lain:
 
-kenali lebih dalam tentang ${userData.name}
-pelajari studi kasus yang mungkin akan ditanyakan sebagai ${role}
-perdalam pengalaman kamu untuk mendaftar sebagai ${role}
-Silakan pantau terus posisi yang kami buka yang mungkin saja kamu minati. Semoga sukses pada pencarian kerja selanjutnya.
+- Kenali lebih dalam tentang ${userData.name}
+- Pelajari studi kasus yang mungkin akan ditanyakan sebagai ${role}
+- Perdalam pengalaman kamu untuk mendaftar sebagai ${role}
+- Silakan pantau terus posisi yang kami buka yang mungkin saja kamu minati. Semoga sukses pada pencarian kerja selanjutnya.
 
 Terima kasih.
 
 Salam,
-Tim Recruiter ${userData.name}
-`;
+Tim Recruiter ${userData.name}`;
 
-  yield put(changeInput('emailContent', template));
+  const templateSubject = `Notifikasi Quint untuk ${student.first_name}`;
+
+  yield put(changeInput('emailContent', templateContent));
+  yield put(changeInput('emailSubject', templateSubject));
 }
 
 export function* fetchWatcher() {

@@ -31,7 +31,7 @@ function RejectionLetterPrompt({ student, onCancel, onSend, subject, content, on
         <Button secondary onClick={onCancel} >
           Kembali
         </Button>
-        <Button primary onClick={onSend} >
+        <Button primary onClick={onSend} disabled={isEmpty(subject) || isEmpty(content)}>
           Kirim Rejection Letter
         </Button>
       </Footer>

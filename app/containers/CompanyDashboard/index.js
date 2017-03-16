@@ -57,14 +57,8 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
         this.props.push('/perusahaan/login');
       }
     }
-  }
 
-  componentWillUpdate(nextProps) {
-    if (this.props.global.currentToken === '' && this.props.global.id === '') {
-      if (nextProps.global.currentToken !== '' && nextProps.global.id !== '') {
-        this.props.initialFetch();
-      }
-    }
+    this.props.initialFetch();
   }
 
   getCookie(cname) {
@@ -215,6 +209,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                         {item.applicants.map((applicant, idx) =>
                           <ApplicantCard
                             {...applicant}
+                            disabled={item.status === 'REJECTED' || item.status === 'ACCEPTED'}
                             key={idx}
                             statusOptions={this.formatStatusOptions(item.status)}
                             onStatusChange={status => this.props.changeStatus(applicant, status, item.role)}

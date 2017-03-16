@@ -12,6 +12,8 @@ import {
   SUBMIT_FAIL,
   SUBMIT_SUCCESS,
   UPDATE_ERRORS,
+  FETCH,
+  FETCH_CATEGORIES_SUCCESS,
   DONE,
 } from './constants';
 
@@ -66,5 +68,18 @@ export function updateErrors(payload) {
 export function done() {
   return {
     type: DONE,
+  };
+}
+
+export function fetch() {
+  return {
+    type: FETCH,
+  };
+}
+
+export function fetchCategoriesSuccess(payload) {
+  return {
+    type: FETCH_CATEGORIES_SUCCESS,
+    payload,
   };
 }
