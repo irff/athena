@@ -18,7 +18,7 @@ import AlertSuccess from 'components/AlertSuccess';
 import Modal from 'components/Modal';
 import Cleave from 'cleave.js/dist/cleave-react';
 import { has, xor } from 'lodash';
-import { submit, review, cancelReview, inputChange, done } from './actions';
+import { submit, review, cancelReview, inputChange, done, fetch } from './actions';
 import { loading } from 'containers/App/actions';
 import { selectGlobal } from 'containers/App/selectors';
 import { fetchUserData } from 'containers/UserAccess/actions';
@@ -27,6 +27,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   static propTypes = {
     local: React.PropTypes.object,
     global: React.PropTypes.object,
+    categories: React.PropTypes.array,
     inputChange: React.PropTypes.func,
     review: React.PropTypes.func,
     cancelReview: React.PropTypes.func,
@@ -35,6 +36,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
     loading: React.PropTypes.func,
     fetchUserData: React.PropTypes.func,
     done: React.PropTypes.func,
+    fetch: React.PropTypes.func,
   };
 
   componentDidMount() {
@@ -48,6 +50,8 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
       } else {
         this.props.push('/perusahaan/login');
       }
+    } else {
+      this.props.fetch();
     }
   }
 
@@ -81,12 +85,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   }
 
   renderEditing() {
-    const { role, salary, location, technical_requirements, tasks, experiences_gained, status, job_schedule, category } = this.props.local;
-
-    const categoryMap = {
-      DESIGN: 'Design',
-      ENGINEERING: 'Engineering',
-    };
+    const { role, salary, location, technical_requirements, tasks, experiences_gained, status, categories, job_schedule, category } = this.props.local;
 
     const statusMap = {
       PHONE_INTERVIEW: 'Phone Interview',
@@ -134,8 +133,8 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 value={category}
               >
                 <option value="" disabled>Pilih Kategori Posisi ini</option>
-                {Object.keys(categoryMap).map((k, idx) =>
-                  <option key={idx} value={k}>{categoryMap[k]}</option>
+                {categories.map((value, idx) =>
+                  <option key={idx} value={value}>{value}</option>
                 )}
               </Select>
             </div>
@@ -224,8 +223,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                     Sembunyikan gaji dari profil perusahaan saya
                   </label>
                   <div className="hideSalaryInfo">
-                    Apabila gaji disembunyikan, tim Quint akan menjaga kerahasiaan informasi gaji
-                    tersebut dan data akan hanya digunakan untuk keperluan blabla.
+                    Perhatian: Gaji merupakan salah satu pertimbangan utama mahasiswa bertalenta dalam mendaftar posisi magang
                   </div>
                 </div>
               </MultiLine>
@@ -538,7 +536,7 @@ const ContentWrapper = styled.div`
 
   .hideSalaryInfo {
     margin-left: 2.5rem;
-    color: ${props => props.theme.gray};
+    color: ${props => props.theme.red};
     margin-bottom: 0;
   }
 
@@ -615,6 +613,7 @@ function mapDispatchToProps(dispatch) {
     push: (url) => dispatch(push(url)),
     loading: () => dispatch(loading()),
     fetchUserData: (data) => dispatch(fetchUserData(data)),
+    fetch: () => dispatch(fetch()),
     done: () => dispatch(done()),
   };
 }

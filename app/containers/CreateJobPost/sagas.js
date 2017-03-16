@@ -4,13 +4,15 @@ import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import validate from 'validate.js';
 import { isEmpty } from 'lodash';
 
+import { loading, loadingDone } from 'containers/App/actions';
 import request from 'utils/request';
 import { selectGlobal } from 'containers/App/selectors';
-import { REVIEW_START, SUBMIT } from './constants';
-import { updateErrors, cancelReview, submitSuccess, submitFail } from './actions';
+import { LOG_IN_SUCCESS_COMPANY } from 'containers/App/constants';
+import { REVIEW_START, SUBMIT, FETCH } from './constants';
+import { updateErrors, cancelReview, submitSuccess, submitFail, fetchCategoriesSuccess } from './actions';
 import selectCreateJobPost from './selectors';
 
-import { API_COMPANIES } from 'containers/App/api';
+import { API_ROOT, API_COMPANIES } from 'containers/App/api';
 import { userAccessSaga } from 'containers/UserAccess/sagas';
 
 // Worker Saga
@@ -87,7 +89,7 @@ export function* submit() {
   const globalState = yield select(selectGlobal());
   const companyId = globalState.id;
   const currentToken = globalState.currentToken;
-  const requestURL = `${API_COMPANIES}/${companyId}/jobs`; // @TODO
+  const requestURL = `${API_COMPANIES}/${companyId}/jobs`;
   const auth = `Bearer ${currentToken}`;
   const state = yield select(selectCreateJobPost());
   const data = state;
@@ -116,8 +118,35 @@ export function* submit() {
   }
 }
 
+export function* fetchCategories() {
+  const globalState = yield select(selectGlobal());
+  const currentToken = globalState.currentToken;
+  const requestURL = `${API_ROOT}/categories`;
+  const auth = `Bearer ${currentToken}`;
+
+  const result = yield call(request, requestURL, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: auth,
+    },
+  });
+
+  if (!result.err) {
+    yield put(fetchCategoriesSuccess(result.data));
+  }
+}
+
 
 // Watcher Saga
+export function* fetchRoutine() {
+  yield put(loading());
+  yield fetchCategories();
+  yield put(loadingDone());
+}
+
+
 export function* reviewWatcher() {
   yield takeLatest(REVIEW_START, validation);
 }
@@ -126,14 +155,30 @@ export function* submitWatcher() {
   yield takeLatest(SUBMIT, submit);
 }
 
+export function* fetchWatcher() {
+  while (yield take(FETCH)) {
+    yield fetchRoutine();
+  }
+}
+
+export function* fetchAfterLoginWatcher() {
+  while (yield take(LOG_IN_SUCCESS_COMPANY)) {
+    yield fetchRoutine();
+  }
+}
+
 // Root Saga
 export function* createJobPostSaga() {
   const reviewSaga = yield fork(reviewWatcher);
   const submitSaga = yield fork(submitWatcher);
+  const fetchSaga = yield fork(fetchWatcher);
+  const fetchAfterLoginSaga = yield fork(fetchAfterLoginWatcher);
 
   yield take(LOCATION_CHANGE);
   yield cancel(reviewSaga);
   yield cancel(submitSaga);
+  yield cancel(fetchSaga);
+  yield cancel(fetchAfterLoginSaga);
 }
 
 // Container saga
