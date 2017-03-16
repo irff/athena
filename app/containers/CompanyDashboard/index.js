@@ -57,14 +57,8 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
         this.props.push('/perusahaan/login');
       }
     }
-  }
 
-  componentWillUpdate(nextProps) {
-    if (this.props.global.currentToken === '' && this.props.global.id === '') {
-      if (nextProps.global.currentToken !== '' && nextProps.global.id !== '') {
-        this.props.initialFetch();
-      }
-    }
+    this.props.initialFetch();
   }
 
   getCookie(cname) {
