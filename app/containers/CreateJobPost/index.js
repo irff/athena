@@ -497,6 +497,7 @@ const ContentWrapper = styled.div`
         & > span {
           width: 15rem;
           flex-shrink: 0;
+          align-self: flex-start;
         }
       }
     }
