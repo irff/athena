@@ -101,7 +101,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
     const periods = Array.from(Array(12).keys()).map(n => {
       const raw = n + month;
       const mo = raw % 12;
-      const yr = year + (raw > 12);
+      const yr = year + (raw >= 12);
       return [`1-${mo}-${yr}`, `${months[mo]} ${yr}`];
     });
 
@@ -124,7 +124,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 onChange={e => this.props.inputChange('role', e.target.value)}
               />
             </div>
-            {this.renderErrorMessage('role', 'Nama Posisi')}
+            {this.renderErrorMessage('role', 'Nama posisi')}
             <div className="input">
               <span>Kategori Posisi</span>
               <Select
@@ -138,7 +138,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 )}
               </Select>
             </div>
-            {this.renderErrorMessage('category', 'Kategori Posisi')}
+            {this.renderErrorMessage('category', 'Kategori posisi')}
             <div className="input">
               <span>Lokasi Internship</span>
               <Input
@@ -175,7 +175,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 </Select>
               </div>
             </div>
-            {this.renderErrorMessage('job_schedule', 'Periode Internship')}
+            {this.renderErrorMessage('job_schedule', 'Periode internship')}
             <div className="input">
               <span>Gaji</span>
               <MultiLine>
@@ -245,7 +245,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 onChange={e => this.props.inputChange('technical_requirements', e.target.value.split('\n'))}
               />
             </div>
-            {this.renderErrorMessage('technical_requirements', 'Requirements')}
+            {this.renderErrorMessage('technical_requirements', 'Kemampuan teknis')}
 
             <div className="input multiline">
               <span>Tanggung Jawab <em>(Job Description)</em></span>
@@ -256,7 +256,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
                 onChange={e => this.props.inputChange('tasks', e.target.value.split('\n'))}
               />
             </div>
-            {this.renderErrorMessage('tasks', 'Tanggung Jawab')}
+            {this.renderErrorMessage('tasks', 'Tanggung jawab')}
 
             <div className="input multiline">
               <span>Kemampuan/Pengalaman yang Didapat</span>
