@@ -209,6 +209,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                         {item.applicants.map((applicant, idx) =>
                           <ApplicantCard
                             {...applicant}
+                            disabled={item.status === 'REJECTED' || item.status === 'ACCEPTED'}
                             key={idx}
                             statusOptions={this.formatStatusOptions(item.status)}
                             onStatusChange={status => this.props.changeStatus(applicant, status, item.role)}

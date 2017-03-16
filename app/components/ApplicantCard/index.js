@@ -7,7 +7,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicked, onResumeClicked, onStatusChange }) {
+function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicked, onResumeClicked, onStatusChange, disabled }) {
   const onLinkedin = () => {
     if (typeof onLinkedinClicked === 'function') onLinkedinClicked();
     window.open(student.linkedin_url, '_blank');
@@ -19,7 +19,7 @@ function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicke
   };
 
   return (
-    <Card>
+    <Card disabled={disabled}>
       <div className="wrapper">
         <div className="profile">
           <div className="head">
@@ -68,10 +68,12 @@ ApplicantCard.propTypes = {
   onLinkedinClicked: React.PropTypes.func,
   onResumeClicked: React.PropTypes.func,
   onStatusChange: React.PropTypes.func,
+  disabled: React.PropTypes.bool,
 };
 
 const Card = styled.div`
   background: ${props => props.theme.white};
+  ${props => (props.disabled ? 'pointer-events: none; opacity: 0.75' : '')}
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 1.5rem;
   padding: 1.5rem;
