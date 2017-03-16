@@ -161,19 +161,19 @@ export function* prefillContent() {
   /* eslint-disable comma-dangle */
   const status = [
     {
-      "text": "pilih status",
+      "text": "preview",
       "value": "WAIT_FOR_REVIEW"
     },
     {
-      "text": "pilih status",
+      "text": "review",
       "value": "RESUME_REVIEWED"
     },
     {
-      "text": "tolak",
+      "text": "penolakan",
       "value": "REJECTED"
     },
     {
-      "text": "terima",
+      "text": "penerimaan",
       "value": "ACCEPTED"
     },
     {
