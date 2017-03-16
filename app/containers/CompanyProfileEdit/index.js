@@ -129,6 +129,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
               {this.renderErrorMessage('name', 'Nama perusahaan')}
               <div className="input">
                 <span>Kategori Perusahaan</span>
+                { /*
                 <Select
                   width="16rem"
                   placeholder="Pilih kategori perusahaan"
@@ -139,6 +140,13 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   <option>Design</option>
                   <option>Design</option>
                 </Select>
+                */ }
+                <Input
+                  fullWidth
+                  placeholder="Ketik kategori perusahaan anda"
+                  value={name}
+                  onChange={e => this.props.inputChange('category', e.target.value)}
+                />
               </div>
               {this.renderErrorMessage('category', 'Kategori perusahaan')}
             </div>
@@ -200,7 +208,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
               {this.renderErrorMessage('logo', 'Logo perusahaan')}
 
               <div className="input">
-                <span>Link Foto Header (256px256p)</span>
+                <span>Link Foto Header (1250px256p)</span>
                 <Input
                   width="23rem"
                   placeholder="http://"
@@ -421,14 +429,14 @@ const Input = styled.input`
   }
 `;
 
-const Select = styled.select`
-  flex: ${props => (props.fullWidth ? 1 : 0)};
-  ${props => props.width && `max-width: ${props.width};`}
+// const Select = styled.select`
+//   flex: ${props => (props.fullWidth ? 1 : 0)};
+//   ${props => props.width && `max-width: ${props.width};`}
 
-  @media screen and (min-width: 40rem) {
-    ${props => props.width && `min-width: ${props.width};`}
-  }
-`;
+//   @media screen and (min-width: 40rem) {
+//     ${props => props.width && `min-width: ${props.width};`}
+//   }
+// `;
 
 
 const mapStateToProps = createStructuredSelector({
