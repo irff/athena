@@ -22,9 +22,16 @@ const CompanyInfoCard = ({
     in_progress_num,
     job_num,
     rejected_num,
+    header_img_url,
   }) => (
   <CompanyInfoCardWrapper>
-    <div className="row expanded">
+    <BackgroundCover>
+      <img src={header_img_url} alt="cover" />
+    </BackgroundCover>
+    <BackgroundCover>
+      <div className="img-tint" />
+    </BackgroundCover>
+    <div className="row expanded wrapper">
       <div className="small-12 columns">
         <div className="topModule">
           <div className="row">
@@ -85,6 +92,7 @@ CompanyInfoCard.propTypes = {
   website: React.PropTypes.string,
   description: React.PropTypes.string,
   logo_url: React.PropTypes.string,
+  header_img_url: React.PropTypes.string,
   accepted_num: React.PropTypes.number,
   applicant_num: React.PropTypes.number,
   in_progress_num: React.PropTypes.number,
@@ -94,10 +102,43 @@ CompanyInfoCard.propTypes = {
   onEditProfile: React.PropTypes.func,
 };
 
+const BackgroundCover = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+  }
+
+  .img-tint {
+    background: ${props => props.theme.darkBlack};
+    opacity: 0.75;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  margin-bottom: 3.875rem;
+`;
+
 const CompanyInfoCardWrapper = styled.div`
   width: 100%;
-  background: ${props => props.theme.darkBlack};
   margin-bottom: 3.875rem;
+  position: relative;
+
+  .wrapper {
+    z-index: 2;
+  }
 
   .topModule {
     padding: 2rem;
