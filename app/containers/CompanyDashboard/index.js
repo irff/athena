@@ -56,9 +56,9 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
       } else {
         this.props.push('/perusahaan/login');
       }
+    } else {
+      this.props.initialFetch();
     }
-
-    this.props.initialFetch();
   }
 
   getCookie(cname) {
@@ -209,7 +209,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                         {item.applicants.map((applicant, idx) =>
                           <ApplicantCard
                             {...applicant}
-                            disabled={item.status === 'REJECTED' || item.status === 'ACCEPTED'}
+                            disabled={applicant.status === 'REJECTED' || applicant.status === 'ACCEPTED'}
                             key={idx}
                             statusOptions={this.formatStatusOptions(item.status)}
                             onStatusChange={status => this.props.changeStatus(applicant, status, item.role)}

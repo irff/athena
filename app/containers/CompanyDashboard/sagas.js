@@ -5,6 +5,7 @@ import request from 'utils/request';
 import { API_COMPANIES } from 'containers/App/api';
 import { loading, loadingDone } from 'containers/App/actions';
 import { selectGlobal } from 'containers/App/selectors';
+import { LOG_IN_SUCCESS_COMPANY } from 'containers/App/constants';
 import selectCompanyDashboard from './selectors';
 import { initialFetchSuccess, initialFetchFail, changeStatusDone, changeInput } from './actions';
 import { INITIAL_FETCH, RESUME_READ, CHANGE_STATUS, CHANGE_STATUS_CONFIRM } from './constants';
@@ -244,6 +245,14 @@ export function* fetchWatcher() {
   }
 }
 
+export function* fetchAfterLoginWatcher() {
+  while (yield take(LOG_IN_SUCCESS_COMPANY)) {
+    yield call(fetchNewApplications);
+    yield call(fetchOldApplications);
+    yield call(fetchStatistics);
+  }
+}
+
 export function* resumeWatcher() {
   let action;
   while (action = yield take(RESUME_READ)) { // eslint-disable-line no-cond-assign
@@ -275,12 +284,14 @@ export function* companySaga() {
   const resumeSaga = yield fork(resumeWatcher);
   const statusSaga = yield fork(statusWatcher);
   const prefillSaga = yield fork(prefillWatcher);
+  const fetchAfterLoginSaga = yield fork(fetchAfterLoginWatcher);
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
   yield cancel(fetchSaga);
   yield cancel(resumeSaga);
   yield cancel(statusSaga);
   yield cancel(prefillSaga);
+  yield cancel(fetchAfterLoginSaga);
 }
 
 export function* companySagaContainer() {

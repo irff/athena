@@ -73,7 +73,7 @@ ApplicantCard.propTypes = {
 
 const Card = styled.div`
   background: ${props => props.theme.white};
-  ${props => (props.disabled ? 'pointer-events: none; opacity: 0.75' : '')}
+  ${props => (props.disabled ? 'pointer-events: none; opacity: 0.50;' : '')}
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 1.5rem;
   padding: 1.5rem;
