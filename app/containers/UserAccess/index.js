@@ -150,7 +150,7 @@ export class UserAccess extends React.Component { // eslint-disable-line react/p
 
     if (this.isCompanyPage()) {
       mainStyle = styles.userAccessCompany;
-      heroHeader = <h1>Raihlah anak<br />anak TOKI & ambis,<br />secepatnya.</h1>;
+      heroHeader = <h1>Dapatkan mahasiswa<br />bertalenta di Quint,<br />sekarang!.</h1>;
       // heroLink = <a>Temukan masa depanmu lewat Quint.<br />Sekarang →</a>;
     }
 
