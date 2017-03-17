@@ -337,7 +337,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
                   <p>
                     Belum ada internship terdaftar.
                     <br />
-                    Ayo <button>Cari Internship</button> Sekarang
+                    Ayo <button onClick={() => this.props.push('/mahasiswa/cari-internship')}>Cari Internship</button> Sekarang
                   </p>
                 </div>
               </EntriesModule>
