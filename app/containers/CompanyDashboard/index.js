@@ -96,7 +96,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
     /* eslint-disable comma-dangle */
     const status = [
       {
-        "text": "pilih status",
+        "text": "belum direview",
         "value": "WAIT_FOR_REVIEW"
       },
       {
@@ -104,11 +104,11 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
         "value": "RESUME_REVIEWED"
       },
       {
-        "text": "tolak",
+        "text": "ditolak",
         "value": "REJECTED"
       },
       {
-        "text": "terima",
+        "text": "diterima",
         "value": "ACCEPTED"
       },
       {
