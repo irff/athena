@@ -486,7 +486,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
           <div className="row expanded">
             <div className="small-12 columns">
               <div className={styles.container}>
-                <div className={styles.bgImg}><img src={item.company.background_img_url === 'iniDefaultEntryQuint' || isEmpty(item.company.background_img_url) ? JapanBackground : item.company.background_img_url} alt="cover background" /></div>
+                <div className={styles.bgImg}><img src={item.company.header_img_url === 'iniDefaultEntryQuint' || isEmpty(item.company.header_img_url) ? JapanBackground : item.company.header_img_url} alt="cover background" /></div>
                 <div className={styles.header}>
                   <div className="row expanded">
                     <div className="small-12 medium-1 columns">
