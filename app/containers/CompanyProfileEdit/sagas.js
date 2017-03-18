@@ -8,6 +8,7 @@ import request from 'utils/request';
 import selectCompanyProfileEdit from './selectors';
 import { API_COMPANIES } from 'containers/App/api';
 import { selectGlobal } from 'containers/App/selectors';
+import { editProfile } from 'containers/App/actions';
 import { LOG_IN_SUCCESS_COMPANY } from 'containers/App/constants';
 import validate from 'validate.js';
 
@@ -81,6 +82,7 @@ export function* save() {
 
   if (!result.err) {
     yield put(saveSuccess());
+    yield put(editProfile(data));
     yield put(push('/perusahaan/home'));
   } else {
     yield put(saveFail(result.err));
