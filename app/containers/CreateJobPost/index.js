@@ -39,6 +39,12 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
     fetch: React.PropTypes.func,
   };
 
+  constructor() {
+    super();
+
+    this.onDoneClick = this.onDoneClick.bind(this);
+  }
+
   componentDidMount() {
     const token = this.getCookie('company_token');
     const companyId = this.getCookie('company_id');
