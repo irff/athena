@@ -15,7 +15,7 @@ export function* fetchNewApplications() {
   const globalState = yield select(selectGlobal());
   const currentToken = globalState.currentToken;
   const currentId = globalState.id;
-  const requestURL = `${API_COMPANIES}/${currentId}/applications`;
+  const requestURL = `${API_COMPANIES}/${currentId}/applications?new=true`;
   const auth = `Bearer ${currentToken}`;
 
   const fetchCall = yield call(request, requestURL, {
