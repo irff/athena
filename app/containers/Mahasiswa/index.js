@@ -238,7 +238,9 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
   componentWillUpdate(nextProps) {
     if (this.props.global.currentToken === '' && this.props.global.id === '') {
       if (nextProps.global.currentToken !== '' && nextProps.global.id !== '') {
-        this.props.initialFetch();
+        if (isEmpty(nextProps.children)) {
+          this.props.initialFetch();
+        }
       }
     } else if (isEmpty(nextProps.children)) {
       this.props.initialFetch();
@@ -335,7 +337,7 @@ export class Mahasiswa extends React.Component { // eslint-disable-line react/pr
                   <p>
                     Belum ada internship terdaftar.
                     <br />
-                    Ayo <button>Cari Internship</button> Sekarang
+                    Ayo <button onClick={() => this.props.push('/mahasiswa/cari-internship')}>Cari Internship</button> Sekarang
                   </p>
                 </div>
               </EntriesModule>
