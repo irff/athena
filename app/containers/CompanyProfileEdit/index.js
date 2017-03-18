@@ -102,7 +102,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
   }
 
   render() {
-    const { name, isSaving, website, description } = this.props.local;
+    const { name, isSaving, website, description, category } = this.props.local;
 
     return (
       <div>
@@ -144,7 +144,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                 <Input
                   fullWidth
                   placeholder="Ketik kategori perusahaan anda"
-                  value={name}
+                  value={category}
                   onChange={e => this.props.inputChange('category', e.target.value)}
                 />
               </div>
