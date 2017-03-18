@@ -100,7 +100,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
         "value": "WAIT_FOR_REVIEW"
       },
       {
-        "text": "pilih status",
+        "text": "review resume",
         "value": "RESUME_REVIEWED"
       },
       {
@@ -230,16 +230,28 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                 {local.applications.map((application, k1) =>
                   <Accordion.Item key={k1} title={<span><strong>{application.role} &middot;</strong> {application.applicant_num} pendaftar</span>}>
                     {!application.applicant_num && this.renderEmptyApplicants()}
-                    {application.applicants.map((applicant, k2) =>
-                      <ApplicantCard
-                        {...applicant}
-                        key={k2}
-                        statusOptions={this.formatStatusOptions(application.status)}
-                        onStatusChange={status => this.props.changeStatus(applicant, status, application.role)}
-                        onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}
-                        onResumeClicked={() => this.props.openResume(applicant.application_id)}
-                      />
-                    )}
+                    {application.status.map((status, k2) => {
+                      const statusApplicants = application.applicants.filter(applicant => applicant.status === status.value);
+                      if (statusApplicants.length > 0) {
+                        return (
+                          <div>
+                            <SubsectionTitle key={k2}>{this.findStatusText(status.value)}</SubsectionTitle>
+                            {statusApplicants.map((applicant, k3) =>
+                              <ApplicantCard
+                                {...applicant}
+                                key={k3}
+                                statusOptions={this.formatStatusOptions(application.status)}
+                                onStatusChange={stat => this.props.changeStatus(applicant, stat, application.role)}
+                                onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}
+                                onResumeClicked={() => this.props.openResume(applicant.application_id)}
+                              />
+                            )}
+                          </div>
+                        );
+                      }
+
+                      return null;
+                    })}
                   </Accordion.Item>
                 )}
               </Accordion>
