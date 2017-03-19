@@ -6,6 +6,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { isEmpty } from 'lodash';
 
 function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicked, onResumeClicked, onStatusChange, disabled }) {
   const onLinkedin = () => {
@@ -25,8 +26,8 @@ function ApplicantCard({ student, status, statusOptions, email, onLinkedinClicke
           <div className="head">
             <h1>{student.first_name} {student.last_name}</h1>
             <div className="links">
-              <button onClick={onLinkedin} className="linkedin">LinkedIn</button>
-              <button onClick={onResume} className="resume">Resume</button>
+              {!isEmpty(student.linkedin_url) && <button onClick={onLinkedin} className="linkedin">LinkedIn</button> }
+              {!isEmpty(student.resume_url) && <button onClick={onResume} className="resume">Resume</button> }
             </div>
           </div>
           <p>{student.headline}</p>
