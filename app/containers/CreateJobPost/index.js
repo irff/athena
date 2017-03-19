@@ -81,7 +81,11 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
     return '';
   }
 
-  renderErrorMessage = (field, label) => {
+  addThousandsSeparator(num, separator = '.') {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+  }
+
+  renderErrorMessage(field, label) {
     const { validationErrors } = this.props.local;
     if (has(validationErrors, field)) {
       return <ErrorMessage>{`${label} ${validationErrors[field][0]}`}</ErrorMessage>;
@@ -318,6 +322,19 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
   renderReviewing() {
     const { role, salary, location, technical_requirements, tasks, experiences_gained, isSubmitting, isSubmitted } = this.props.local;
 
+    const salaryMinimal = this.addThousandsSeparator(salary.fee.minimal);
+    const salaryMaximal = this.addThousandsSeparator(salary.fee.maximal);
+
+    let salaryText = `${salary.currency} ${salaryMinimal}-${salaryMaximal} /${salary.term}`;
+
+    if (salary.fee.minimal === salary.fee.maximal) {
+      salaryText = `${salary.currency} ${salaryMinimal} /${salary.term}`;
+    }
+
+    if (!salary.is_published) {
+      salaryText = 'Rahasia';
+    }
+
     return (
       <ReviewContainer>
         <div className="row">
@@ -327,7 +344,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
             </section>
             <section>
               <span className="location">{location}</span>
-              <span>{`${salary.currency} ${salary.fee.minimal}-${salary.fee.maximal} /${salary.term}`}</span>
+              <span>{salaryText}</span>
             </section>
             <section>
               <div className="row">
