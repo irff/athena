@@ -197,7 +197,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
           <div className="row">
             <div className="small-12 columns">
               <div className="input">
-                <span>Link Logo Perusahaan (256px256p)</span>
+                <span>Link Logo Perusahaan (256px256px)</span>
                 <Input
                   width="23rem"
                   placeholder="http://"
@@ -208,7 +208,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
               {this.renderErrorMessage('logo', 'Logo perusahaan')}
 
               <div className="input">
-                <span>Link Foto Header (1250px256p)</span>
+                <span>Link Foto Header (1250px256px)</span>
                 <Input
                   width="23rem"
                   placeholder="http://"
