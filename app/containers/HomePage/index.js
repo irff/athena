@@ -76,7 +76,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
         {
           testimonyText: '"We worked with Quint for our internship program, Quint brought in great talent with national and international achievements."',
           testimonyName: 'Fransiskus Xaverius',
-          testimonyPosition: 'Co-Founder, CEO of Xendit',
+          testimonyPosition: 'Co-Founder, CTO of Qlapa',
           testimonyPicture: Frans,
         },
         {
