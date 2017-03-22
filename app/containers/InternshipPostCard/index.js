@@ -448,7 +448,16 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
       city = location.pop();
       region = location.pop();
       street = location.pop();
-      address = `${street}, ${region}, ${city}`;
+
+      if (!isEmpty(region)) {
+        if (!isEmpty(street)) {
+          address = `${street}, ${region}, ${city}`;
+        } else {
+          address = `${region}, ${city}`;
+        }
+      } else {
+        address = `${city}`;
+      }
 
       unDetailed = (
         <div className={styles.internshipPostCard}>
@@ -498,7 +507,7 @@ export class InternshipPostCard extends React.Component { // eslint-disable-line
                         <h4>{item.company.category} Company</h4>
                         <h5><a href={`https://www.google.com/maps/search/${item.location}`} target="_blank">{address}</a></h5>
                         <h5><a href={item.company.website.startsWith('http') ? item.company.website : `http://${item.company.website}`}>{item.company.website}</a></h5>
-                        <p>{item.why_us}</p>
+                        <p>{item.company.description}</p>
                       </div>
                     </div>
                   </div>

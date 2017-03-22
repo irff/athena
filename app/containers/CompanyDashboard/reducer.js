@@ -17,7 +17,7 @@ import {
 const initialState = fromJS({
   new_applications: [],
   applications: [],
-  statistics: [],
+  statistics: {},
   selectedRole: '',
   selectedApplication: {},
   inputs: {
@@ -88,6 +88,18 @@ function companyDashboardReducer(state = initialState, action) {
           }),
         }));
 
+      const newStatistics = state
+        .get('statistics')
+        .toJS();
+
+      if (selectedStatus === 'ACCEPTED') {
+        newStatistics.accepted_num += 1;
+        newStatistics.in_progress_num -= 1;
+      } else if (selectedStatus === 'REJECTED') {
+        newStatistics.rejected_num += 1;
+        newStatistics.in_progress_num -= 1;
+      }
+
       return state
         .set('applications', fromJS(applications))
         .set('new_applications', fromJS(newApplications))
@@ -95,6 +107,7 @@ function companyDashboardReducer(state = initialState, action) {
         .set('isRejecting', false)
         .set('selectedStatus', '')
         .set('selectedApplication', {})
+        .set('statistics', fromJS(newStatistics))
         .setIn(['inputs', 'emailSubject'], '')
         .setIn(['inputs', 'emailContent'], '');
     }
