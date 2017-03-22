@@ -205,7 +205,7 @@ export class CompanyProfileEdit extends React.Component { // eslint-disable-line
                   onChange={e => this.props.inputChange('logo_url', e.target.value)}
                 />
               </div>
-              {this.renderErrorMessage('logo', 'Logo perusahaan')}
+              {this.renderErrorMessage('logo_url', 'Logo perusahaan')}
 
               <div className="input">
                 <span>Link Foto Header (1250px256px)</span>
