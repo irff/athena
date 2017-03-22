@@ -165,8 +165,9 @@ const CompanyInfoCardWrapper = styled.div`
     }
 
     img {
-      height: calc(4rem - 4px);
       width: calc(4rem - 4px);
+      height: auto;
+      max-height: calc(4rem - 4px);
     }
 
     .logoWrapper {
