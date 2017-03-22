@@ -240,6 +240,7 @@ export class CompanyDashboard extends React.Component { // eslint-disable-line r
                               <ApplicantCard
                                 {...applicant}
                                 key={k3}
+                                disabled={applicant.status === 'REJECTED' || applicant.status === 'ACCEPTED'}
                                 statusOptions={this.formatStatusOptions(application.status)}
                                 onStatusChange={stat => this.props.changeStatus(applicant, stat, application.role)}
                                 onLinkedinClicked={() => this.props.openLinkedin(applicant.application_id)}

@@ -331,7 +331,7 @@ export class CreateJobPost extends React.Component { // eslint-disable-line reac
       salaryText = `${salary.currency} ${salaryMinimal} /${salary.term}`;
     }
 
-    if (!salary.is_published) {
+    if (salary.isHidden) {
       salaryText = 'Rahasia';
     }
 
